@@ -7,7 +7,7 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
-  <link href='/css/shopping_list.css' rel='stylesheet'>
+  <link href='/css/shopping_list.css' rel='stylesheet' >
   <!-- this is a comment in HTML -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -20,12 +20,31 @@
 
 <body>
   <div class='container'>
-    <h2>Pantry</h2>
-    <form action='/create_pantry' method='post'>
-      Pantry name: <input type='text' name='name'>
+    <div class='row' id='header'>
+      <h2>Shopping List</h2>
+      <span class='glyphicon glyphicon-plus'></span>
+    </div>
+
+    <div class='row' id='sort'>
+      <h4>Sort by: <i>Likes</i></h4>
+    </div>
+
+    {{#each pantry.requests}}
+      <div class='row request'>
+        <h3 class='request-name'>{{name}}</h3>
+        <span class='glyphicon glyphicon-chevron-up'>{{likes}}</span>
+        <h6 class='request-category'>{{category}}</h6>
+      </div>
+    {{/each}}
+
+          <form method='post' action='/create_request'>
+      Name: <input type='text' name='name'>
+      Category: <input type='text' name='category'>
       <input type='submit' value='Submit'>
     </form>
   </div>
+
+
 
   <script src='https://code.jquery.com/jquery.js'></script>
   <script src='/js/bootstrap.min.js'></script>

@@ -1,0 +1,50 @@
+/* TODO: fix fonts */
+
+#header {
+  text-align: center;
+  background-color: #8bc53e;
+  padding-top: 2%;
+  padding-bottom: 2%;
+}
+
+#header h2 {
+  display: inline;
+  color: white;
+}
+
+#header span {
+  color: white;
+  margin-left: 20px;
+}
+
+/*TODO: fix header alignments*/
+
+#sort {
+  background-color: #e6e6e6;
+  color: #8bc53e;
+  text-align: center;
+}
+
+.request {
+  border-bottom: 2px #ddcf9b solid;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+
+.request-name {
+  display: inline;
+}
+
+.request-category {
+  margin-top: 3px;  
+  color: #989898;
+}
+
+.glyphicon-chevron-up {
+  font-size: 20px;
+  float: right;
+  color: #ddcf9b;
+}
+
+/* TODO: fix vertical alignment;
+/* TODO: get icon outlines (so it fills in when clicked)*/
