@@ -7,7 +7,7 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
-  <link href='/css/introHCI.css' rel='stylesheet'>
+  <link href='/css/pantry.css' rel='stylesheet'>
   <!-- this is a comment in HTML -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -20,7 +20,31 @@
 
 <body>
   <div class='container'>
-    <a href='/shopping_list/{{id}}'>My Shopping List</a>
+
+  <div class='row' id='header'>
+      <h2>Pantry</h2>
+      <span class='glyphicon glyphicon-plus'></span>
+    </div>
+
+    <div class='row' id='sort'>
+      <h4>Sort by: <i>Expiration</i></h4>
+    </div>
+
+    {{#each pantry.items}}
+      <div class='row item'>
+        <h3 class='item-name'>{{name}}</h3>
+        <h6 class='item-expiration'>January 6, 2014</h6>
+        <h6 class='item-category'>{{category}}</h6>
+      </div>
+    {{/each}}
+
+          <form method='post' action='/create_item'>
+      Name: <input type='text' name='name'>
+      Category: <input type='text' name='category'>
+      <input type='submit' value='Submit'>
+    </form>
+
+    {{!-- <a href='/shopping_list/{{id}}'>My Shopping List</a>
     <h2>Name: {{pantry.name}}</h2>
     <form method="post" action="/create_item">
       Name: <input type='text' name='name'>
@@ -36,7 +60,7 @@
       </div>
     {{/each}}
 
-  </div>
+  </div> --}}
 
   <script src='https://code.jquery.com/jquery.js'></script>
   <script src='/js/bootstrap.min.js'></script>
