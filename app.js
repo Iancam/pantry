@@ -9,7 +9,7 @@ var path = require('path');
 var handlebars = require('express3-handlebars')
 var mongoose = require('mongoose');
 
-var index = require('./routes/index');
+var pantry = require('./routes/pantry');
 
 /* Connect to MongoDB */
 var local_database_name = 'pantry';
@@ -40,7 +40,9 @@ if ('development' == app.get('env')) {
 }
 
 /* Routes */
-app.get('/', index.view);
+app.get('/', pantry.home);
+app.post('/create_pantry', pantry.create);
+app.get('/pantry/:id', pantry.view);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
