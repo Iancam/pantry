@@ -1,20 +1,12 @@
 {
-    "name": "application-name",
-    "version": "0.1.0",
-    "private": true,
-
-    "author": {
-        "name": "Your Name",
-        "url": "http://yourwebsite.com/"
-    },
-
-    "dependencies": {
-        "browserify": "1.16.x",
-        "coffee-script": "1.4.x",
-        "express": "3.x",
-        "less": "1.3.x",
-        "express-hbs": "0.1.x",
-        "nodemon": "*",
-        "watch-lessc": "0.0.x"
-    }
+  "name": "application-name",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "3.4.8",
+    "jade": "*"
+  }
 }
