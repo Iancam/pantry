@@ -25,6 +25,7 @@ exports.view = function (req, res) {
 
     if (err) helpers.error(err, found_pantry);
 
-    res.render('pantry', {pantry: found_pantry});
+    res.render('pantry', 
+    {pantry: found_pantry, id:req.session.pantry_id});
   })
 }
