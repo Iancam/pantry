@@ -21,11 +21,34 @@ exports.view = function (req, res) {
   req.session.pantry_id = id;
 
   models.Pantry
-  .findById(id, function (err, found_pantry) {
-
-    if (err) helpers.error(err, found_pantry);
+  .findById(id)
+  .populate('items')
+  .exec(function (err, found_pantry) {
+    if (err) helpers.error(err);
 
     res.render('pantry', 
     {pantry: found_pantry, id:req.session.pantry_id});
+  })
+}
+
+exports.create_item = function (req, res) {
+  var name = req.param('name');
+  var category = req.param('category');
+  //TODO: add date
+
+  var new_item = new models.Item({
+    name: name,
+    category: category
+  })
+
+  new_item.save(helpers.error);
+
+  models.Pantry
+  .findById(req.session.pantry_id, function (err, found_pantry) {
+    if (err) helpers.error(err);
+
+    found_pantry.items.push(new_item);
+    found_pantry.save(helpers.error);
+    res.redirect('pantry/' + req.session.pantry_id);
   })
 }
