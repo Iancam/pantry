@@ -51,6 +51,7 @@ app.get('/pantry/:id', pantry.view);
 app.get('/shopping_list/:id', shopping_list.view);
 app.post('/create_request', shopping_list.create_request);
 app.post('/create_item', pantry.create_item);
+app.post('/like', shopping_list.like);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

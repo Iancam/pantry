@@ -30,7 +30,7 @@
     </div>
 
     {{#each pantry.requests}}
-      <div class='row request'>
+      <div class='row request' id='{{_id}}'>
         <h3 class='request-name'>{{name}}</h3>
         <span class='glyphicon glyphicon-chevron-up'>{{likes}}</span>
         <h6 class='request-category'>{{category}}</h6>
@@ -49,5 +49,6 @@
 
   <script src='https://code.jquery.com/jquery.js'></script>
   <script src='/js/bootstrap.min.js'></script>
+  <script src='/js/shopping_list.js'></script>
 </body>
 </html>

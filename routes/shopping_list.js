@@ -42,3 +42,16 @@ exports.create_request = function (req, res) {
   })
 
 }
+
+exports.like = function (req, res) {
+  var id = req.param('id');
+  
+  models.Request
+  .findById(id, function (err, found_request) {
+    if (err) helpers.error(err);
+
+    found_request.likes++;
+    found_request.save(helpers.error);
+    res.send({'likes': found_request.likes});
+  })
+}
