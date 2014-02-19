@@ -12,11 +12,13 @@ exports.create = function (req, res) {
 
   new_pantry.save(helpers.error);
 
-  res.redirect('pantry/' + new_pantry._id);
+  res.redirect('shopping_list/' + new_pantry._id);
 }
 
 exports.view = function (req, res) {
   var id = req.param('id');
+
+  req.session.pantry_id = id;
 
   models.Pantry
   .findById(id, function (err, found_pantry) {

@@ -10,6 +10,7 @@ var handlebars = require('express3-handlebars')
 var mongoose = require('mongoose');
 
 var pantry = require('./routes/pantry');
+var shopping_list = require('./routes/shopping_list');
 
 /* Connect to MongoDB */
 var local_database_name = 'pantry';
@@ -18,6 +19,10 @@ var database_uri = process.env.MONGOLAB_URI || local_database_uri
 mongoose.connect(database_uri);
 
 var app = express();
+
+/* Setup sessions */
+app.use(express.cookieParser());
+app.use(express.session({secret: 'pantry'}));
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -43,6 +48,8 @@ if ('development' == app.get('env')) {
 app.get('/', pantry.home);
 app.post('/create_pantry', pantry.create);
 app.get('/pantry/:id', pantry.view);
+app.get('/shopping_list/:id', shopping_list.view);
+app.post('/create_request', shopping_list.create_request);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

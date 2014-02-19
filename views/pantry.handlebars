@@ -21,6 +21,11 @@
 <body>
   <div class='container'>
     <h2>Name: {{pantry.name}}</h2>
+    <form method="post" action="/create_request">
+      Name: <input type='text' name='name'>
+      Category: <input type='text' name='name'>
+      <input type='submit' value='Submit'>
+    </form>
   </div>
 
   <script src='https://code.jquery.com/jquery.js'></script>
