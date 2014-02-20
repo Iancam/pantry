@@ -9,7 +9,6 @@
   
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
-  <link href='/css/shopping_list.css' rel='stylesheet' >
   <link href='/css/navbar.css' rel='stylesheet'>
 
   <!-- Scripts for fonts -->
@@ -27,38 +26,12 @@
 
 <body>
   <div class='container'>
-    {{> share_modal}}
-    <div class='row' id='header'>
-      <button class='btn btn-primary align-left' data-toggle='modal' data-target='#shareModal'>
-        Share
-      </button>
-      <h2>Shopping List</h2>
-      <a href="/new_request"><span class='glyphicon glyphicon-plus'></span></a>
-    </div>
 
-    <div class='row' id='sort'>
-      <div class='btn-group'>
-        <button class='btn btn-default btn-md dropdown-toggle' id='sort-btn' type='button' data-toggle='dropdown'>
-          Sort<span class='caret'></span>
-        </button>
-
-        <ul class='dropdown-menu'>
-          <li><a href='/shopping_list/{{id}}/Name'>Name</a></li>
-          <li><a href='/shopping_list/{{id}}/Category'>Category</a></li>
-          <li><a href='/shopping_list/{{id}}/Likes'>Likes</a></li>
-        </ul>
-      </div>
-    </div>
-
-
-
-    {{#each requests}}
-      <div class='row request' id='{{_id}}'>
-        <h3 class='request-name'>{{name}}</h3>
-        <span class='glyphicon glyphicon-chevron-up'>{{likes}}</span>
-        <h6 class='request-category'>{{category}}</h6>
-      </div>
-    {{/each}}
+    <form method='post' action='/create_request'>
+      Name: <input type='text' name='name'>
+      Category: <input type='text' name='category'>
+      <input type='submit' value='Submit'>
+    </form>
 
     {{> navbar}}
   </div>

@@ -11,11 +11,16 @@ exports.create = function (req, res) {
 
   var new_pantry = new models.Pantry({name: name});
 
-  new_pantry.save(helpers.error);
+  new_pantry.save(function (err, new_pantry) {
+    if (err) {
+      console.log(err);
+      res.redirect('/');
+    } else {
+      req.session.pantry_order = 'Name';
 
-  req.session.pantry_order = 'Name';
-
-  res.redirect('shopping_list/' + new_pantry._id + '/Name');
+      res.redirect('shopping_list/' + new_pantry._id + '/Name');
+    }
+  })
 }
 
 exports.view = function (req, res) {
@@ -71,5 +76,12 @@ exports.create_item = function (req, res) {
                  + req.session.pantry_id + '/'
                  + req.session.pantry_order);
   })
+}
+
+exports.new_item = function (req, res) {
+  res.render('new_item', 
+  {id: req.session.pantry_id,
+   shopping_list_order: req.session.shopping_list_order,
+   pantry_order: req.session.pantry_order});
 }
 

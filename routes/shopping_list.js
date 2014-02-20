@@ -72,3 +72,10 @@ exports.like = function (req, res) {
     res.send({'likes': found_request.likes});
   })
 }
+
+exports.new_request = function (req, res) {
+  res.render('new_request', 
+  {id: req.session.pantry_id,
+   shopping_list_order: req.session.shopping_list_order,
+   pantry_order: req.session.pantry_order});
+}

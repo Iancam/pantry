@@ -94,11 +94,23 @@ function init_mongoose () {
 app.get('/', pantry.home);
 app.post('/create_pantry', pantry.create);
 app.get('/pantry/:id/:order', pantry.view);
+app.get('/pantry/:id/', function (req, res) {
+	// Make name the order if there isn't one.
+	var id = req.param('id');
+	res.redirect('/pantry/' + id + '/name');
+})
 app.get('/shopping_list/:id/:order', shopping_list.view);
+app.get('/shopping_list/:id/', function (req, res) {
+	// Make name the order if there isn't one.
+	var id = req.param('id');
+	res.redirect('/shopping_list/' + id + '/name');
+})
 app.post('/create_request', shopping_list.create_request);
 app.post('/create_item', pantry.create_item);
 app.post('/like', shopping_list.like);
 app.post('/share', share.share);
+app.get('/new_request', shopping_list.new_request);
+app.get('/new_item', pantry.new_item);
 
 
 
