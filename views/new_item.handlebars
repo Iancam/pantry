@@ -57,15 +57,6 @@
         </div>
       </div>
 
-{{!--       <div class='well'>
-        <div class='input-append date' data-date='12-02-2012' data-date-format='dd-mm-yyyy'>
-          <div class='input-group'>
-            <input class='form-control' id='datepicker' size='16' type='text' value='12-02-2012' name='date'>
-            <span class='glyphicon glyphicon-calendar'></span>
-          </div>
-        </div>
-      </div> --}}
-
       <button type='submit' class='btn btn-primary'>Submit</button>
     </form>
 
@@ -77,7 +68,9 @@
   <script src='/js/bootstrap.min.js'></script>
   <script src='/js/bootstrap-datepicker.js'></script>
   <script>
-    $(".input-group.date").datepicker({ autoclose: true, todayHighlight: true });
+    $(".input-group.date").datepicker({ autoclose: true, 
+                                   todayHighlight: true,
+                                        startDate: new Date()});
   </script>
 </body>
 </html>
