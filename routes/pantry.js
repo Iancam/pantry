@@ -57,11 +57,14 @@ exports.view = function (req, res) {
 exports.create_item = function (req, res) {
   var name = req.param('name');
   var category = req.param('category');
+  var date = new Date(req.param('date'));
+  console.log ("date = " + date);
   //TODO: add date
 
   var new_item = new models.Item({
     name: name,
-    category: category
+    category: category,
+    expiration: date
   })
 
   new_item.save(helpers.error);

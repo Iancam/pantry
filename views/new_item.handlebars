@@ -10,6 +10,8 @@
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
   <link href='/css/navbar.css' rel='stylesheet'>
+  <link href='/css/datepicker.css' rel='stylesheet'>
+
 
   <!-- Scripts for fonts -->
   <script type='text/javascript' src='//use.typekit.net/vka4voo.js'></script>
@@ -27,10 +29,32 @@
 <body>
   <div class='container'>
 
-    <form method='post' action='/create_item'>
-      Name: <input type='text' name='name'>
-      Category: <input type='text' name='category'>
-      <input type='submit' value='Submit'>
+    <form role='form' method='post' action='/create_item'>
+      <div class='form-group'>
+        <label for='name'>Name</label>
+        <input type='text' class='form-control' id='name' placeholder='Yogurt' name='name'>
+      </div>
+
+      <div class='form-group'>
+        <label for='category'>Category</label>
+          <select class='form-control' name='category'>
+            <option>Fruits</option>
+            <option>Vegetables</option>
+            <option>Grains</option>
+            <option>Protein</option>
+            <option>Dairy</option>
+            <option>Snacks</option>
+          </select>
+      </div>
+
+      <div class='well'>
+        <div class='input-append date' id='datepicker' data-date='12-02-2012' data-date-format='dd-mm-yyyy'>
+          <input class='span2' size='16' type='text' value='12-02-2012' name='date'>
+          <span class='add-on'><i class='icon-th'></i></span>
+        </div>
+      </div>
+
+      <button type='submit' class='btn btn-primary'>Submit</button>
     </form>
 
     {{> navbar}}
@@ -39,6 +63,9 @@
 
   <script src='https://code.jquery.com/jquery.js'></script>
   <script src='/js/bootstrap.min.js'></script>
-  <script src='/js/shopping_list.js'></script>
+  <script src='/js/bootstrap-datepicker.js'></script>
+  <script>
+    $('#datepicker').datepicker();
+  </script>
 </body>
 </html>
