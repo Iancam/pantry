@@ -22,13 +22,18 @@
 </head>
 
 <body>
+  {{> share_modal}}
   <div class='container'>
-
+  
   <div class='row' id='header'>
+      <button class="btn btn-primary align-left" data-toggle="modal" data-target="#shareModal">
+        Share
+      </button>
       <h2>Pantry</h2>
       <span class='glyphicon glyphicon-plus'></span>
+      
     </div>
-
+    
     <div class='row' id='sort'>
       <h4>Sort by: <i>Expiration</i></h4>
     </div>

@@ -3,27 +3,24 @@
  * Module dependencies.
  */
 
-var express = require('express');
+var express = require('express'),
+routes = require("./routes"),
+handlebars = require('express3-handlebars'),
+mailer = require('express-mailer'),
+mongoose = require("mongoose"),
+http = require('http'),
+path = require('path'),
+handlebars = require('express3-handlebars')
+mongoose = require('mongoose'),
 
-var routes = require("./routes");
-var pantry = require("./routes/pantry")
-
-
-var handlebars = require('express3-handlebars');
-var mongoose = require("mongoose");
-
-var http = require('http');
-var path = require('path');
-var handlebars = require('express3-handlebars')
-var mongoose = require('mongoose');
-
-var pantry = require('./routes/pantry');
-var shopping_list = require('./routes/shopping_list');
+share = require('./routes/share')
+pantry = require('./routes/pantry'),
+shopping_list = require('./routes/shopping_list'),
 
 /* Connect to MongoDB */
-var local_database_name = 'pantry';
-var local_database_uri  = 'mongodb://localhost/' + local_database_name
-var database_uri = process.env.MONGOLAB_URI || local_database_uri
+local_database_name = 'pantry',
+local_database_uri  = 'mongodb://localhost/' + local_database_name,
+database_uri = process.env.MONGOLAB_URI || local_database_uri,
 mongoose.connect(database_uri);
 
 var app = express();
@@ -56,8 +53,18 @@ app.use(function (req, res) {
 	res.redirect("/");
 })
 
-// Add routes here
-// app.get('/', index.view);
+// mailer
+mailer.extend(app, {
+  from: 'pantry.mailer@gmail.com',
+  host: 'smtp.gmail.com', // hostname
+  secureConnection: true, // use SSL
+  port: 465, // port for secure SMTP
+  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
+  auth: {
+    user: 'pantry.mailer@gmail.com',
+    pass: 'pantrypass'
+  }
+});
 
 function init_mongoose () {
 	// Here we find an appropriate database to connect to, defaulting to
@@ -82,6 +89,20 @@ function init_mongoose () {
 	});
 };
 
+// mailer.send('../views/share_email', {
+// 	to: "kleptocrat@gmail.com", // REQUIRED. This can be a comma delimited string just like a normal email to field. 
+// 	subject: 'A Pantry Has Been Shared With You!', // REQUIRED.
+// 	otherProperty: {url:"200"} // All additional properties are also passed to the template as local variables.
+// 	}, function (err) {
+// 	if (err) {
+// 	// handle error
+// 		console.log(err);
+// 		res.send('There was an error sending the email');
+// 		return;
+// 	}
+// 	res.send('Email Sent');
+// 	});
+
 /* Routes */
 app.get('/', pantry.home);
 app.post('/create_pantry', pantry.create);
@@ -90,6 +111,8 @@ app.get('/shopping_list/:id', shopping_list.view);
 app.post('/create_request', shopping_list.create_request);
 app.post('/create_item', pantry.create_item);
 app.post('/like', shopping_list.like);
+app.post('/share', share.share);
+
 
 
 http.createServer(app).listen(app.get('port'), function(){

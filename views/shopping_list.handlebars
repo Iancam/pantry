@@ -23,7 +23,11 @@
 
 <body>
   <div class='container'>
+    {{> share_modal}}
     <div class='row' id='header'>
+      <button class="btn btn-primary align-left" data-toggle="modal" data-target="#shareModal">
+        Share
+      </button>
       <h2>Shopping List</h2>
       <span class='glyphicon glyphicon-plus'></span>
     </div>
