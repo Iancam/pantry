@@ -1,9 +1,4 @@
-html {
-  height: 100%;
-}
-
 body {
-  min-height: 100%;
   background-color: #8bc53e;
 }
 
@@ -23,6 +18,7 @@ body {
 #name-field {
   margin-bottom: 5%;
   width: 75%;
+  height: 50px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
