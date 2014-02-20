@@ -10,6 +10,7 @@
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
   <link href='/css/navbar.css' rel='stylesheet'>
+  <link href='/new_request.css' rel='stylesheet'>
 
   <!-- Scripts for fonts -->
   <script type='text/javascript' src='//use.typekit.net/vka4voo.js'></script>
@@ -27,10 +28,25 @@
 <body>
   <div class='container'>
 
-    <form method='post' action='/create_request'>
-      Name: <input type='text' name='name'>
-      Category: <input type='text' name='category'>
-      <input type='submit' value='Submit'>
+    <form role="form" method='post' action='/create_request'>
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Yogurt" name='name'>
+      </div>
+
+      <div class='form-group'>
+        <label for='category'>Category</label>
+          <select class="form-control" name='category'>
+            <option>Fruits</option>
+            <option>Vegetables</option>
+            <option>Grains</option>
+            <option>Protein</option>
+            <option>Dairy</option>
+            <option>Snacks</option>
+          </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
     {{> navbar}}
