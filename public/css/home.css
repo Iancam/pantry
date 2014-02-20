@@ -12,6 +12,8 @@ body {
   text-align: center;
   color: white;
   margin-bottom: 45%;
+  font-family: Museo Slab;
+  font-weight: 500;
 }
 
 .form-control {
