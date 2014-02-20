@@ -50,9 +50,9 @@
       <div class="form-group row">
         <div class="col-xs-8">
           <label class="control-label">Effective Date</label>
-          <div class="input-group date" id="datepicker" data-date="12-02-2012" data-date-format="mm-dd-yyyy">
-            <input class="form-control" type="text" readonly="" value="12-02-2012">
+          <div class="input-group date" id="datepicker" data-date="" data-date-format="mm/dd/yyyy">
             <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+            <input class="form-control" id='datepicker-text' type="text" readonly="" value="">
           </div>
         </div>
       </div>
@@ -68,9 +68,12 @@
   <script src='/js/bootstrap.min.js'></script>
   <script src='/js/bootstrap-datepicker.js'></script>
   <script>
+    var today = new Date();
+    $('#datepicker-text').attr('value', today.toLocaleDateString());
+    $('.input-group.date').attr('data-date', today.toLocaleDateString());
     $(".input-group.date").datepicker({ autoclose: true, 
                                    todayHighlight: true,
-                                        startDate: new Date()});
+                                        startDate: today});
   </script>
 </body>
 </html>
