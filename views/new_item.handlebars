@@ -5,7 +5,7 @@
   <title>Pantry</title>  
   <meta charset='utf-8'>
   {{!-- Disable Zooming --}}
-  <meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' />
+  <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' />
   
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
@@ -47,12 +47,24 @@
           </select>
       </div>
 
-      <div class='well'>
-        <div class='input-append date' id='datepicker' data-date='12-02-2012' data-date-format='dd-mm-yyyy'>
-          <input class='span2' size='16' type='text' value='12-02-2012' name='date'>
-          <span class='add-on'><i class='icon-th'></i></span>
+      <div class="form-group row">
+        <div class="col-xs-8">
+          <label class="control-label">Effective Date</label>
+          <div class="input-group date" id="datepicker" data-date="12-02-2012" data-date-format="mm-dd-yyyy">
+            <input class="form-control" type="text" readonly="" value="12-02-2012">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+          </div>
         </div>
       </div>
+
+{{!--       <div class='well'>
+        <div class='input-append date' data-date='12-02-2012' data-date-format='dd-mm-yyyy'>
+          <div class='input-group'>
+            <input class='form-control' id='datepicker' size='16' type='text' value='12-02-2012' name='date'>
+            <span class='glyphicon glyphicon-calendar'></span>
+          </div>
+        </div>
+      </div> --}}
 
       <button type='submit' class='btn btn-primary'>Submit</button>
     </form>
@@ -65,7 +77,7 @@
   <script src='/js/bootstrap.min.js'></script>
   <script src='/js/bootstrap-datepicker.js'></script>
   <script>
-    $('#datepicker').datepicker();
+    $(".input-group.date").datepicker({ autoclose: true, todayHighlight: true });
   </script>
 </body>
 </html>
