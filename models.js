@@ -12,6 +12,7 @@ var itemSchema = new Schema({
   name: {type: String, required: true},
   category: {type: String, required: true},
   expiration: Date,
+  expiration_string: String,
   low: Boolean
 })
 

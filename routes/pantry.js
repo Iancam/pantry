@@ -35,7 +35,9 @@ exports.view = function (req, res) {
   .exec(function (err, found_pantry) {
     if (err) helpers.error(err);
 
-    found_pantry.items.sort(function (item1, item2) {
+    var items = found_pantry.items;
+
+    items.sort(function (item1, item2) {
       if (order === 'Name') {
         console.log(item1.name);
         return item1.name.localeCompare(item2.name);
@@ -47,7 +49,7 @@ exports.view = function (req, res) {
     })
 
     res.render('pantry', 
-    {items:found_pantry.items, 
+    {items: items, 
      id:req.session.pantry_id,
      shopping_list_order: req.session.shopping_list_order,
      pantry_order: req.session.pantry_order});
@@ -57,14 +59,14 @@ exports.view = function (req, res) {
 exports.create_item = function (req, res) {
   var name = req.param('name');
   var category = req.param('category');
-  var date = new Date(req.param('date'));
-  console.log ("date = " + date);
-  //TODO: add date
+  var expiration_string = req.param('expiration');
+  var expiration = new Date(expiration_string);
 
   var new_item = new models.Item({
     name: name,
     category: category,
-    expiration: date
+    expiration: expiration,
+    expiration_string: expiration_string,
   })
 
   new_item.save(helpers.error);
