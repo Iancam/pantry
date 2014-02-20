@@ -8,6 +8,8 @@
 #header h2 {
   display: inline;
   color: white;
+  font-family: Museo Slab;
+  font-weight: 500;
 }
 
 #header span {
