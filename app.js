@@ -5,8 +5,12 @@
 
 var express = require('express');
 var routes = require("./routes");
+var pantry = require("./routes/pantry")
+var requests = require("./routes/requests")
+
 var http = require('http');
 var path = require('path');
+
 var handlebars = require('express3-handlebars');
 var mongoose = require("mongoose");
 
@@ -68,7 +72,7 @@ function define_schemas () {
 	var Schema = mongoose.Schema;
 
 	var pantry_schema = Schema({
-		url: {type: String, required: true, unique: true},
+		// url: {type: String, required: true, unique: true},
 		pantry_items: [{type: Schema.Types.ObjectId, ref: "Item_Pantry"}],
 	});
 
@@ -91,35 +95,23 @@ function define_schemas () {
 		second_added: Number,
 		score: Number
 	})
-
-	var items = Schema({
-		title: {type: String, required: true, unique: true},
-		text: {type: String, required: true},
-		shortened_text: {type: String, required: true},
-		user_id: {type: Schema.Types.ObjectId, ref:"User", required: true},
-		upvotes: Number,
-		second_created: Number,
-		score: Number,
-	});
-
-	var user_schema = Schema({
-		name: {type: String, unique: true, required: true},
-		voted: [{type: Schema.Types.ObjectId, ref: "Wish"}],
-		following: [{type: Schema.Types.ObjectId, ref: "Feed"}]
-		
-	});
 	
-	var Feed = mongoose.model("Feed", pantry_schema);
-	var User = mongoose.model("User", user_schema);
-	var Story = mongoose.model("Story", story_schema);
+	var Item_Requested = mongoose.model("Item_Requested", item_requested_schema);
+	var Item_Pantry = mongoose.model("Item_Requested", item_pantry_schema);
+	var Pantry = mongoose.model("Pantry", pantry_schema);;
+	var Shopping_List= mongoose.model("Shopping_List", shopping_list_schema);
 
-	exports.FeedModel = Feed;
-	exports.UserModel = User;
-	exports.StoryModel = Story;
+	exports.Item_Requested_Model = Item_Requested;
+	exports.Item_Pantry_Model = Item_Pantry;
+	exports.Pantry_Model = Pantry;
+	exports.Shopping_List_Model = Shopping_List;
 };
 
 define_routes = function () {
 	app.get("/", routes.index);
+	app.get("/:id", pantry.view);
+	app.get("requests/:id", requests.view);
+	app.post("/")
 	// app.post("/create_need", feed.create);
 	// app.post("/create_story", story.create);
 	// app.get("/upvote/:id", story.upvote);
