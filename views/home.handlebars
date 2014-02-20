@@ -4,7 +4,10 @@
 <head>
   <title>Pantry</title>  
   <meta charset='utf-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  
+  {{!-- Disable Zooming --}}
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
   <link href="/css/home.css" rel='stylesheet'>
@@ -25,11 +28,11 @@
 
 <body>
   <div class='container'>
-    <h1 class='header'>Pantry</h1>
+    <h1 id='header'>Pantry</h1>
 
     <form class='form-signin' role='form' action='/create_pantry' method='post'>
-      <input class='form-control' type='text' name='name' placeholder='Pantry Name'>
-      <button class='btn btn-md' type='submit'>+ New Pantry</button>
+      <input class='form-control' id='name-field' type='text' name='name' placeholder='Pantry Name'>
+      <button class='btn btn-lg' id='submit-btn' type='submit'>+ New Pantry</button>
     </form>
   </div>
   

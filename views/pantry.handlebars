@@ -4,10 +4,14 @@
 <head>
   <title>Pantry</title>  
   <meta charset='utf-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  {{!-- Disable Zooming --}}
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+  
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
   <link href='/css/pantry.css' rel='stylesheet'>
+  <link href='/css/navbar.css' rel='stylesheet'>
+
   <!-- Scripts for fonts -->
   <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -29,6 +33,9 @@
       <button class="btn btn-primary align-left" data-toggle="modal" data-target="#shareModal">
         Share
       </button>
+
+
+    <div class='row' id='header'>
       <h2>Pantry</h2>
       <span class='glyphicon glyphicon-plus'></span>
       
@@ -38,7 +45,7 @@
       <h4>Sort by: <i>Expiration</i></h4>
     </div>
 
-    {{#each pantry.items}}
+    {{#each items}}
       <div class='row item'>
         <h3 class='item-name'>{{name}}</h3>
         <h6 class='item-expiration'>January 6, 2014</h6>
@@ -46,12 +53,16 @@
       </div>
     {{/each}}
 
-          <form method='post' action='/create_item'>
+    <form method='post' action='/create_item'>
       Name: <input type='text' name='name'>
       Category: <input type='text' name='category'>
       <input type='submit' value='Submit'>
     </form>
+
   {{> navbar}}
+
+  </div> {{!-- End of container --}}
+
   <script src='https://code.jquery.com/jquery.js'></script>
   <script src='/js/bootstrap.min.js'></script>
 </body>

@@ -4,10 +4,14 @@
 <head>
   <title>Pantry</title>  
   <meta charset='utf-8'>
-  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  {{!-- Disable Zooming --}}
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+  
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
   <link href='/css/shopping_list.css' rel='stylesheet' >
+  <link href='/css/navbar.css' rel='stylesheet'>
+
   <!-- Scripts for fonts -->
   <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -36,7 +40,7 @@
       <h4>Sort by: <i>Likes</i></h4>
     </div>
 
-    {{#each pantry.requests}}
+    {{#each requests}}
       <div class='row request' id='{{_id}}'>
         <h3 class='request-name'>{{name}}</h3>
         <span class='glyphicon glyphicon-chevron-up'>{{likes}}</span>
@@ -44,15 +48,15 @@
       </div>
     {{/each}}
 
-          <form method='post' action='/create_request'>
+    <form method='post' action='/create_request'>
       Name: <input type='text' name='name'>
       Category: <input type='text' name='category'>
       <input type='submit' value='Submit'>
     </form>
 
+    {{> navbar}}
   </div>
 
-  {{> navbar}}
 
   <script src='https://code.jquery.com/jquery.js'></script>
   <script src='/js/bootstrap.min.js'></script>

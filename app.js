@@ -89,25 +89,12 @@ function init_mongoose () {
 	});
 };
 
-// mailer.send('../views/share_email', {
-// 	to: "kleptocrat@gmail.com", // REQUIRED. This can be a comma delimited string just like a normal email to field. 
-// 	subject: 'A Pantry Has Been Shared With You!', // REQUIRED.
-// 	otherProperty: {url:"200"} // All additional properties are also passed to the template as local variables.
-// 	}, function (err) {
-// 	if (err) {
-// 	// handle error
-// 		console.log(err);
-// 		res.send('There was an error sending the email');
-// 		return;
-// 	}
-// 	res.send('Email Sent');
-// 	});
 
 /* Routes */
 app.get('/', pantry.home);
 app.post('/create_pantry', pantry.create);
-app.get('/pantry/:id', pantry.view);
-app.get('/shopping_list/:id', shopping_list.view);
+app.get('/pantry/:id/:order', pantry.view);
+app.get('/shopping_list/:id/:order', shopping_list.view);
 app.post('/create_request', shopping_list.create_request);
 app.post('/create_item', pantry.create_item);
 app.post('/like', shopping_list.like);
