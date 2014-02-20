@@ -1,0 +1,31 @@
+html {
+  height: 100%;
+}
+
+body {
+  min-height: 100%;
+  background-color: #8bc53e;
+}
+
+.header {
+  margin-top: 50%;
+  text-align: center;
+  color: white;
+  margin-bottom: 45%;
+}
+
+.form-control {
+  margin-bottom: 5%;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.btn {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #ddcf9b;
+  color: white;
+}
