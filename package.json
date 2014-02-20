@@ -10,5 +10,6 @@
     "express3-handlebars": "*",
     "mongodb": "*",
     "mongoose": "*"
+    "express-mailer": "*",
   }
 }
