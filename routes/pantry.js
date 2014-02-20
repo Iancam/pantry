@@ -1,19 +1,4 @@
-<<<<<<< HEAD
 
-/*
- * GET pantry listing.
- */
-
-var app = require("../app");
-
-exports.create = function(req,res) {
-	// body...
-}
-
-exports.view = function(req, res){
-  
-};
-=======
 var models = require('../models.js');
 var helpers = require('../helpers.js');
 
@@ -68,4 +53,4 @@ exports.create_item = function (req, res) {
     res.redirect('pantry/' + req.session.pantry_id);
   })
 }
->>>>>>> e66848ea7bc42e3e80615d19c85a1223d219493a
+
