@@ -7,7 +7,7 @@ var express = require('express');
 
 var routes = require("./routes");
 var pantry = require("./routes/pantry")
-var requests = require("./routes/requests")
+
 
 var handlebars = require('express3-handlebars');
 var mongoose = require("mongoose");
