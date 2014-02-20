@@ -13,9 +13,9 @@ exports.create = function (req, res) {
 
   new_pantry.save(helpers.error);
 
-  req.session.pantry_order = 'name';
+  req.session.pantry_order = 'Name';
 
-  res.redirect('shopping_list/' + new_pantry._id + '/name');
+  res.redirect('shopping_list/' + new_pantry._id + '/Name');
 }
 
 exports.view = function (req, res) {
@@ -31,10 +31,10 @@ exports.view = function (req, res) {
     if (err) helpers.error(err);
 
     found_pantry.items.sort(function (item1, item2) {
-      if (order === 'name') {
+      if (order === 'Name') {
         console.log(item1.name);
         return item1.name.localeCompare(item2.name);
-      } else if (order === 'category') {
+      } else if (order === 'Category') {
         return item1.category.localeCompare(item2.category);
       } else {
         return item2.date - item1.date;

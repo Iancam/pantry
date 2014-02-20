@@ -26,23 +26,30 @@
 </head>
 
 <body>
-  {{> share_modal}}
   <div class='container'>
+    {{> share_modal}}
   
-  <div class='row' id='header'>
+    <div class='row' id='header'>
       <button class="btn btn-primary align-left" data-toggle="modal" data-target="#shareModal">
         Share
       </button>
 
-
-    <div class='row' id='header'>
       <h2>Pantry</h2>
       <span class='glyphicon glyphicon-plus'></span>
-      
     </div>
     
     <div class='row' id='sort'>
-      <h4>Sort by: <i>Expiration</i></h4>
+      <div class='btn-group'>
+        <button class='btn btn-default btn-md dropdown-toggle' id='sort-btn' type='button' data-toggle='dropdown'>
+          Sort<span class='caret'></span>
+        </button>
+
+        <ul class='dropdown-menu'>
+          <li><a href='/pantry/{{id}}/Name'>Name</a></li>
+          <li><a href='/pantry/{{id}}/Category'>Category</a></li>
+          <li><a href='/pantry/{{id}}/Expiration'>Expiration</a></li>
+        </ul>
+      </div>
     </div>
 
     {{#each items}}

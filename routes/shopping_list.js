@@ -14,10 +14,10 @@ exports.view = function (req, res) {
     if (err) helpers.error(err);
 
     found_pantry.requests.sort(function (req1, req2) {
-      if (order === 'name') {
+      if (order === 'Name') {
         console.log(req1.name);
         return req1.name.localeCompare(req2.name);
-      } else if (order === 'category') {
+      } else if (order === 'Category') {
         return req1.category.localeCompare(req2.category);
       } else {
         return req2.likes - req1.likes;
