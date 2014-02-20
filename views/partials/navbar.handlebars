@@ -1,20 +1,22 @@
 {{!-- navbar.handlebars --}}
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
-  <div class="container-fluid">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <ul class="nav navbar-nav">
-      	<li>
-      		<a class="nav navbar navbar-left" href="/pantry/{{id}}">Pantry</a>
-      	</li>
-      	<li class="divider"></li>
-      	<li>
-      		<a class="nav navbar navbar-right" href="/shopping_list/{{id}}">Shopping List</a>
-      	</li>
-      </ul>
-    </div>
+  <div class="container">
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
+      <ul class='nav navbar navbar-left tab-item'>
+        <li>
+          <h4>
+        	 <a href=" /pantry/{{id}}">Pantry</a>
+          </h4>
+        </li>
+      </ul>
+
+      <ul class='nav navbar navbar-right tab-item'>
+        <li class='active'>
+          <h4>
+            <a href="/shopping_list/{{id}}">Shopping List</a>
+          </h4>
+        </li>
+      </ul>
     
-  </div><!-- /.container-fluid -->
+  </div><!-- /.container -->
 </nav>

@@ -1,0 +1,16 @@
+.tab-item {
+  margin-bottom: auto;
+  margin-top: auto;
+}
+
+.tab-item li {
+  margin: auto;
+}
+
+.navbar-left {
+  margin-left: 10%;
+}
+
+.navbar-right {
+  margin-right: 10%;
+}

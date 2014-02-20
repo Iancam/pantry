@@ -8,6 +8,8 @@
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
   <link href='/css/pantry.css' rel='stylesheet'>
+  <link href='/css/navbar.css' rel='stylesheet'>
+
   <!-- Scripts for fonts -->
   <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
@@ -24,7 +26,7 @@
 <body>
   <div class='container'>
 
-  <div class='row' id='header'>
+    <div class='row' id='header'>
       <h2>Pantry</h2>
       <span class='glyphicon glyphicon-plus'></span>
     </div>
@@ -41,12 +43,16 @@
       </div>
     {{/each}}
 
-          <form method='post' action='/create_item'>
+    <form method='post' action='/create_item'>
       Name: <input type='text' name='name'>
       Category: <input type='text' name='category'>
       <input type='submit' value='Submit'>
     </form>
+
   {{> navbar}}
+
+  </div> {{!-- End of container --}}
+  
   <script src='https://code.jquery.com/jquery.js'></script>
   <script src='/js/bootstrap.min.js'></script>
 </body>
