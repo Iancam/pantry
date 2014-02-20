@@ -3,8 +3,9 @@ var helpers = require('../helpers.js');
 
 exports.view = function (req, res) {
   var id = req.param('id');
-
+  var order = req.param('order');
   req.session.pantry_id = id;
+  req.session.shopping_list_order = order;
 
   models.Pantry
   .findById(id) 
@@ -12,8 +13,22 @@ exports.view = function (req, res) {
   .exec(function (err, found_pantry) {
     if (err) helpers.error(err);
 
+    found_pantry.requests.sort(function (req1, req2) {
+      if (order === 'name') {
+        console.log(req1.name);
+        return req1.name.localeCompare(req2.name);
+      } else if (order === 'category') {
+        return req1.category.localeCompare(req2.category);
+      } else {
+        return req2.likes - req1.likes;
+      }
+    })
+
     res.render('shopping_list', 
-    {pantry: found_pantry, id:req.session.pantry_id});
+    {requests: found_pantry.requests,
+     id: req.session.pantry_id,
+     shopping_list_order: req.session.shopping_list_order,
+     pantry_order: req.session.pantry_order});
   })
 }
 
@@ -38,7 +53,9 @@ exports.create_request = function (req, res) {
 
     found_pantry.requests.push(new_request);
     found_pantry.save(helpers.error);
-    res.redirect('shopping_list/' + req.session.pantry_id);
+    res.redirect('shopping_list/' 
+                  + req.session.pantry_id + '/'
+                  + req.session.shopping_list_order);
   })
 
 }
