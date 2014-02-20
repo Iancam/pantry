@@ -4,22 +4,35 @@
  */
 
 var express = require('express');
+
 var routes = require("./routes");
 var pantry = require("./routes/pantry")
 var requests = require("./routes/requests")
 
-var http = require('http');
-var path = require('path');
-
 var handlebars = require('express3-handlebars');
 var mongoose = require("mongoose");
 
-// Example route
-// var user = require('./routes/user');
+var http = require('http');
+var path = require('path');
+var handlebars = require('express3-handlebars')
+var mongoose = require('mongoose');
 
+var pantry = require('./routes/pantry');
+var shopping_list = require('./routes/shopping_list');
+
+/* Connect to MongoDB */
+var local_database_name = 'pantry';
+var local_database_uri  = 'mongodb://localhost/' + local_database_name
+var database_uri = process.env.MONGOLAB_URI || local_database_uri
+mongoose.connect(database_uri);
 
 var app = express();
 
+/* Setup sessions */
+app.use(express.cookieParser());
+app.use(express.session({secret: 'pantry'}));
+
+// all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.engine('handlebars', handlebars());
@@ -68,73 +81,15 @@ function init_mongoose () {
 	  }
 	});
 };
-function define_schemas () {
-	var Schema = mongoose.Schema;
 
-	var pantry_schema = Schema({
-		// url: {type: String, required: true, unique: true},
-		pantry_items: [{type: Schema.Types.ObjectId, ref: "Item_Pantry"}],
-	});
-
-	var shopping_list_schema = Schema({
-		requested_items: [{type: Schema.Types.ObjectId, ref: "Item_Requested"}]
-	});
-
-	var item_pantry_schema = Schema({
-		name:{type: String, required: true, unique: true},
-		category: String,
-		percent_left: {type:Number, required: true},
-		amount_left: Number,
-		second_added: Number,
-		
-	});
-
-	var item_requested_schema = Schema({
-		name: {type: String, required: true, unique: true},
-		wants: Number,
-		second_added: Number,
-		score: Number
-	})
-	
-	var Item_Requested = mongoose.model("Item_Requested", item_requested_schema);
-	var Item_Pantry = mongoose.model("Item_Requested", item_pantry_schema);
-	var Pantry = mongoose.model("Pantry", pantry_schema);;
-	var Shopping_List= mongoose.model("Shopping_List", shopping_list_schema);
-
-	exports.Item_Requested_Model = Item_Requested;
-	exports.Item_Pantry_Model = Item_Pantry;
-	exports.Pantry_Model = Pantry;
-	exports.Shopping_List_Model = Shopping_List;
-};
-
-define_routes = function () {
-	app.get("/", routes.index);
-	app.get("/:id", pantry.view);
-	app.get("requests/:id", requests.view);
-	app.post("/")
-	// app.post("/create_need", feed.create);
-	// app.post("/create_story", story.create);
-	// app.get("/upvote/:id", story.upvote);
-	// app.get("/unvote/:id", story.unvote);
-	// app.get("/new_user", user.new_user);
-	// app.post("/edit_story", story.edit)
-	// app.get("/search/:query", story.search);
-	// app.post("/login", user.login);
-	// app.post("/create_user", user.create_user);
-	// app.get("/logout", user.logout);
-	// app.get("/following", user.following);
-	// app.get("/follow/:id", user.follow);
-	// app.get("/unfollow/:id", user.unfollow);
-	// app.get("/feed/:id", feed.view);
-	// app.get("/story/:id", story.view);
-	// app.get("/login", login.view);
-};
-
-
-
-init_mongoose();
-define_routes();
-
+/* Routes */
+app.get('/', pantry.home);
+app.post('/create_pantry', pantry.create);
+app.get('/pantry/:id', pantry.view);
+app.get('/shopping_list/:id', shopping_list.view);
+app.post('/create_request', shopping_list.create_request);
+app.post('/create_item', pantry.create_item);
+app.post('/like', shopping_list.like);
 
 
 http.createServer(app).listen(app.get('port'), function(){
