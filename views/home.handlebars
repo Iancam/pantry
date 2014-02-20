@@ -7,6 +7,7 @@
   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
+  <link href="/css/home.css" rel='stylesheet'>
   <!-- this is a comment in HTML -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -19,10 +20,11 @@
 
 <body>
   <div class='container'>
-    <h2>Pantry</h2>
-    <form action='/create_pantry' method='post'>
-      Pantry name: <input type='text' name='name'>
-      <input type='submit' value='Submit'>
+    <h1 class='header'>Pantry</h1>
+
+    <form class='form-signin' role='form' action='/create_pantry' method='post'>
+      <input class='form-control' type='text' name='name' placeholder='Pantry Name'>
+      <button class='btn btn-md' type='submit'>+ New Pantry</button>
     </form>
   </div>
 
