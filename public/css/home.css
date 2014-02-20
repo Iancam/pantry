@@ -7,16 +7,20 @@ body {
   background-color: #8bc53e;
 }
 
-.header {
-  margin-top: 50%;
+.container {
+  margin-top: 20%;
+}
+
+#header {
+  margin-top: 30%;
+  margin-bottom: 45%;
   text-align: center;
   color: white;
-  margin-bottom: 45%;
   font-family: Museo Slab;
   font-weight: 500;
 }
 
-.form-control {
+#name-field {
   margin-bottom: 5%;
   width: 75%;
   margin-left: auto;
@@ -24,7 +28,7 @@ body {
   text-align: center;
 }
 
-.btn {
+#submit-btn {
   display: block;
   margin-left: auto;
   margin-right: auto;
