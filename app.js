@@ -6,7 +6,8 @@
 var express = require('express'),
 routes = require("./routes"),
 handlebars = require('express3-handlebars'),
-mailer = require('express-mailer'),
+// mailer = require('express-mailer'),
+email = require('emailjs/email')
 mongoose = require("mongoose"),
 http = require('http'),
 path = require('path'),
@@ -53,17 +54,12 @@ app.use(function (req, res) {
 	res.redirect("/");
 })
 
-// mailer
-mailer.extend(app, {
-  from: 'pantry.mailer@gmail.com',
-  host: 'smtp.gmail.com', // hostname
-  secureConnection: true, // use SSL
-  port: 465, // port for secure SMTP
-  transportMethod: 'SMTP', // default is SMTP. Accepts anything that nodemailer accepts
-  auth: {
-    user: 'pantry.mailer@gmail.com',
-    pass: 'pantrypass'
-  }
+// email
+var server = email.server.connect({ 
+   user:    "pantry.mailer@gmail.com", 
+   password:"pantrypass", 
+   host:    "smtp.gmail.com", 
+   ssl:     true
 });
 
 function init_mongoose () {
@@ -100,7 +96,7 @@ app.post('/create_item', pantry.create_item);
 app.post('/like', shopping_list.like);
 app.post('/share', share.share);
 
-
+exports.server = server;
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
