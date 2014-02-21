@@ -1,0 +1,45 @@
+<div class="modal fade" id="itemModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel-new-item" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modalLabel-new-item">Add new Item</h4>
+      </div>
+      <div class="modal-body">
+        <form role='form' method='post' action='/create_item' id="new-form">
+          <div class='form-group'>
+            <label for='name'>Name</label>
+            <input type='text' class='form-control' id='name' placeholder='Yogurt' name='name'>
+          </div>
+
+          <div class='form-group'>
+            <label for='category'>Category</label>
+              <select class='form-control' name='category'>
+                <option>Fruits</option>
+                <option>Vegetables</option>
+                <option>Grains</option>
+                <option>Protein</option>
+                <option>Dairy</option>
+                <option>Snacks</option>
+              </select>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-xs-8">
+              <label class="control-label">Expiration Date</label>
+              <div class="input-group date" id="datepicker" data-date="" data-date-format="m/dd/yyyy">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                <input class="form-control" id='datepicker-text' type="text" readonly="" value="" name='expiration'>
+              </div>
+            </div>
+          </div>
+      {{!-- <button type='submit' class='btn btn-primary'>Submit</button> --}}
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="modal-save" form="new-form">Add New Item</button>
+      </div>
+    </div>
+  </div>
+</div>
