@@ -11,11 +11,16 @@ exports.create = function (req, res) {
 
   var new_pantry = new models.Pantry({name: name});
 
-  new_pantry.save(helpers.error);
+  new_pantry.save(function (err, new_pantry) {
+    if (err) {
+      console.log(err);
+      res.redirect('/');
+    } else {
+      req.session.pantry_order = 'Name';
 
-  req.session.pantry_order = 'name';
-
-  res.redirect('shopping_list/' + new_pantry._id + '/name');
+      res.redirect('shopping_list/' + new_pantry._id + '/Name');
+    }
+  })
 }
 
 exports.view = function (req, res) {
@@ -30,11 +35,13 @@ exports.view = function (req, res) {
   .exec(function (err, found_pantry) {
     if (err) helpers.error(err);
 
-    found_pantry.items.sort(function (item1, item2) {
-      if (order === 'name') {
+    var items = found_pantry.items;
+
+    items.sort(function (item1, item2) {
+      if (order === 'Name') {
         console.log(item1.name);
         return item1.name.localeCompare(item2.name);
-      } else if (order === 'category') {
+      } else if (order === 'Category') {
         return item1.category.localeCompare(item2.category);
       } else {
         return item2.date - item1.date;
@@ -42,7 +49,7 @@ exports.view = function (req, res) {
     })
 
     res.render('pantry', 
-    {items:found_pantry.items, 
+    {items: items, 
      id:req.session.pantry_id,
      shopping_list_order: req.session.shopping_list_order,
      pantry_order: req.session.pantry_order});
@@ -52,11 +59,14 @@ exports.view = function (req, res) {
 exports.create_item = function (req, res) {
   var name = req.param('name');
   var category = req.param('category');
-  //TODO: add date
+  var expiration_string = req.param('expiration');
+  var expiration = new Date(expiration_string);
 
   var new_item = new models.Item({
     name: name,
-    category: category
+    category: category,
+    expiration: expiration,
+    expiration_string: expiration_string,
   })
 
   new_item.save(helpers.error);
@@ -71,5 +81,12 @@ exports.create_item = function (req, res) {
                  + req.session.pantry_id + '/'
                  + req.session.pantry_order);
   })
+}
+
+exports.new_item = function (req, res) {
+  res.render('new_item', 
+  {id: req.session.pantry_id,
+   shopping_list_order: req.session.shopping_list_order,
+   pantry_order: req.session.pantry_order});
 }
 

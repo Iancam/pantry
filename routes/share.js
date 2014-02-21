@@ -5,9 +5,11 @@ exports.share = function(req, res){
   console.log( emails);
   var changing = emails.map(function(val){return '<'+val+'>'});
   console.log(changing);
-  var message = "success mother fucker!";
+  var text = "This Pantry has been shared with you: "+req.protocol+"://"+req.host+"/pantry/"+req.session.pantry_id+'/name'
+  console.log(text);
+
   app.server.send({
-    text:    "This url has been shared with you:\n ", 
+    text: text, 
     from:    "Pantry Founder <pantry.mailer@gmail.com>", 
     to:      changing.join(', '),
     // cc:      "else <else@gmail.com>",

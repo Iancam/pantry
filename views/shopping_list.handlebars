@@ -5,7 +5,7 @@
   <title>Pantry</title>  
   <meta charset='utf-8'>
   {{!-- Disable Zooming --}}
-  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+  <meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' />
   
   <link href='/css/bootstrap.min.css' rel='stylesheet'>
   <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
@@ -13,8 +13,8 @@
   <link href='/css/navbar.css' rel='stylesheet'>
 
   <!-- Scripts for fonts -->
-  <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  <script type='text/javascript' src='//use.typekit.net/vka4voo.js'></script>
+  <script type='text/javascript'>try{Typekit.load();}catch(e){}</script>
   <!-- this is a comment in HTML -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -28,17 +28,30 @@
 <body>
   <div class='container'>
     {{> share_modal}}
+    {{> request_modal}}
     <div class='row' id='header'>
-      <button class="btn btn-primary align-left" data-toggle="modal" data-target="#shareModal">
+      <button class='btn btn-primary align-left' data-toggle='modal' data-target='#shareModal'>
         Share
       </button>
       <h2>Shopping List</h2>
-      <span class='glyphicon glyphicon-plus'></span>
+      <a href="#" data-toggle='modal' data-target='#requestModal'><span class='glyphicon glyphicon-plus'></span></a>
     </div>
 
     <div class='row' id='sort'>
-      <h4>Sort by: <i>Likes</i></h4>
+      <div class='btn-group'>
+        <button class='btn btn-default btn-md dropdown-toggle' id='sort-btn' type='button' data-toggle='dropdown'>
+          Sort<span class='caret'></span>
+        </button>
+
+        <ul class='dropdown-menu'>
+          <li><a href='/shopping_list/{{id}}/Name'>Name</a></li>
+          <li><a href='/shopping_list/{{id}}/Category'>Category</a></li>
+          <li><a href='/shopping_list/{{id}}/Likes'>Likes</a></li>
+        </ul>
+      </div>
     </div>
+
+
 
     {{#each requests}}
       <div class='row request' id='{{_id}}'>
@@ -47,12 +60,6 @@
         <h6 class='request-category'>{{category}}</h6>
       </div>
     {{/each}}
-
-    <form method='post' action='/create_request'>
-      Name: <input type='text' name='name'>
-      Category: <input type='text' name='category'>
-      <input type='submit' value='Submit'>
-    </form>
 
     {{> navbar}}
   </div>

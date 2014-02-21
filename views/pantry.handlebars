@@ -26,38 +26,39 @@
 </head>
 
 <body>
-  {{> share_modal}}
   <div class='container'>
-  
-  <div class='row' id='header'>
+    {{> share_modal}}
+    {{> item_modal}}
+    <div class='row' id='header'>
       <button class="btn btn-primary align-left" data-toggle="modal" data-target="#shareModal">
         Share
       </button>
 
-
-    <div class='row' id='header'>
       <h2>Pantry</h2>
-      <span class='glyphicon glyphicon-plus'></span>
-      
+      <a href="#" data-toggle="modal" data-target="#itemModal"><span class='glyphicon glyphicon-plus'></span></a>
     </div>
     
     <div class='row' id='sort'>
-      <h4>Sort by: <i>Expiration</i></h4>
+      <div class='btn-group'>
+        <button class='btn btn-default btn-md dropdown-toggle' id='sort-btn' type='button' data-toggle='dropdown'>
+          Sort<span class='caret'></span>
+        </button>
+
+        <ul class='dropdown-menu'>
+          <li><a href='/pantry/{{id}}/Name'>Name</a></li>
+          <li><a href='/pantry/{{id}}/Category'>Category</a></li>
+          <li><a href='/pantry/{{id}}/Expiration'>Expiration</a></li>
+        </ul>
+      </div>
     </div>
 
     {{#each items}}
       <div class='row item'>
         <h3 class='item-name'>{{name}}</h3>
-        <h6 class='item-expiration'>January 6, 2014</h6>
+        <h6 class='item-expiration'>{{expiration_string}}</h6>
         <h6 class='item-category'>{{category}}</h6>
       </div>
     {{/each}}
-
-    <form method='post' action='/create_item'>
-      Name: <input type='text' name='name'>
-      Category: <input type='text' name='category'>
-      <input type='submit' value='Submit'>
-    </form>
 
   {{> navbar}}
 
