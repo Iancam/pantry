@@ -11,7 +11,7 @@ path = require('path'),
 handlebars = require('express3-handlebars'),
 email = require('emailjs/email'),
 mongoose = require("mongoose"),
-
+models = require("./models"),
 user = require('./routes/user'),
 share = require('./routes/share'),
 pantry = require('./routes/pantry'),
@@ -73,12 +73,13 @@ passport.use(new FacebookStrategy({
 		callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
-		console.log(profile);
+
 		var newUser = {fid: profile.id,
-			email: profile.emails.value,
-			lastname: profile.familyName,
-			firstname: profile.givenName};
-		User.findOrCreate(newUser, function(err, user){
+			email: profile.emails[0].value,
+			lastname: profile.name.familyName,
+			firstname: profile.name.givenName};
+
+		models.User.findOrCreate(newUser, function(err, user){
 			if (err) {return done(err); }
 			done(null, user);
 		});
@@ -90,7 +91,7 @@ passport.serializeUser(function(user, done) {
 });
 
 passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
+  models.User.findById(id, function(err, user) {
     done(err, user);
   });
 });
@@ -129,7 +130,7 @@ app.get('/pantry/:id/', function (req, res) {
 	var id = req.param('id');
 	res.redirect('/pantry/' + id + '/name');
 })
-app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email' ] }));
 app.get('/auth/facebook/callback', 
 	passport.authenticate('facebook', {successRedirect: '/user/pantry',
 									   failureRedirect: '/login'}))

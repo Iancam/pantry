@@ -6,8 +6,14 @@ exports.new_user = function (req, res) {
 };
 
 exports.pantry = function (req, res) {
-	var pid = req.user.pantry;
-	res.redirect("/pantry/"+id+"/Name");
+	console.log(req.user);
+	// var pid = req.user.pantry;
+	// if (pid) {
+		// res.redirect("/pantry/"+pid+"/Name");
+	// }
+	// else {
+		res.redirect("/");
+	// }
 }
 
 exports.logout = function (req, res) {
