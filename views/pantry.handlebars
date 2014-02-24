@@ -29,6 +29,7 @@
   <div class='container'>
     {{> share_modal}}
     {{> item_modal}}
+    
     <div class='row' id='header'>
       <button class="btn btn-primary align-left" data-toggle="modal" data-target="#shareModal">
         Share
@@ -37,6 +38,7 @@
       <h2>Pantry</h2>
       <a href="#" data-toggle="modal" data-target="#itemModal"><span class='glyphicon glyphicon-plus'></span></a>
     </div>
+    
     
     <div class='row' id='sort'>
       <div class='btn-group'>
@@ -53,11 +55,7 @@
     </div>
 
     {{#each items}}
-      <div class='row item'>
-        <h3 class='item-name'>{{name}}</h3>
-        <h6 class='item-expiration'>{{expiration_string}}</h6>
-        <h6 class='item-category'>{{category}}</h6>
-      </div>
+      {{> item}}
     {{/each}}
 
   {{> navbar}}

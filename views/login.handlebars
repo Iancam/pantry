@@ -1,0 +1,28 @@
+<html>
+<head>
+  <title>Pantry</title>  
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;' />
+  
+  <link href='/css/bootstrap.min.css' rel='stylesheet'>
+  <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
+  <link href='/css/shopping_list.css' rel='stylesheet' >
+  <link href='/css/navbar.css' rel='stylesheet'>
+
+  <!-- Scripts for fonts -->
+  <script type='text/javascript' src='//use.typekit.net/vka4voo.js'></script>
+  <script type='text/javascript'>try{Typekit.load();}catch(e){}</script>
+
+</head>
+<body>
+  <div class="container">
+    <form action="/create_user" role="form" method="post" class="form-signin">
+      <input type="text" class="form-control" id="name-field" placeholder="name" name="name" required autofocus=true>
+      <button type="submit" class="btn btn-primary btn-large btn-block"> create my account! </button>
+    </form>
+  </div>
+</body>
+
+  <form class="form-signin" method="post", action="/create_user" role="form">
+    input<type="text" class="form-control" id="name-field" placeholder="Name" name="name" required autofocus>
+    button<type="submit" class="btn btn-primary btn-large btn-block"> Create my account!

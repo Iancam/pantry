@@ -10,6 +10,9 @@
     "express3-handlebars": "*",
     "mongodb": "*",
     "mongoose": "*",
-    "emailjs": "*"
+    "emailjs": "*",
+    "passport": "*",
+    "passport-facebook": "*",
+    "mongoose-findorcreate": "*"
   }
 }
