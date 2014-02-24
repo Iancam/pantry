@@ -3,6 +3,7 @@ var models = require('../models.js');
 var helpers = require('../helpers.js');
 
 exports.home = function(req, res){
+  console.log(req.protocol + '://' + req.get('host') + '/');
   res.render('home');
 };
 

@@ -6,17 +6,18 @@
 var express = require('express'),
 routes = require("./routes"),
 handlebars = require('express3-handlebars'),
-// mailer = require('express-mailer'),
-email = require('emailjs/email')
-mongoose = require("mongoose"),
 http = require('http'),
 path = require('path'),
-handlebars = require('express3-handlebars')
-mongoose = require('mongoose'),
+handlebars = require('express3-handlebars'),
+email = require('emailjs/email'),
+mongoose = require("mongoose"),
 
-share = require('./routes/share')
+user = require('./routes/user'),
+share = require('./routes/share'),
 pantry = require('./routes/pantry'),
 shopping_list = require('./routes/shopping_list'),
+passport = require('passport'),
+FacebookStrategy = require('passport-facebook').Strategy;
 
 /* Connect to MongoDB */
 local_database_name = 'pantry',
@@ -26,9 +27,6 @@ mongoose.connect(database_uri);
 
 var app = express();
 
-/* Setup sessions */
-app.use(express.cookieParser());
-app.use(express.session({secret: 'pantry'}));
 
 // all environments
 app.set('port', process.env.PORT || 3000);
@@ -41,10 +39,15 @@ app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
 app.use(express.cookieParser('Intro HCI secret key'));
-app.use(express.session());
+app.use(express.bodyParser());
+/* Setup sessions */
+app.use(express.cookieParser());
+app.use(express.session({secret: 'pantry'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(app.router);
 app.use(express.static(path.join(__dirname, '/public')));
-
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
@@ -62,6 +65,37 @@ var server = email.server.connect({
    ssl:     true
 });
 
+//passport
+
+passport.use(new FacebookStrategy({
+		clientID: "220032974854303",
+		clientSecret: "3f3ca3266c18ee0911a845526023b593",
+		callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
+	},
+	function(accessToken, refreshToken, profile, done) {
+		console.log(profile);
+		var newUser = {fid: profile.id,
+			email: profile.emails.value,
+			lastname: profile.familyName,
+			firstname: profile.givenName};
+		User.findOrCreate(newUser, function(err, user){
+			if (err) {return done(err); }
+			done(null, user);
+		});
+	}
+));
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
+
+//database
 function init_mongoose () {
 	// Here we find an appropriate database to connect to, defaulting to
 	// localhost if we don't find one.  
@@ -95,6 +129,10 @@ app.get('/pantry/:id/', function (req, res) {
 	var id = req.param('id');
 	res.redirect('/pantry/' + id + '/name');
 })
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback', 
+	passport.authenticate('facebook', {successRedirect: '/user/pantry',
+									   failureRedirect: '/login'}))
 app.get('/shopping_list/:id/:order', shopping_list.view);
 app.get('/shopping_list/:id/', function (req, res) {
 	// Make name the order if there isn't one.
@@ -107,6 +145,7 @@ app.post('/like', shopping_list.like);
 app.post('/share', share.share);
 app.get('/new_request', shopping_list.new_request);
 app.get('/new_item', pantry.new_item);
+app.get("/user/pantry", user.pantry);
 
 exports.server = server;
 
