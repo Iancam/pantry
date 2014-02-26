@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var app = require("../app");
 var models = require("../models");
 var helpers = require('../helpers');
-var underscore = require('underscore');
+var _ = require('underscore');
 exports.new_user = function (req, res) {
   res.redirect("/my_pantries");
 };
