@@ -2,7 +2,7 @@
 
 <html>
 <head>
-  <title>My Pantries</title>  
+  <title>Home</title>  
   <meta charset='utf-8'>
   {{!-- Disable Zooming --}}
   <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
@@ -26,22 +26,35 @@
 </head>
 
 <body>
+  <nav class="navbar navbar-default" role="navigation">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#dropdown-menu">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Home</a>
+    </div>
+    <div class="navbar-collapse collapse" id="dropdown-menu">
+      
+    </div>
+  </nav>
+
   <div class="container">
     {{> pantry_modal}}
     <div class='row' id='header'>
       
       {{> user_dropdown}}
-      <h2>My Pantries</h2>
+      <h2>Home</h2>
       <a href="#" data-toggle="modal" data-target="#pantryModal"><span class='glyphicon glyphicon-plus'></span></a>
     </div>
     {{#each pantries}}
       {{> pantry_min}}
     {{/each}}
-
   </div>
   
   <script src='https://code.jquery.com/jquery.js'></script>
   <script src='/js/bootstrap.min.js'></script>
-  <script src='/js/pantries.js'></script>
 </body>
 </html>
