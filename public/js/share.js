@@ -5,7 +5,7 @@ var new_input = function(){
 	$(".share-email").each(remove_input);
 	var re = /.+@.+/
 	if (input.next().length == 0 && re.test(input.val())) {
-		var new_input = '<input type="text" name="email" class="form-control" placeholder="Add Emails" rows="2">';
+		var new_input = '<input type="text" name="email" class="form-control share-email" placeholder="Add Emails" rows="2">';
 		input.parent().append(new_input);
 	}
 	// if(input.val() != '') {
@@ -35,5 +35,5 @@ $('#share-form').submit(function (argument) {
 	return false;
 });
 
-$(document).on('change', "input[type='text'][name='email']", new_input);
-$(document).on('blur', "input[type='text'][name='email']", remove_input);
+$(document).on('change', ".share-email", new_input);
+$(document).on('blur', ".share-email", remove_input);
