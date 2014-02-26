@@ -4,7 +4,7 @@ findOrCreate = require("mongoose-findorcreate");
 var Schema = mongoose.Schema;
 
 var pantrySchema = new Schema({
-  name: {type: String, required: true, unique: true},
+  name: {type: String, required: true},
   // description: String,
   items: [{type: Schema.Types.ObjectId, ref: 'Item'}],
   requests: [{type: Schema.Types.ObjectId, ref: 'Request'}],
