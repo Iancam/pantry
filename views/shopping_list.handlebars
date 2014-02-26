@@ -47,14 +47,12 @@
           <li><a href='/shopping_list/{{id}}/Likes'>Likes</a></li>
         </ul>
       </div>
+
+      <button id='btn-edit'>Edit</button>
     </div>
     
     {{#each requests}}
-      <div class='row request' id='{{_id}}'>
-        <h3 class='request-name'>{{name}}</h3>
-        <span class='glyphicon glyphicon-chevron-up'>{{likes}}</span>
-        <h6 class='request-category'>{{category}}</h6>
-      </div>
+      {{> request}}
     {{/each}}
 
     {{> navbar}}

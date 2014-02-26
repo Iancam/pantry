@@ -149,6 +149,9 @@ app.post('/share/:pid', pantry.share);
 // app.get("/user/pantry", user.pantry);
 app.get('/logout', function(req, res) {req.logout(); res.redirect('/');});
 app.get("/my_pantries", user.myPantries)
+app.post("/remove_item", pantry.remove);
+app.post("/remove_request", shopping_list.remove);
+app.post("/to_pantry", shopping_list.to_pantry);
 
 exports.server = server;
 

@@ -6,3 +6,24 @@ $('.glyphicon-chevron-up').click(function () {
     span.text(data.likes);
   })
 })
+
+$('.btn-remove').click(function () {
+  var request = $(this).parent('.request')
+  var id = request.attr('id');
+  $.post('/remove_request', {id: id}, function (data) {
+    request.remove();
+  })
+})
+
+$('.btn-to-pantry').click(function () {
+  var request = $(this).parent('.request')
+  var id = request.attr('id');
+  $.post('/to_pantry', {id: id}, function (data) {
+    request.remove();
+  })
+})
+
+$('#btn-edit').click(function () {
+  $('.btn-remove').toggle();
+  $('.btn-to-pantry').toggle();
+})
