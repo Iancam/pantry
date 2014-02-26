@@ -32,6 +32,7 @@ var userSchema = new Schema({
   email:  {type: String, required: true},
   likes:  [{type: Schema.Types.ObjectId, ref: "Request"}],
   fid:    {type: String, required: true},
+  last_visited: [{{type: Schema.Types.ObjectId, ref: 'Pantry'}:{ type: Date, default: Date.now }}]
   // pantries: [{type: Schema.Types.ObjectId, ref: "Pantry"}]
 });
 

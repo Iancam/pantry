@@ -1,10 +1,18 @@
 /* TODO: fix fonts */
+body {
+  padding-top: 50px !important;
+}
 
 #header {
   text-align: center;
   background-color: #8bc53e;
   padding-top: 2%;
   padding-bottom: 2%;
+  position: fixed;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+  top:0;
 }
 
 #header h2 {

@@ -39,7 +39,7 @@ function share_with (req, res, emails_list) {
       from:    "Pantry Founder <pantry.mailer@gmail.com>", 
       to:      emails.join(', '),
       // cc:      "else <else@gmail.com>",
-      subject: "testing emailjs"
+      subject: "A Pantry Has Been Shared With You"
     }, function(err, message) { 
       console.log(err || message); 
       res.json(err || message);
