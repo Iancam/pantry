@@ -3,10 +3,13 @@ var mongoose = require("mongoose");
 var app = require("../app");
 var models = require("../models");
 var helpers = require('../helpers');
-
+var underscore = require('underscore');
 exports.new_user = function (req, res) {
   res.redirect("/my_pantries");
 };
+
+
+
 
 exports.myPantries = function (req, res) {
   
@@ -15,10 +18,10 @@ exports.myPantries = function (req, res) {
   .exec(function (err, found_pantries) {
     if (err) helpers.error(err);
     models.Pantry.find({'invited_emails': req.user.email}, function (err, shared_pantries){
-
+     
       res.render('pantries', 
       {user: req.user,
-       pantries: found_pantries,
+       pantries: _.union(shared_pantries, found_pantries),
        invited_to: shared_pantries
       });
     });

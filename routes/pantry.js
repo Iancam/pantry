@@ -30,6 +30,13 @@ exports.create = function (req, res) {
 
 function share_with (req, res, emails_list) {
   if (emails_list) {
+    var pid = req.session.pantry_id;
+    models.Pantry.findById(pid, function (err, found_pantry) {
+      if (err) {helpers.error(err)};
+      found_pantry.invited_emails.push.apply(found_pantry.invited_emails, emails_list);      
+      found_pantry.save(helpers.error);
+    });
+
     var emails = emails_list.map(function(val){return '<'+val+'>'});
     var text = "This Pantry has been shared with you: "+req.protocol+"://"+req.host+"/pantry/"+req.session.pantry_id+'/name'
      console.log(emails);
@@ -52,11 +59,7 @@ function share_with (req, res, emails_list) {
 
 exports.share = function(req, res){
   var emails_list = req.body['emails'];
-  var pid = req.session.pantry_id;
-  models.Pantry.findById(pid, function (err, found_pantry) {
-    if (err) {helpers.error(err)};
-    found_pantry.invited_emails.push().apply(invited_emails, emails_list);
-  });
+
   share_with(req, res, emails_list);
 };
 
