@@ -1,0 +1,47 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>My Pantries</title>  
+  <meta charset='utf-8'>
+  {{!-- Disable Zooming --}}
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+
+  <link href='/css/bootstrap.min.css' rel='stylesheet'>
+  <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
+  <link href="/css/pantry.css" rel='stylesheet'>
+
+  <!-- Scripts for fonts -->
+  <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+  <!-- this is a comment in HTML -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
+      <script src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js'></script>
+    <![endif]-->        
+</head>
+
+<body>
+  <div class="container">
+    {{> pantry_modal}}
+    <div class='row' id='header'>
+      
+      {{> user_dropdown}}
+      <h2>My Pantries</h2>
+      <a href="#" data-toggle="modal" data-target="#pantryModal"><span class='glyphicon glyphicon-plus'></span></a>
+    </div>
+    {{#each pantries}}
+      {{> pantry_min}}
+    {{/each}}
+
+    {{> navbar}}
+  </div>
+  
+  <script src='https://code.jquery.com/jquery.js'></script>
+  <script src='/js/bootstrap.min.js'></script>
+</body>
+</html>

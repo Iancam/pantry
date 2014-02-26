@@ -1,0 +1,28 @@
+{{!-- pantry_modal.handlebars --}}
+<div class="modal fade" id="pantryModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel-new-pantry" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="modalLabel-new-pantry">Add new Pantry</h4>
+      </div>
+      <div class="modal-body">
+        <form role='form' method='post' action='/create_pantry' id="new-pantry-form">
+          <div class='form-group'>
+            <label for='name'>Name</label>
+            <input type='text' class='form-control' id='pantry_name' placeholder='My New Pantry' name='name'>
+          </div>
+          <div class="form-group">
+            {{!-- <label for="Share">Enter Emails</label> --}}
+            <input type="email" class="form-control share-email" placeholder="Add Emails" rows="2">
+          </div>
+        </form>
+      </div>
+      {{!-- <button type='submit' class='btn btn-primary'>Submit</button> --}}
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary" id="modal-save" form="new-pantry-form">Add New pantry</button>
+      </div>
+    </div>
+  </div>
+</div>
