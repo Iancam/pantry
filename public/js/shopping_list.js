@@ -22,3 +22,8 @@ $('.btn-to-pantry').click(function () {
     request.remove();
   })
 })
+
+$('#btn-edit').click(function () {
+  $('.btn-remove').toggle();
+  $('.btn-to-pantry').toggle();
+})

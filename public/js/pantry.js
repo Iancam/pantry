@@ -5,3 +5,7 @@ $('.btn-remove').click(function () {
     item.remove();
   })
 })
+
+$('#btn-edit').click(function () {
+  $('.btn-remove').toggle();
+})
