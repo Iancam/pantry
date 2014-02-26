@@ -21,6 +21,7 @@ var remove_input = function() {
 }
 $('#share-form').submit(function (argument) {
 	var emails = $(".share-email");
+	// get pantry id
 	var emails_gold = []
 	emails.each(function(){
 		var email = $(this).val();

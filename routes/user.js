@@ -19,14 +19,14 @@ exports.pantry = function (req, res) {
 }
 
 exports.myPantries = function (req, res) {
-	// var pantry_ids = req.user.pantries;
-	models.Pantry.find({'users': 'user._id'})
+	console.log(req);
+	models.Pantry.find({'users': req.user._id})
 	.sort('name')
 	.exec(function (err, found_pantries) {
 		if (err) helpers.error(err);
 		res.render('pantries', 
 			{user: req.user,
-			  pantries: found_pantries});
+			 pantries: found_pantries});
 	});
 }
 

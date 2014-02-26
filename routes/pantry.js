@@ -9,9 +9,12 @@ exports.home = function(req, res){
 
 exports.create = function (req, res) {
   var name = req.param('name');
-
-  var new_pantry = new models.Pantry({name: name});
-
+  var invited_emails= req.param('invited_emails');
+  var user = req.user;
+  var new_pantry = new models.Pantry({
+    name: name,
+    users: [user._id]
+  });
   new_pantry.save(function (err, new_pantry) {
     if (err) {
       console.log(err);
@@ -22,6 +25,19 @@ exports.create = function (req, res) {
     }
   })
 }
+
+exports.share = function(req, res){
+  var emails_list = req.body['emails'];
+  var emails = emails_list.map(function(val){return '<'+val+'>'});
+  var text = "This Pantry has been shared with you: "+req.protocol+"://"+req.host+"/pantry/"+req.session.pantry_id+'/name'
+  app.server.send({
+    text: text, 
+    from:    "Pantry Founder <pantry.mailer@gmail.com>", 
+    to:      emails.join(', '),
+    // cc:      "else <else@gmail.com>",
+    subject: "testing emailjs"
+  }, function(err, message) { console.log(err || message); });
+};
 
 exports.view = function (req, res) {
   var id = req.param('id');

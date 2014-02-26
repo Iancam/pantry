@@ -8,7 +8,7 @@ var pantrySchema = new Schema({
   // description: String,
   items: [{type: Schema.Types.ObjectId, ref: 'Item'}],
   requests: [{type: Schema.Types.ObjectId, ref: 'Request'}],
-  invited_emails: [{{type: String, required: true}}],
+  invited_emails: [{type: String, required: true}],
   users: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
@@ -37,7 +37,7 @@ var userSchema = new Schema({
 
 userSchema.plugin(findOrCreate);
 
-exports.Invited = mongoose.model('Invited', invitedSchema);
+
 exports.Pantry = mongoose.model('Pantry', pantrySchema);
 exports.Item = mongoose.model('Item', itemSchema);
 exports.Request = mongoose.model('Request', requestSchema);

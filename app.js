@@ -13,7 +13,7 @@ email = require('emailjs/email'),
 mongoose = require("mongoose"),
 models = require("./models"),
 user = require('./routes/user'),
-share = require('./routes/share'),
+// share = require('./routes/share'),
 pantry = require('./routes/pantry'),
 shopping_list = require('./routes/shopping_list'),
 passport = require('passport'),
@@ -142,7 +142,7 @@ app.get('/shopping_list/:id/', function (req, res) {
 app.post('/create_request', shopping_list.create_request);
 app.post('/create_item', pantry.create_item);
 app.post('/like', shopping_list.like);
-app.post('/share', share.share);
+app.post('/share', pantry.share);
 // app.get('/new_request', shopping_list.new_request);
 // app.get('/new_item', pantry.new_item);
 app.get("/user/pantry", user.pantry);
