@@ -1,6 +1,20 @@
 {{!-- pantry_list.handlebars --}}
 <div class='row item'>
-	<h3 class='pantry-name'><a href='/pantry/{{id}}/Name'>{{name}}</a></h3>
-	<h6 class='pantry-num-users'>{{users.length}}</h6>
-	<h6 class="pantry-invitees">{{invited_emails.length}}</h6>
+  <h3 class='pantry-name'><a href='/pantry/{{id}}/Name'>{{name}}</a></h3>
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <h4>Regulars: </h4>
+    <ul class="user-list">
+      {{#each users}}
+        <li>{{this.firstname}}</li>
+      {{/each}}
+    </ul>
+  </div>
+  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+    <h4>Size:</h4>
+    {{items.length}} items
+  </div>
+  
+  
+    
+  
 </div>
