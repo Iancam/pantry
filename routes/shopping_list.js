@@ -74,9 +74,12 @@ exports.like = function (req, res) {
   })
 }
 
-// exports.new_request = function (req, res) {
-//   res.render('new_request', 
-//   {id: req.session.pantry_id,
-//    shopping_list_order: req.session.shopping_list_order,
-//    pantry_order: req.session.pantry_order});
-// }
+exports.remove = function (req, res) {
+  var id = req.param('id');
+
+  models.Request
+  .findById(id)
+  .remove(helpers.error);
+
+  res.send();
+}

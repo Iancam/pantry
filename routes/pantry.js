@@ -108,10 +108,14 @@ exports.create_item = function (req, res) {
   })
 }
 
-// exports.new_item = function (req, res) {
-//   res.render('new_item', 
-//   {id: req.session.pantry_id,
-//    shopping_list_order: req.session.shopping_list_order,
-//    pantry_order: req.session.pantry_order});
-// }
+exports.remove = function (req, res) {
+  var id = req.param('id');
 
+  console.log(id);
+
+  models.Item
+  .findById(id)
+  .remove(helpers.error);
+
+  res.send();
+}

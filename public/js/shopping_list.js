@@ -6,3 +6,11 @@ $('.glyphicon-chevron-up').click(function () {
     span.text(data.likes);
   })
 })
+
+$('.btn-remove').click(function () {
+  var request = $(this).parent('.request')
+  var id = request.attr('id');
+  $.post('/remove_request', {id: id}, function (data) {
+    request.remove();
+  })
+})
