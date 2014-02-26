@@ -5,39 +5,40 @@
   <title>Home</title>  
   <meta charset='utf-8'>
   {{!-- Disable Zooming --}}
-  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
-  <link href='/css/bootstrap.min.css' rel='stylesheet'>
-  <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
-  <link href="/css/pantry.css" rel='stylesheet'>
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/pantry.css" rel="stylesheet">
 
   <!-- Scripts for fonts -->
   <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-  <!-- this is a comment in HTML -->
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
-      <script src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js'></script>
-    <![endif]-->        
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>      
 </head>
-
 <body>
   <nav class="navbar navbar-default" role="navigation">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed pull-left" data-toggle="collapse" data-target="#dropdown-menu">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Home</a>
-    </div>
-    <div class="navbar-collapse collapse" id="dropdown-menu">
-      
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Home</a>
+      </div>
+      <div class="collapse navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="/logout">Logged in as {{user.firstname}} {{user.lastname}}</a></li>
+          <li><a href="/my_pantries">Home</a></li>
+          {{#if id}}
+            <li><a href="#" data-toggle="modal" data-target="#shareModal">Share</a></li>
+          {{else}}
+            <li class="disabled"><a href="#" data-toggle="modal" data-target="#shareModal">Share</a></li>
+          {{/if}}
+          <li class="divider"></li>
+          <li><a href="/create_pantry">Create New Pantry</a></li>
+        </ul>
+      </div>
     </div>
   </nav>
 
@@ -54,7 +55,7 @@
     {{/each}}
   </div>
   
-  <script src='https://code.jquery.com/jquery.js'></script>
-  <script src='/js/bootstrap.min.js'></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </body>
 </html>
