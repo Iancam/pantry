@@ -4,7 +4,7 @@
  */
 
 var express = require('express'),
-routes = require("./routes"),
+// routes = require("./routes"),
 handlebars = require('express3-handlebars'),
 http = require('http'),
 path = require('path'),
@@ -73,7 +73,6 @@ passport.use(new FacebookStrategy({
 		callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
-
 		var newUser = {fid: profile.id,
 			email: profile.emails[0].value,
 			lastname: profile.name.familyName,
@@ -132,7 +131,7 @@ app.get('/pantry/:id/', function (req, res) {
 })
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email' ] }));
 app.get('/auth/facebook/callback', 
-	passport.authenticate('facebook', {successRedirect: '/user/pantry',
+	passport.authenticate('facebook', {successRedirect: '/my_pantries',
 									   failureRedirect: '/login'}))
 app.get('/shopping_list/:id/:order', shopping_list.view);
 app.get('/shopping_list/:id/', function (req, res) {
@@ -144,9 +143,10 @@ app.post('/create_request', shopping_list.create_request);
 app.post('/create_item', pantry.create_item);
 app.post('/like', shopping_list.like);
 app.post('/share', share.share);
-app.get('/new_request', shopping_list.new_request);
-app.get('/new_item', pantry.new_item);
+// app.get('/new_request', shopping_list.new_request);
+// app.get('/new_item', pantry.new_item);
 app.get("/user/pantry", user.pantry);
+app.get("/my_pantries", user.myPantries)
 
 exports.server = server;
 

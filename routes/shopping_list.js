@@ -25,7 +25,8 @@ exports.view = function (req, res) {
     })
 
     res.render('shopping_list', 
-    {requests: found_pantry.requests,
+    {user: req.user,
+     requests: found_pantry.requests,
      id: req.session.pantry_id,
      shopping_list_order: req.session.shopping_list_order,
      pantry_order: req.session.pantry_order});
@@ -73,9 +74,9 @@ exports.like = function (req, res) {
   })
 }
 
-exports.new_request = function (req, res) {
-  res.render('new_request', 
-  {id: req.session.pantry_id,
-   shopping_list_order: req.session.shopping_list_order,
-   pantry_order: req.session.pantry_order});
-}
+// exports.new_request = function (req, res) {
+//   res.render('new_request', 
+//   {id: req.session.pantry_id,
+//    shopping_list_order: req.session.shopping_list_order,
+//    pantry_order: req.session.pantry_order});
+// }

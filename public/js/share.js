@@ -1,10 +1,8 @@
 // share.js
 
-
-
 var new_input = function(){
 	var input = $(this);
-	$("input[type='text'][name='email']").each(remove_input);
+	$(".share-email").each(remove_input);
 	var re = /.+@.+/
 	if (input.next().length == 0 && re.test(input.val())) {
 		var new_input = '<input type="text" name="email" class="form-control" placeholder="Add Emails" rows="2">';
@@ -22,16 +20,16 @@ var remove_input = function() {
 	}
 }
 $('#share-form').submit(function (argument) {
-	var emails = $("input[type='text'][name='email']");
-	var eamils_gold = []
+	var emails = $(".share-email");
+	var emails_gold = []
 	emails.each(function(){
 		var email = $(this).val();
 		if (!$(this).val() == ""){
-			eamils_gold.push(email);
+			emails_gold.push(email);
 		}
 	});
 	$('#sort').after('<div class="alert alert-dismissable alert-success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>successfully shared! </div>');
-	$.post("/share", {"emails": eamils_gold});
+	$.post("/share", {"emails": emails_gold});
 
 	return false;
 });
