@@ -15,32 +15,6 @@
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>      
 </head>
 <body>
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Home</a>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li><a href="/logout">Logged in as {{user.firstname}} {{user.lastname}}</a></li>
-          <li><a href="/my_pantries">Home</a></li>
-          {{#if id}}
-            <li><a href="#" data-toggle="modal" data-target="#shareModal">Share</a></li>
-          {{else}}
-            <li class="disabled"><a href="#" data-toggle="modal" data-target="#shareModal">Share</a></li>
-          {{/if}}
-          <li class="divider"></li>
-          <li><a href="/create_pantry">Create New Pantry</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
   <div class="container">
     {{> pantry_modal}}

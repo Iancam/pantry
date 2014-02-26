@@ -2,7 +2,7 @@
 var new_input = function(){
 	var input = $(this);
 	$(".share-email").each(remove_input);
-	var re = /.+@.+/
+	var re = /.+@.\..+/
 	if (input.next().length == 0 && re.test(input.val())) {
 		var new_input = '<input type="email" class="share-email form-control" name="email" placeholder="Add Emails" rows="2">';
 		input.parent().append(new_input);
@@ -33,11 +33,6 @@ var parse_emails = function () {
 }
 
 function share_callback (results) {
-	console.log(results);
-}
-
-function addPantry (results) {
-	var html = Handlebars.templates.pantry_min()
 	console.log(results);
 }
 

@@ -2,8 +2,9 @@
 
 var new_input = function(){
 	var input = $(this);
+	console.log(input.val());
 	$(".share-email").each(remove_input);
-	var re = /.+@.+/
+	var re = /.+@.+\..+/
 	if (input.next().length == 0 && re.test(input.val())) {
 		var new_input = '<input type="text" name="email" class="form-control share-email" placeholder="Add Emails" rows="2">';
 		input.parent().append(new_input);
@@ -19,7 +20,7 @@ var remove_input = function() {
 		input.remove();
 	}
 }
-$('#share-form').submit(function (argument) {
+$('#share-form').submit(function () {
 	var emails = $(".share-email");
 	// get pantry id
 	var emails_gold = []
@@ -29,11 +30,14 @@ $('#share-form').submit(function (argument) {
 			emails_gold.push(email);
 		}
 	});
-	$('#sort').after('<div class="alert alert-dismissable alert-success"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>successfully shared! </div>');
-	$.post("/share", {"emails": emails_gold});
-
+	$.ajax({
+        type: "POST",
+        url: "/share",
+        data: {"emails": emails_gold}
+    });
+	$('#shareModal').modal('hide');
 	return false;
 });
 
-$(document).on('change', ".share-email", new_input);
+$(document).on('keyup', ".share-email", new_input);
 $(document).on('blur', ".share-email", remove_input);

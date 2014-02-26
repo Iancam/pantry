@@ -4,7 +4,7 @@ findOrCreate = require("mongoose-findorcreate");
 var Schema = mongoose.Schema;
 
 var pantrySchema = new Schema({
-  name: {type: String, required: true, unique: true},
+  name: {type: String, required: true},
   // description: String,
   items: [{type: Schema.Types.ObjectId, ref: 'Item'}],
   requests: [{type: Schema.Types.ObjectId, ref: 'Request'}],
@@ -32,6 +32,10 @@ var userSchema = new Schema({
   email:  {type: String, required: true},
   likes:  [{type: Schema.Types.ObjectId, ref: "Request"}],
   fid:    {type: String, required: true},
+  visited: [{
+    pantry: {type: Schema.Types.ObjectId, ref: 'Pantry'},
+    date: { type: Date, default: Date.now }
+  }]
   // pantries: [{type: Schema.Types.ObjectId, ref: "Pantry"}]
 });
 

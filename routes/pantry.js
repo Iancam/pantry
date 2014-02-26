@@ -1,33 +1,19 @@
 
 var models = require('../models.js');
 var helpers = require('../helpers.js');
-
+var app  = require("../app");
 exports.home = function(req, res){
-  console.log(req.protocol + '://' + req.get('host') + '/');
   res.render('home');
 };
-
-function share_with (req, emails_list) {
-  var emails = emails_list.map(function(val){return '<'+val+'>'});
-  var text = "This Pantry has been shared with you: "+req.protocol+"://"+req.host+"/pantry/"+req.session.pantry_id+'/name'
-  app.server.send({
-    text: text, 
-    from:    "Pantry Founder <pantry.mailer@gmail.com>", 
-    to:      emails.join(', '),
-    // cc:      "else <else@gmail.com>",
-    subject: "testing emailjs"
-  }, function(err, message) { console.log(err || message); });
-}
 
 exports.create = function (req, res) {
   var name = req.param('name');
   var invited_emails= req.param('invited_emails');
   var user = req.user;
-  share_with(req, invited_emails);
+  share_with(req, res, invited_emails);
   var new_pantry = new models.Pantry({
     name: name,
     users: [user._id],
-    invited_emails: invited_emails
   });
   
   new_pantry.save(function (err, new_pantry) {
@@ -42,9 +28,36 @@ exports.create = function (req, res) {
   
 }
 
+function share_with (req, res, emails_list) {
+  if (emails_list) {
+    var emails = emails_list.map(function(val){return '<'+val+'>'});
+    var text = "This Pantry has been shared with you: "+req.protocol+"://"+req.host+"/pantry/"+req.session.pantry_id+'/name'
+     console.log(emails);
+     console.log(text);
+    app.server.send({
+      text: text, 
+      from:    "Pantry Founder <pantry.mailer@gmail.com>", 
+      to:      emails.join(', '),
+      // cc:      "else <else@gmail.com>",
+      subject: "A Pantry Has Been Shared With You"
+    }, function(err, message) { 
+      console.log(err || message); 
+      res.json(err || message);
+    });
+  }
+  else {
+
+  }
+}
+
 exports.share = function(req, res){
   var emails_list = req.body['emails'];
-  share_with(req, emails_list);
+  var pid = req.session.pantry_id;
+  models.Pantry.findById(pid, function (err, found_pantry) {
+    if (err) {helpers.error(err)};
+    found_pantry.invited_emails.push().apply(invited_emails, emails_list);
+  });
+  share_with(req, res, emails_list);
 };
 
 exports.view = function (req, res) {
@@ -63,7 +76,6 @@ exports.view = function (req, res) {
 
     items.sort(function (item1, item2) {
       if (order === 'Name') {
-        console.log(item1.name);
         return item1.name.localeCompare(item2.name);
       } else if (order === 'Category') {
         return item1.category.localeCompare(item2.category);
