@@ -83,3 +83,28 @@ exports.remove = function (req, res) {
 
   res.send();
 }
+
+exports.to_pantry = function (req, res) {
+  var id = req.param('id');
+
+  console.log ('id = ' + id);
+
+  models.Request
+  .findById(id, function (err, found_request){
+    var name = found_request.name;
+    var category = found_request.category;
+
+    found_request.remove(helpers.error);
+
+    var new_item = new models.Item({name: name, category: category});
+    new_item.save(helpers.error);
+
+    models.Pantry
+    .findById(req.session.pantry_id, function (err, found_pantry) {
+      found_pantry.items.push(new_item);
+      found_pantry.save(helpers.error);
+    })
+  })
+
+  res.send();
+}
