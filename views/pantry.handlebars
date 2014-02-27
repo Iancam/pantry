@@ -31,14 +31,13 @@
     {{> item_modal}}
     
     <div class='row' id='header'>
-      <a id="open-icon-header" href="#menu"></a>
-      {{> sidebar}}
+      {{!-- <a id="open-icon-header" href="#menu">FUCKING OPEN</a> --}}
+      
       {{> user_dropdown}}
       <h2>Pantry</h2>
       <a href="#" data-toggle="modal" data-target="#itemModal"><span class='glyphicon glyphicon-plus'></span></a>
     </div>
-    
-    
+  
     <div class='row' id='sort'>
       <div class='btn-group'>
         <button class='btn btn-default btn-md dropdown-toggle' id='sort-btn' type='button' data-toggle='dropdown'>
@@ -62,7 +61,7 @@
   {{> navbar}}
 
   </div> {{!-- End of container --}}
-
+  {{!-- {{> sidebar}} --}}
   {{> standard_js}}
   <script src="/js/pantry.js"></script>
 </body>
