@@ -10,6 +10,15 @@
   
 }
 
+.left{
+  padding-top: 10px;
+  float: left;
+}
+.right{
+  padding-top: 10px;
+  float: right;
+}
+
 .unshifted {
 	right: 0;
   left: 0;
@@ -18,6 +27,10 @@
 .shifted {
 	width: 100%;
   left: 40%;
+}
+
+#menu-toggle {
+  display: inline;
 }
 
 #header h2 {
