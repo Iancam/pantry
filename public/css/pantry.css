@@ -1,15 +1,5 @@
 
 
-/*TODO: fix header alignments*/
-
-#sort {
-  background-color: #e6e6e6;
-  color: #8bc53e;
-  text-align: center;
-  padding-top: 5%;
-  padding-bottom: 5%;
-}
-
 .item {
   border-bottom: 2px #ddcf9b solid;
   padding-left: 5%;
@@ -18,6 +8,12 @@
 
 .item-name {
   display: inline;
+}
+
+.btn-remove {
+  margin-top: 8px;
+  display: inline;
+  float: right;
 }
 
 .item-expiration {
@@ -29,5 +25,3 @@
   margin-top: 3px;  
   color: #989898;
 }
-
-/* TODO: add running low flag */

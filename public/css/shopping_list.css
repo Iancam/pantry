@@ -1,16 +1,5 @@
 /* TODO: fix fonts */
 
-
-/*TODO: fix header alignments*/
-
-#sort {
-  background-color: #e6e6e6;
-  color: #8bc53e;
-  text-align: center;
-  padding-top: 5%;
-  padding-bottom: 5%;
-}
-
 .request {
   border-bottom: 2px #ddcf9b solid;
   padding-left: 5%;
@@ -31,6 +20,3 @@
   float: right;
   color: #ddcf9b;
 }
-
-/* TODO: fix vertical alignment;
-/* TODO: get icon outlines (so it fills in when clicked)*/

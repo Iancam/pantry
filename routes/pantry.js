@@ -2,6 +2,7 @@
 var models = require('../models.js');
 var helpers = require('../helpers.js');
 var app  = require("../app");
+
 exports.home = function(req, res){
   res.render('home');
 };
@@ -66,6 +67,8 @@ exports.share = function(req, res){
 exports.view = function (req, res) {
   var id = req.param('id');
   var order = req.param('order');
+  var next_pantry_order = get_next_pantry_order (order)
+
   req.session.pantry_id = id;
   req.session.pantry_order = order;
 
@@ -80,22 +83,31 @@ exports.view = function (req, res) {
     items.sort(function (item1, item2) {
       if (order === 'Name') {
         return item1.name.localeCompare(item2.name);
-      } else if (order === 'Category') {
-        return item1.category.localeCompare(item2.category);
       } else {
-        return item2.date - item1.date;
-      }
+        return item1.category.localeCompare(item2.category);
+      } 
     })
 
     res.render('pantry', 
     { page: 'pantry',
       modal: true,
+      pantry_name: found_pantry.name,
       user: req.user,
       items: items, 
       id:req.session.pantry_id,
       shopping_list_order: req.session.shopping_list_order,
-      pantry_order: req.session.pantry_order});
+      next_pantry_order: next_pantry_order,
+      pantry_order: req.session.pantry_order
+    });
   })
+}
+
+function get_next_pantry_order (order) {
+  if (order === 'Name') {
+    return 'Category';
+  } else {
+    return 'Name';
+  }
 }
 
 exports.create_item = function (req, res) {

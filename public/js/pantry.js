@@ -6,6 +6,10 @@ $('.btn-remove').click(function () {
   })
 })
 
-$('#btn-edit').click(function () {
-  $('.btn-remove').toggle();
+$('#edit').click(function () {
+  $('.btn-remove').toggle(50);
+})
+
+$(document).ready(function () {
+  $('.btn-remove').hide();
 })
