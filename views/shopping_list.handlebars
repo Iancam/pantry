@@ -20,12 +20,24 @@
   <div class='container'>
     {{> share_modal}}
     {{> request_modal}}
+
     <div class='row' id='header'>
       <a id="open-icon-header" href="#menu"></a>
       {{!-- > sidebar --}}
       {{> user_dropdown}}
       <h2>Shopping List</h2>
       <a href="#" data-toggle='modal' data-target='#requestModal'><span class='glyphicon glyphicon-plus'></span></a>
+    </div>
+
+    <div class="row">
+      <div class="btn-group btn-group-justified">
+        <a href=' /pantry/{{id}}/{{pantry_order}}' class="btn btn-default" role="button">
+          <span class="glphyicon glphyicon-cutlery"></span> Pantry
+        </a>
+        <a href='/shopping_list/{{id}}/{{shopping_list_order}}' class="btn btn-default" role="button">
+          <span class="glphyicon glphyicon-shopping-cart"> Grocery List</span>
+        </a>
+      </div>
     </div>
 
     <div class='row' id='sort'>
