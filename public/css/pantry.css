@@ -28,16 +28,6 @@ body {
   margin-left: 20px;
 }
 
-/*TODO: fix header alignments*/
-
-#sort {
-  background-color: #e6e6e6;
-  color: #8bc53e;
-  text-align: center;
-  padding-top: 5%;
-  padding-bottom: 5%;
-}
-
 .item {
   border-bottom: 2px #ddcf9b solid;
   padding-left: 5%;
@@ -56,6 +46,41 @@ body {
 .item-category {
   margin-top: 3px;  
   color: #989898;
+}
+
+#footer {
+  text-align: center;
+  background-color: #8bc53e;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  position: fixed;
+  right: 0;
+  left: 0;
+  height: 50px;
+  z-index: 1030;
+  bottom:0;
+}
+
+#sort {
+  display: inline;
+  float: left;
+  margin-left: 5%;
+}
+
+#edit {
+  display: inline;
+  float: right;
+  margin-right: 5%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
 }
 
 /* TODO: add running low flag */
