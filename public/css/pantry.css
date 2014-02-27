@@ -38,6 +38,12 @@ body {
   display: inline;
 }
 
+.btn-remove {
+  margin-top: 8px;
+  display: inline;
+  float: right;
+}
+
 .item-expiration {
   display: inline;
   float: right;

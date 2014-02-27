@@ -7,5 +7,9 @@ $('.btn-remove').click(function () {
 })
 
 $('#edit').click(function () {
-  $('.btn-remove').toggle();
+  $('.btn-remove').toggle(50);
+})
+
+$(document).ready(function () {
+  $('.btn-remove').hide();
 })
