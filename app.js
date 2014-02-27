@@ -70,7 +70,7 @@ var server = email.server.connect({
 passport.use(new FacebookStrategy({
 		clientID: "220032974854303",
 		clientSecret: "3f3ca3266c18ee0911a845526023b593",
-		callbackURL: "http://safe-anchorage-2842.herokapp.com/auth/facebook/callback"
+		callbackURL: "http://safe-anchorage-2842.herokuapp.com/auth/facebook/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
 		var newUser = {fid: profile.id,
