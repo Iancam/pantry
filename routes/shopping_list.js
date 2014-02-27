@@ -4,6 +4,9 @@ var helpers = require('../helpers.js');
 exports.view = function (req, res) {
   var id = req.param('id');
   var order = req.param('order');
+  var next_shopping_list_order = get_next_shopping_list_order (order)
+
+
   req.session.pantry_id = id;
   req.session.shopping_list_order = order;
 
@@ -24,12 +27,26 @@ exports.view = function (req, res) {
     })
 
     res.render('shopping_list', 
-    {user: req.user,
-     requests: found_pantry.requests,
-     id: req.session.pantry_id,
-     shopping_list_order: req.session.shopping_list_order,
-     pantry_order: req.session.pantry_order});
+    {
+      pantry_name: found_pantry.name,
+      user: req.user,
+      requests: found_pantry.requests,
+      id: req.session.pantry_id,
+      shopping_list_order: req.session.shopping_list_order,
+      next_shopping_list_order: next_shopping_list_order,
+      pantry_order: req.session.pantry_order
+   });
   })
+}
+
+function get_next_shopping_list_order (order) {
+  if (order === 'Name') {
+    return 'Category';
+  } else if (order === 'Category') {
+    return 'Likes';
+  } else {
+    return 'Name';
+  }
 }
 
 exports.create_request = function (req, res) {

@@ -23,7 +23,12 @@ $('.btn-to-pantry').click(function () {
   })
 })
 
-$('#btn-edit').click(function () {
+$('#edit').click(function () {
   $('.btn-remove').toggle();
   $('.btn-to-pantry').toggle();
+})
+
+$(document).ready(function () {
+  $('.btn-remove').hide();
+  $('.btn-to-pantry').hide();
 })

@@ -11,6 +11,7 @@ body {
   position: fixed;
   right: 0;
   left: 0;
+  height: 50px;
   z-index: 1030;
   top:0;
 }
@@ -23,16 +24,6 @@ body {
 #header span {
   color: white;
   margin-left: 20px;
-}
-
-/*TODO: fix header alignments*/
-
-#sort {
-  background-color: #e6e6e6;
-  color: #8bc53e;
-  text-align: center;
-  padding-top: 5%;
-  padding-bottom: 5%;
 }
 
 .request {
@@ -56,5 +47,37 @@ body {
   color: #ddcf9b;
 }
 
-/* TODO: fix vertical alignment;
-/* TODO: get icon outlines (so it fills in when clicked)*/
+#footer {
+  text-align: center;
+  background-color: #8bc53e;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  position: fixed;
+  right: 0;
+  left: 0;
+  height: 50px;
+  z-index: 1030;
+  bottom:0;
+}
+
+#sort {
+  display: inline;
+  float: left;
+  margin-left: 5%;
+}
+
+#edit {
+  display: inline;
+  float: right;
+  margin-right: 5%;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+a:hover {
+  text-decoration: none;
+  color: black;
+}

@@ -1,6 +1,5 @@
 body {
   padding-top: 50px !important;
-  padding-bottom: 70px;
 }
 
 #header {
@@ -16,9 +15,11 @@ body {
   top:0;
 }
 
-#header h2 {
+#header h3 {
   display: inline;
   color: white;
+  margin-left: auto;
+  margin-right: auto;
   /*font-family: Museo Slab;
   font-weight: 500;*/
 }
@@ -88,5 +89,3 @@ a:hover {
   text-decoration: none;
   color: black;
 }
-
-/* TODO: add running low flag */

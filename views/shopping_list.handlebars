@@ -25,7 +25,7 @@
       <a id="open-icon-header" href="#menu"></a>
       {{!-- > sidebar --}}
       {{> user_dropdown}}
-      <h2>Shopping List</h2>
+      <h2>{{pantry_name}}</h2>
       <a href="#" data-toggle='modal' data-target='#requestModal'><span class='glyphicon glyphicon-plus'></span></a>
     </div>
 
@@ -39,28 +39,12 @@
         </a>
       </div>
     </div>
-
-    <div class='row' id='sort'>
-      <div class='btn-group'>
-        <button class='btn btn-default btn-md dropdown-toggle' id='sort-btn' type='button' data-toggle='dropdown'>
-          Sort<span class='caret'></span>
-        </button>
-
-        <ul class='dropdown-menu'>
-          <li><a href='/shopping_list/{{id}}/Name'>Name</a></li>
-          <li><a href='/shopping_list/{{id}}/Category'>Category</a></li>
-          <li><a href='/shopping_list/{{id}}/Likes'>Likes</a></li>
-        </ul>
-      </div>
-
-      <button id='btn-edit'>Edit</button>
-    </div>
     
     {{#each requests}}
       {{> request}}
     {{/each}}
 
-    {{> navbar}}
+    {{> footer_shopping_list}}
   </div>
 
   {{> standard_js}}
