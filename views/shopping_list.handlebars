@@ -7,10 +7,9 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   
-  <link href='/css/bootstrap.min.css' rel='stylesheet'>
-  <link href='/css/bootstrap-theme.min.css' rel='stylesheet'>
+  {{> standard_css}}
   <link href='/css/shopping_list.css' rel='stylesheet' >
-  <link href='/css/navbar.css' rel='stylesheet'>
+  <link rel="stylesheet" href="/css/jquery.mmenu.all.css" rel="stylesheet">
 
   <!-- Scripts for fonts -->
   <script type='text/javascript' src='//use.typekit.net/vka4voo.js'></script>
@@ -30,6 +29,8 @@
     {{> share_modal}}
     {{> request_modal}}
     <div class='row' id='header'>
+      <a id="open-icon-header" href="#menu"></a>
+      {{> sidebar}}
       {{> user_dropdown}}
       <h2>Shopping List</h2>
       <a href="#" data-toggle='modal' data-target='#requestModal'><span class='glyphicon glyphicon-plus'></span></a>
@@ -58,10 +59,8 @@
     {{> navbar}}
   </div>
 
-
-  <script src='https://code.jquery.com/jquery.js'></script>
-  <script src='/js/bootstrap.min.js'></script>
+  {{> standard_js}}
   <script src='/js/shopping_list.js'></script>
-  <script src="/js/share.js"></script>
+  
 </body>
 </html>
