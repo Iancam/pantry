@@ -6,6 +6,6 @@ $('.btn-remove').click(function () {
   })
 })
 
-$('#btn-edit').click(function () {
+$('#edit').click(function () {
   $('.btn-remove').toggle();
 })
