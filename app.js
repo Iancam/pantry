@@ -132,21 +132,18 @@ app.get('/pantry/:id/', function (req, res) {
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email' ] }));
 app.get('/auth/facebook/callback', 
 	passport.authenticate('facebook', {successRedirect: '/my_pantries',
-									   failureRedirect: '/login'}))
+									   failureRedirect: '/login'}));
 app.get('/shopping_list/:id/:order', shopping_list.view);
 app.get('/shopping_list/:id/', function (req, res) {
 	// Make name the order if there isn't one.
 	var id = req.param('id');
 	res.redirect('/shopping_list/' + id + '/name');
-})
+});
 app.post('/create_request', shopping_list.create_request);
 app.post('/create_item', pantry.create_item);
 app.post('/like', shopping_list.like);
 app.post('/share', pantry.share);
 app.post('/share/:pid', pantry.share);
-// app.get('/new_request', shopping_list.new_request);
-// app.get('/new_item', pantry.new_item);
-// app.get("/user/pantry", user.pantry);
 app.get('/logout', function(req, res) {req.logout(); res.redirect('/');});
 app.get("/my_pantries", user.myPantries)
 app.post("/remove_item", pantry.remove);
