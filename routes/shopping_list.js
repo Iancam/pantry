@@ -24,7 +24,9 @@ exports.view = function (req, res) {
     })
 
     res.render('shopping_list', 
-    {user: req.user,
+    {page: "shopping_list",
+      modal: true,
+     user: req.user,
      requests: found_pantry.requests,
      id: req.session.pantry_id,
      shopping_list_order: req.session.shopping_list_order,

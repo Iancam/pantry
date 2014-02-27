@@ -1,16 +1,36 @@
-.tab-item {
-  margin-bottom: auto;
-  margin-top: auto;
+#header {
+  text-align: center;
+  height: 50px;
+  background-color: #8bc53e;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  position: fixed;
+  z-index: 1030;
+  top:0;
+  
 }
 
-.tab-item li {
-  margin: auto;
+.unshifted {
+	right: 0;
+  left: 0;
 }
 
-.navbar-left {
-  margin-left: 10%;
+.shifted {
+	width: 100%;
+  left: 40%;
 }
 
-.navbar-right {
-  margin-right: 10%;
+#header h2 {
+  display: inline;
+  color: white;
+}
+
+#header span {
+  color: white;
+  margin-left: 20px;
+}
+
+body {
+  padding-top: 52px !important;
+  padding-bottom: 70px;
 }

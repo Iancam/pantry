@@ -8,8 +8,8 @@ exports.new_user = function (req, res) {
   res.redirect("/my_pantries");
 };
 
-exports.myPantries = function (req, res) {
-	models.Pantry.find({'invited_emails': req.user.email}, function(err, found_pantries) {
+function update_users (req, res) {
+  models.Pantry.find({'invited_emails': req.user.email}, function(err, found_pantries) {
     _.each(found_pantries, function(pantry, index, list) {
       var add_user = true;
       _.all(pantry.users, function(user, index, list) {
@@ -26,14 +26,21 @@ exports.myPantries = function (req, res) {
       pantry.save(helpers.error);
     });
   });
+}
+
+exports.myPantries = function (req, res) {
+	update_users(req, res);
+
+
   models.Pantry.find({'users': req.user._id})
   .sort('name')
   .populate('users')
   .exec(function (err, found_pantries) {
     if (err) helpers.error(err);
     res.render('pantries', 
-    {user: req.user,
-     pantries: found_pantries});
+    { page: 'pantries',
+      user: req.user,
+      pantries: found_pantries});
   });
 }
 

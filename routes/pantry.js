@@ -88,7 +88,9 @@ exports.view = function (req, res) {
     })
 
     res.render('pantry', 
-    {user: req.user,
+    { page: 'pantry',
+      modal: true,
+      user: req.user,
       items: items, 
       id:req.session.pantry_id,
       shopping_list_order: req.session.shopping_list_order,
