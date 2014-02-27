@@ -95,8 +95,8 @@ exports.view = function (req, res) {
       items: items, 
       id:req.session.pantry_id,
       shopping_list_order: req.session.shopping_list_order,
-      next_pantry_order: next_pantry_order
-      pantry_order: req.session.pantry_order,
+      next_pantry_order: next_pantry_order,
+      pantry_order: req.session.pantry_order
     });
   })
 }
