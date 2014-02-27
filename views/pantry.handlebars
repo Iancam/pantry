@@ -12,32 +12,30 @@
 
   <!-- Scripts for fonts -->
   <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-  <!-- this is a comment in HTML -->
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
-      <script src='https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js'></script>
-    <![endif]-->        
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>    
 </head>
-
 <body>
-  
-
   <div class='container'>
     {{> share_modal}}
     {{> item_modal}}
     
     <div class='row' id='header'>
+
       {{!-- <a id="open-icon-header" href="#menu">FUCKING OPEN</a> --}}
-      
       {{> user_dropdown}}
       <h2>Pantry</h2>
       <a href="#" data-toggle="modal" data-target="#itemModal"><span class='glyphicon glyphicon-plus'></span></a>
+    </div>    
+    <div class="row">
+      <div class="btn-group btn-group-justified">
+        <a class="btn btn-default" role="button">
+          <span class="glphyicon glphyicon-cutlery"></span> Cutlery
+        </a>
+        <a class="btn btn-default" role="button">
+          <span class="glphyicon glphyicon-shopping-cart"></span>
+        </a>
+      </div>
     </div>
-  
     <div class='row' id='sort'>
       <div class='btn-group'>
         <button class='btn btn-default btn-md dropdown-toggle' id='sort-btn' type='button' data-toggle='dropdown'>
