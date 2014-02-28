@@ -44,4 +44,21 @@ exports.myPantries = function (req, res) {
   });
 }
 
+exports.myPantries_alt = function (req, res) {
+  update_users(req, res);
+
+
+  models.Pantry.find({'users': req.user._id})
+  .sort('name')
+  .populate('users')
+  .exec(function (err, found_pantries) {
+    if (err) helpers.error(err);
+    res.render('pantries', 
+    { page: 'pantries',
+      user: req.user,
+      pantries: found_pantries,
+      alt: true});
+  });
+}
+
 

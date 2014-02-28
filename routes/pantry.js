@@ -102,6 +102,45 @@ exports.view = function (req, res) {
   })
 }
 
+exports.view_alt = function (req, res) {
+  var id = req.param('id');
+  var order = req.param('order');
+  var next_pantry_order = get_next_pantry_order (order)
+
+  req.session.pantry_id = id;
+  req.session.pantry_order = order;
+
+  models.Pantry
+  .findById(id)
+  .populate('items')
+  .exec(function (err, found_pantry) {
+    if (err) helpers.error(err);
+
+    var items = found_pantry.items;
+
+    items.sort(function (item1, item2) {
+      if (order === 'Name') {
+        return item1.name.localeCompare(item2.name);
+      } else {
+        return item1.category.localeCompare(item2.category);
+      } 
+    })
+
+    res.render('pantry', 
+    { page: 'pantry',
+      modal: true,
+      pantry_name: found_pantry.name,
+      user: req.user,
+      items: items, 
+      id:req.session.pantry_id,
+      shopping_list_order: req.session.shopping_list_order,
+      next_pantry_order: next_pantry_order,
+      pantry_order: req.session.pantry_order,
+      alt: true
+    });
+  })
+}
+
 function get_next_pantry_order (order) {
   if (order === 'Name') {
     return 'Category';

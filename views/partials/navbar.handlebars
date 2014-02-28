@@ -1,6 +1,12 @@
 <div class='mm-fixed-top unshifted' id='header'>
   <div class="container">
-    <div class="left"><a id="menu-toggle" href="#menu"><span class="glyphicon glyphicon-th-list"></span></a></div>
+    <div class="left">
+      {{#if alt}}
+        <p>alt</p>
+      {{else}}
+        <a id="menu-toggle" href="#menu"><span class="glyphicon glyphicon-th-list"></span></a>
+      {{/if}}
+    </div>
     <h2>{{pantry_name}}</h2>
     <div class="right">
       {{#if modal}}

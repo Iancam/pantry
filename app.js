@@ -27,7 +27,6 @@ mongoose.connect(database_uri);
 
 var app = express();
 
-
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
@@ -70,8 +69,8 @@ var server = email.server.connect({
 passport.use(new FacebookStrategy({
 		clientID: "220032974854303",
 		clientSecret: "3f3ca3266c18ee0911a845526023b593",
-		// callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
-		callbackURL: "http://safe-anchorage-2842.herokuapp.com/auth/facebook/callback"
+		callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
+		// callbackURL: "http://safe-anchorage-2842.herokuapp.com/auth/facebook/callback"
 	},
 	function(accessToken, refreshToken, profile, done) {
 		var newUser = {fid: profile.id,
@@ -130,16 +129,38 @@ app.get('/pantry/:id/', function (req, res) {
 	var id = req.param('id');
 	res.redirect('/pantry/' + id + '/Name');
 })
+
+//Pantry Alternate 
+app.get('/pantry_alt/:id/:order', pantry.view_alt);
+app.get('/pantry_alt/:id/', function (req, res) {
+	// Make name the order if there isn't one.
+	var id = req.param('id');
+	res.redirect('/pantry_alt/' + id + '/Name');
+})
+
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email' ] }));
 app.get('/auth/facebook/callback', 
 	passport.authenticate('facebook', {successRedirect: '/my_pantries',
 									   failureRedirect: '/login'}));
+
+
 app.get('/shopping_list/:id/:order', shopping_list.view);
 app.get('/shopping_list/:id/', function (req, res) {
 	// Make name the order if there isn't one.
 	var id = req.param('id');
 	res.redirect('/shopping_list/' + id + '/Name');
 });
+
+
+//Shopping List Alternate
+app.get('/shopping_list_alt/:id/:order', shopping_list.view_alt);
+app.get('/shopping_list_alt/:id/', function (req, res) {
+	// Make name the order if there isn't one.
+	var id = req.param('id');
+	res.redirect('/shopping_list_alt/' + id + '/Name');
+});
+
+
 app.post('/create_request', shopping_list.create_request);
 app.post('/create_item', pantry.create_item);
 app.post('/like', shopping_list.like);
@@ -147,6 +168,9 @@ app.post('/share', pantry.share);
 app.post('/share/:pid', pantry.share);
 app.get('/logout', function(req, res) {req.logout(); res.redirect('/');});
 app.get("/my_pantries", user.myPantries)
+
+app.get('/my_pantries_alt', user.myPantries_alt);
+
 app.post("/remove_item", pantry.remove);
 app.post("/remove_request", shopping_list.remove);
 app.post("/to_pantry", shopping_list.to_pantry);
