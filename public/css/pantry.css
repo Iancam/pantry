@@ -1,32 +1,4 @@
-body {
-  padding-top: 50px !important;
-  padding-bottom: 70px;
-}
 
-#header {
-  text-align: center;
-  background-color: #8bc53e;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  position: fixed;
-  right: 0;
-  left: 0;
-  height: 50px;
-  z-index: 1030;
-  top:0;
-}
-
-#header h2 {
-  display: inline;
-  color: white;
-  /*font-family: Museo Slab;
-  font-weight: 500;*/
-}
-
-#header span {
-  color: white;
-  margin-left: 20px;
-}
 
 .item {
   border-bottom: 2px #ddcf9b solid;
@@ -53,40 +25,3 @@ body {
   margin-top: 3px;  
   color: #989898;
 }
-
-#footer {
-  text-align: center;
-  background-color: #8bc53e;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  position: fixed;
-  right: 0;
-  left: 0;
-  height: 50px;
-  z-index: 1030;
-  bottom:0;
-}
-
-#sort {
-  display: inline;
-  float: left;
-  margin-left: 5%;
-}
-
-#edit {
-  display: inline;
-  float: right;
-  margin-right: 5%;
-}
-
-a {
-  text-decoration: none;
-  color: black;
-}
-
-a:hover {
-  text-decoration: none;
-  color: black;
-}
-
-/* TODO: add running low flag */

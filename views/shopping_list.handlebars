@@ -10,6 +10,7 @@
   {{> standard_css}}
   <link href='/css/shopping_list.css' rel='stylesheet' >
   <link rel="stylesheet" href="/css/jquery.mmenu.all.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/footer.css">
 
   <!-- Scripts for fonts -->
   <script type='text/javascript' src='//use.typekit.net/vka4voo.js'></script>
@@ -20,15 +21,7 @@
   <div class='container'>
     {{> share_modal}}
     {{> request_modal}}
-
-    <div class='row' id='header'>
-      <a id="open-icon-header" href="#menu"></a>
-      {{!-- > sidebar --}}
-      {{> user_dropdown}}
-      <h2>Shopping List</h2>
-      <a href="#" data-toggle='modal' data-target='#requestModal'><span class='glyphicon glyphicon-plus'></span></a>
-    </div>
-
+    {{> navbar}}
     <div class="row">
       <div class="btn-group btn-group-justified">
         <a href=' /pantry/{{id}}/{{pantry_order}}' class="btn btn-default" role="button">
@@ -39,29 +32,14 @@
         </a>
       </div>
     </div>
-
-    <div class='row' id='sort'>
-      <div class='btn-group'>
-        <button class='btn btn-default btn-md dropdown-toggle' id='sort-btn' type='button' data-toggle='dropdown'>
-          Sort<span class='caret'></span>
-        </button>
-
-        <ul class='dropdown-menu'>
-          <li><a href='/shopping_list/{{id}}/Name'>Name</a></li>
-          <li><a href='/shopping_list/{{id}}/Category'>Category</a></li>
-          <li><a href='/shopping_list/{{id}}/Likes'>Likes</a></li>
-        </ul>
-      </div>
-
-      <button id='btn-edit'>Edit</button>
-    </div>
     
     {{#each requests}}
       {{> request}}
     {{/each}}
 
-    {{> navbar}}
+    {{> footer_shopping_list}}
   </div>
+  {{!-- {{> sidebar}} --}}
 
   {{> standard_js}}
   <script src='/js/shopping_list.js'></script>

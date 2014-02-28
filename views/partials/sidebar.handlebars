@@ -1,23 +1,14 @@
-<!-- sidebar.handlebars -->
-<nav id="menu" class="mm-menu mm-horizontal mm-ismenu mm-current mm-opened"><ul class="mm-list mm-panel mm-opened mm-current" id="mm-m0-p0">
-	<li id="open-icon-menu"><a href="#">
-		<i class="icon icon-white icon-th-list"></i></a></li>
-	<li><a href="#home">
-		<i class="icon icon-white icon-home"></i>
-		Home</a></li>
-	<li><a href="#iconbar">
-		<i class="icon icon-white icon-th"></i>
-		Iconbar</a></li>
-	<li><a href="#styling">
-		<i class="icon icon-white icon-bold"></i>
-		Styling</a></li>
-	<li><a href="#responsive">
-		<i class="icon icon-white icon-resize-horizontal"></i>
-		Responsive</a></li>
-	<li><a href="#scrolling">
-		<i class="icon icon-white icon-arrow-down"></i>
-		Scrolling</a></li>
-	<li><a href="#about">
-		<i class="icon icon-white icon-cog"></i>
-		About</a></li>
-</ul></nav>
+{{!-- user_dropdown.handlebars --}}
+<div id="menu">
+  <ul>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/logout">{{user.firstname}} {{user.lastname}} (logout)</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/my_pantries">My Pantries</a></li>
+    {{#if id}}
+      <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#shareModal" href="#">Share</a></li>
+    {{else}}
+      <li role="presentation" class="disabled"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#shareModal" href="#">Share</a></li>
+    {{/if}}
+    <li role="presentation" class="divider"></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#pantryModal" href="#">Create new Pantry</a></li>
+  </ul>
+</div>

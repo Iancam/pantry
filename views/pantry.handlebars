@@ -9,13 +9,15 @@
   
   {{> standard_css}}
   <link href='/css/pantry.css' rel='stylesheet'>
+  <link rel="stylesheet" href="/css/footer.css">
+
 
   <!-- Scripts for fonts -->
   <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>    
 </head>
-
 <body>
+<<<<<<< HEAD
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar">
@@ -73,16 +75,22 @@
       </div>
     </div>
 
+=======
+  <div class='container'>
+    {{> share_modal}}
+    {{> item_modal}}
+    {{> navbar}}  
+    {{> control}}
+>>>>>>> b1ca62c9182ae6eca457b19b59c820ddd32111d5
     {{#each items}}
       {{> item}}
     {{/each}}
 
-    {{> footer}}
+    {{> footer_pantry}}
 
   {{!-- > navbar --}}
 
   </div> {{!-- End of container --}}
-
   {{> standard_js}}
   <script src="/js/pantry.js"></script>
 </body>

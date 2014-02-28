@@ -1,39 +1,4 @@
 /* TODO: fix fonts */
-body {
-  padding-top: 50px !important;
-}
-
-#header {
-  text-align: center;
-  background-color: #8bc53e;
-  padding-top: 2%;
-  padding-bottom: 2%;
-  position: fixed;
-  right: 0;
-  left: 0;
-  z-index: 1030;
-  top:0;
-}
-
-#header h2 {
-  display: inline;
-  color: white;
-}
-
-#header span {
-  color: white;
-  margin-left: 20px;
-}
-
-/*TODO: fix header alignments*/
-
-#sort {
-  background-color: #e6e6e6;
-  color: #8bc53e;
-  text-align: center;
-  padding-top: 5%;
-  padding-bottom: 5%;
-}
 
 .request {
   border-bottom: 2px #ddcf9b solid;
@@ -55,6 +20,3 @@ body {
   float: right;
   color: #ddcf9b;
 }
-
-/* TODO: fix vertical alignment;
-/* TODO: get icon outlines (so it fills in when clicked)*/

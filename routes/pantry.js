@@ -89,14 +89,15 @@ exports.view = function (req, res) {
     })
 
     res.render('pantry', 
-    {
+    { page: 'pantry',
+      modal: true,
       pantry_name: found_pantry.name,
       user: req.user,
       items: items, 
       id:req.session.pantry_id,
       shopping_list_order: req.session.shopping_list_order,
-      pantry_order: req.session.pantry_order,
-      next_pantry_order: next_pantry_order
+      next_pantry_order: next_pantry_order,
+      pantry_order: req.session.pantry_order
     });
   })
 }
