@@ -62,7 +62,7 @@ var server = email.server.connect({
    password:"pantrypass", 
    host:    "smtp.gmail.com", 
    ssl:     true
-});g
+});
 
 //passport
 
