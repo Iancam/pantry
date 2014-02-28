@@ -17,11 +17,71 @@
   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>    
 </head>
 <body>
+<<<<<<< HEAD
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar">
+        <ul class="nav navbar-nav nav-justified">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu</a>
+            <ul class="dropdown-menu">
+              <li>
+                <a href="/logout">{{user.firstname}} {{user.lastname}} Logout</a>
+              </li>
+              <li>
+                <a href="my_pantries">Home</a>
+              </li>
+              <li>
+                <a data-toggle="modal" data-target="#shareModal" href="#">Share</a>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <a data-toggle="modal" data-target="#pantryModal" href="#">Create New Pantry</a>
+              </li>
+            </ul>
+          </li>
+          <li style="float:none;"><a href="#">Name</a></li>
+          <li class="navbar-right"><a href="#">Name</a></li>
+          <li>
+            <button type="button" class="btn btn-default navbar-btn">
+            <span class="glphyicon glyphicon-plus"></span>
+          </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class='container'>
+    {{> share_modal}}
+    {{> item_modal}}
+    
+    <!--<div class='row' id='header'>
+      <a id="open-icon-header" href="#menu"></a>
+      {{!-- > <!--sidebar --}}
+      {{> user_dropdown}}
+      <h2>{{pantry_name}}</h2>
+      <a href="#" data-toggle="modal" data-target="#itemModal"><span class='glyphicon glyphicon-plus'></span></a>
+    </div>-->
+    
+    <div class="row">
+      <div class="btn-group btn-group-justified">
+        <a href=' /pantry/{{id}}/{{pantry_order}}' class="btn btn-default" role="button">
+          <span class="glphyicon glphyicon-cutlery"></span> Pantry
+        </a>
+        <a href='/shopping_list/{{id}}/{{shopping_list_order}}' class="btn btn-default" role="button">
+          <span class="glphyicon glphyicon-shopping-cart"> Grocery List</span>
+        </a>
+      </div>
+    </div>
+
+=======
   <div class='container'>
     {{> share_modal}}
     {{> item_modal}}
     {{> navbar}}  
     {{> control}}
+>>>>>>> b1ca62c9182ae6eca457b19b59c820ddd32111d5
     {{#each items}}
       {{> item}}
     {{/each}}
