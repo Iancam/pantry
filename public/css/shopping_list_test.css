@@ -121,19 +121,19 @@ pre
 
 /*Item Styling*/
 
-.items-wrapper
+.requests-wrapper 
 {
   padding-top: 2%;
 }
 
-.item 
+.request 
 {
   border-bottom: 2px #ddcf9b solid;
   padding-left: 5%;
   padding-right: 5%;
 }
 
-.item-name 
+.request-name 
 {
   display: inline;
 }
@@ -145,14 +145,14 @@ pre
   float: right;
 }
 
-.item-expiration 
-{
-  display: inline;
-  float: right;
-}
-
-.item-category 
+.request-category 
 {
   margin-top: 3px;  
   color: #989898;
+}
+
+.glyphicon-chevron-up {
+  font-size: 20px;
+  float: right;
+  color: #ddcf9b;
 }
