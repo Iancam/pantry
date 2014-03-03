@@ -26,17 +26,23 @@ exports.view = function (req, res) {
       }
     })
 
-    res.render('shopping_list',
-    { page: "shopping_list",
-      modal: true,
-      pantry_name: found_pantry.name,
-      user: req.user,
-      requests: found_pantry.requests,
-      id: req.session.pantry_id,
-      shopping_list_order: req.session.shopping_list_order,
-      next_shopping_list_order: next_shopping_list_order,
-      pantry_order: req.session.pantry_order
-   });
+    models.User
+    .findById(req.user._id)
+    .populate("pantries")
+    .exec(function (err, found_user) {
+      res.render('shopping_list',
+      { page: "shopping_list",
+        modal: true,
+        pantry_name: found_pantry.name,
+        user: req.user,
+        my_pantries: found_user.pantries,
+        requests: found_pantry.requests,
+        id: req.session.pantry_id,
+        shopping_list_order: req.session.shopping_list_order,
+        next_shopping_list_order: next_shopping_list_order,
+        pantry_order: req.session.pantry_order
+     });
+    })
   })
 }
 
