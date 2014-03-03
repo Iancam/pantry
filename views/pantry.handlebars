@@ -2,37 +2,58 @@
 
 <html>
 <head>
-  <title>Pantry</title>  
+  <title>Pantry</title>
   <meta charset='utf-8'>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  
-  {{> standard_css}}
-  <link href='/css/pantry.css' rel='stylesheet'>
-  <link rel="stylesheet" href="/css/footer.css">
 
-
-  <!-- Scripts for fonts -->
-  <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>    
+  <link type="text/css" rel="stylesheet" href="/css/pantry.css">
+  <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" media="all" href="/css/jquery.mmenu.all.css">
 </head>
 <body>
-  <div class='container'>
-    {{> share_modal}}
+
+  <div>
+    {{!-- Data targets  --}}
+    {{> sidebar}}
     {{> item_modal}}
-    {{> navbar}}  
-    {{> control}}
+    {{> share_modal}}
+    {{> pantry_modal}}
 
-    {{#each items}}
-      {{> item}}
-    {{/each}}
+    <div id="header">
+      <a href="#menu"></a>
+      {{pantry_name}}
+      <a class="right" href="#" data-toggle="modal" data-target="#{{page}}Modal"></a>
+    </div>
 
-    {{> footer_pantry}}
+    <div class="container">
+      {{> control}}
+      <div class="items-wrapper">
+        {{#each items}}
+          {{> item}}
+        {{/each}}
+      </div>
+    </div>
 
-  {{!-- > navbar --}}
+    <div id="footer">
+      <a href="/pantry/{{id}}/{{next_pantry_order}}">
+        Sort by: <i>{{pantry_order}}</i>
+      </a>
+      <a href="#" class="right">
+        <span id="edit">Edit</span>
+      </a>
+    </div>
+  </div>
 
-  </div> {{!-- End of container --}}
-  {{> standard_js}}
-  <script src="/js/pantry.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.mmenu.min.all.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("nav#menu").mmenu();
+    });
+  </script>
+  <script type="text/javascript" src="/js/pantry.js"></script>
 </body>
+
 </html>

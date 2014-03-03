@@ -26,7 +26,7 @@ exports.view = function (req, res) {
       }
     })
 
-    res.render('shopping_list_test',
+    res.render('shopping_list',
     { page: "shopping_list",
       modal: true,
       pantry_name: found_pantry.name,

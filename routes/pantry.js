@@ -88,7 +88,7 @@ exports.view = function (req, res) {
       } 
     })
 
-    res.render('pantry_test', 
+    res.render('pantry', 
     { page: 'pantry',
       modal: true,
       pantry_name: found_pantry.name,

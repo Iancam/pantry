@@ -2,47 +2,58 @@
 
 <html>
 <head>
-  <title>Pantry</title>  
+  <title>Pantry</title>
   <meta charset='utf-8'>
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name='viewport' content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  
-  {{> standard_css}}
-  <link href='/css/shopping_list.css' rel='stylesheet' >
-  <link rel="stylesheet" href="/css/jquery.mmenu.all.css" rel="stylesheet">
-  <link rel="stylesheet" href="/css/footer.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 
-  <!-- Scripts for fonts -->
-  <script type='text/javascript' src='//use.typekit.net/vka4voo.js'></script>
-  <script type='text/javascript'>try{Typekit.load();}catch(e){}</script>  
+  <link type="text/css" rel="stylesheet" href="/css/shopping_list.css">
+  <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css">
+  <link type="text/css" rel="stylesheet" media="all" href="/css/jquery.mmenu.all.css">
 </head>
-
 <body>
-  <div class='container'>
-    {{> share_modal}}
+
+  <div>
+    {{!-- Data targets  --}}
+    {{> sidebar}}
     {{> request_modal}}
-    {{> navbar}}
-    <div class="row">
-      <div class="btn-group btn-group-justified">
-        <a href=' /pantry/{{id}}/{{pantry_order}}' class="btn btn-default" role="button">
-          <span class="glphyicon glphyicon-cutlery"></span> Pantry
-        </a>
-        <a href='/shopping_list/{{id}}/{{shopping_list_order}}' class="btn btn-default" role="button">
-          <span class="glphyicon glphyicon-shopping-cart"> Grocery List</span>
-        </a>
+    {{> share_modal}}
+    {{> pantry_modal}}
+
+    <div id="header">
+      <a href="#menu"></a>
+      {{pantry_name}}
+      <a class="right" href="#" data-toggle="modal" data-target="#{{page}}Modal"></a>
+    </div>
+
+    <div class="container">
+      {{> control}}
+      <div class="requests-wrapper">
+        {{#each requests}}
+          {{> request}}
+        {{/each}}
       </div>
     </div>
-    
-    {{#each requests}}
-      {{> request}}
-    {{/each}}
 
-    {{> footer_shopping_list}}
+    <div id="footer">
+      <a href="/shopping_list/{{id}}/{{next_shopping_list_order}}">
+        Sort by: <i>{{shopping_list_order}}</i>
+      </a>
+      <a href="#" class="right">
+        <span id="edit">Edit</span>
+      </a>
+    </div>
   </div>
-  {{!-- {{> sidebar}} --}}
 
-  {{> standard_js}}
-  <script src='/js/shopping_list.js'></script>
-  
+  <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="/js/jquery.mmenu.min.all.js"></script>
+  <script type="text/javascript">
+    $(function () {
+      $("nav#menu").mmenu();
+    });
+  </script>
+  <script type="text/javascript" src="/js/shopping_list.js"></script>
 </body>
+
 </html>
