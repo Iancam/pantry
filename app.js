@@ -22,7 +22,11 @@ FacebookStrategy = require("passport-facebook").Strategy;
 local_database_name = "pantry",
 local_database_uri  = "mongodb://localhost/" + local_database_name,
 database_uri = process.env.MONGOLAB_URI || local_database_uri,
-mongoose.connect(database_uri);
+mongoose.connect(database_uri, function (database_uri, err) {
+  if (err) {
+    res.send(err);
+  }
+});
 
 var app = express();
 
