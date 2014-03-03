@@ -16,6 +16,9 @@ exports.create = function (req, res) {
     name: name,
     users: [user._id],
   });
+
+  user.pantries.push(new_pantry);
+  user.save(helpers.error);
   
   new_pantry.save(function (err, new_pantry) {
     if (err) {
@@ -23,7 +26,7 @@ exports.create = function (req, res) {
       res.redirect('/');
     } else {
       req.session.pantry_order = 'Name';
-      res.redirect('shopping_list/' + new_pantry._id + '/Name');
+      res.redirect('pantry/' + new_pantry._id + '/Name');
     }
   });
   
@@ -67,6 +70,9 @@ exports.share = function(req, res){
 exports.view = function (req, res) {
   var id = req.param('id');
   var order = req.param('order');
+
+  console.log("id = " + id);
+  console.log("order = " + order);
   var next_pantry_order = get_next_pantry_order (order)
 
   req.session.pantry_id = id;
@@ -88,17 +94,29 @@ exports.view = function (req, res) {
       } 
     })
 
-    res.render('pantry', 
-    { page: 'pantry',
-      modal: true,
-      pantry_name: found_pantry.name,
-      user: req.user,
-      items: items, 
-      id:req.session.pantry_id,
-      shopping_list_order: req.session.shopping_list_order,
-      next_pantry_order: next_pantry_order,
-      pantry_order: req.session.pantry_order
-    });
+    models.User 
+    .findById(req.user._id)
+    .populate('pantries')
+    .exec(function (err, found_user) {
+      if (err) helpers.error(err);
+
+      console.log(found_user);
+      var my_pantries = found_user.pantries;
+      console.log(my_pantries);
+
+      res.render('pantry', 
+      { modal: true,
+        pantry_name: found_pantry.name,
+        user: req.found_user,
+        my_pantries: found_user.pantries,
+        items: items, 
+        id:req.session.pantry_id,
+        shopping_list_order: req.session.shopping_list_order,
+        next_pantry_order: next_pantry_order,
+        pantry_order: req.session.pantry_order
+      });
+    })
+
   })
 }
 

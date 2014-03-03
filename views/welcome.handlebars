@@ -1,0 +1,30 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>Pantry</title>
+  <meta charset='utf-8'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+
+  <link href='/css/bootstrap.min.css' rel='stylesheet'>
+  <link href="/css/welcome.css" rel="stylesheet">
+
+  <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
+  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>   
+  <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+
+<body>
+  {{!-- Data target --}}
+  {{> pantry_modal}}
+
+  <div class='container'>
+    <h1>Welcome to Pantry!</h1>
+    <h3 id="welcome-msg">To get started, create your first pantry:</h3>
+    <button class="btn btn-primary btn-lg" id="btn-pantry" data-toggle="modal" data-target="#pantryModal">
+      Let's do it!
+    </button>
+  </div>
+</body>
+</html>
