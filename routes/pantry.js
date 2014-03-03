@@ -71,8 +71,6 @@ exports.view = function (req, res) {
   var id = req.param('id');
   var order = req.param('order');
 
-  console.log("id = " + id);
-  console.log("order = " + order);
   var next_pantry_order = get_next_pantry_order (order)
 
   req.session.pantry_id = id;
@@ -94,6 +92,18 @@ exports.view = function (req, res) {
       } 
     })
 
+    var in_pantry = false;
+    for (var i = 0; i < req.user.pantries.length; i++) {
+      if (found_pantry._id.equals(req.user.pantries[i])) {
+        in_pantry = true;
+        break;
+      }
+    }
+
+    if (!in_pantry) {
+      req.user.pantries.push(found_pantry._id);
+    }
+
     models.User 
     .findById(req.user._id)
     .populate('pantries')
@@ -103,10 +113,10 @@ exports.view = function (req, res) {
       res.render('pantry', 
       { modal: true,
         pantry_name: found_pantry.name,
+        id:req.session.pantry_id,
         user: req.found_user,
         my_pantries: found_user.pantries,
         items: items, 
-        id:req.session.pantry_id,
         shopping_list_order: req.session.shopping_list_order,
         next_pantry_order: next_pantry_order,
         pantry_order: req.session.pantry_order
