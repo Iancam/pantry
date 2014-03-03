@@ -92,23 +92,27 @@ exports.view = function (req, res) {
       } 
     })
 
-    var in_pantry = false;
-    for (var i = 0; i < req.user.pantries.length; i++) {
-      if (found_pantry._id.equals(req.user.pantries[i])) {
-        in_pantry = true;
-        break;
-      }
-    }
 
-    if (!in_pantry) {
-      req.user.pantries.push(found_pantry._id);
-    }
 
     models.User 
     .findById(req.user._id)
     .populate('pantries')
     .exec(function (err, found_user) {
       if (err) helpers.error(err);
+
+      var in_pantry = false;
+      for (var i = 0; i < req.found_user.pantries.length; i++) {
+        if (found_pantry.equals(req.found_user.pantries[i])) {
+          in_pantry = true;
+          break;
+        }
+      }
+
+      console.log(in_pantry);
+
+      if (!in_pantry) {
+        req.user.pantries.push(found_pantry._id);
+      }
 
       res.render('pantry', 
       { modal: true,
