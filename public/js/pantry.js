@@ -8,7 +8,7 @@ $(".btn-remove").click(function () {
 })
 
 $("#edit").click(function () {
-  $(".btn-remove").toggle(50);
+  $(".btn-remove").slideToggle(50);
 })
 
 $(document).ready(function () {

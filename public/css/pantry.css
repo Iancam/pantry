@@ -91,10 +91,25 @@ pre
   left: auto;
   right: 10px;
 }
-#content,
-.content
+.btn-control
 {
-  padding: 20px;
+  border-radius: 0px !important;
+}
+#btn-pantry
+{
+  border-left: none;
+}
+#btn-shopping-list
+{
+  border-right: none;
+}
+.container-content
+{
+  position: absolute;
+  top: 73px; /* The height of the header + control */
+  bottom: 40px; /* The height of the footer */
+  width: 100%;
+  overflow: auto; /* Make scrollable */
 }
 
 #footer
@@ -133,6 +148,7 @@ pre
   border-bottom: 2px #ddcf9b solid;
   padding-left: 5%;
   padding-right: 5%;
+  padding-top: 2%;
 }
 
 .item-name,
@@ -161,7 +177,8 @@ pre
   color: #989898;
 }
 
-.like-icon {
+.like-icon 
+{
   font-size: 20px;
   float: right;
   color: #ddcf9b;
