@@ -101,8 +101,8 @@ exports.view = function (req, res) {
       if (err) helpers.error(err);
 
       var in_pantry = false;
-      for (var i = 0; i < req.found_user.pantries.length; i++) {
-        if (found_pantry.equals(req.found_user.pantries[i])) {
+      for (var i = 0; i < found_user.pantries.length; i++) {
+        if (found_pantry.equals(found_user.pantries[i])) {
           in_pantry = true;
           break;
         }
