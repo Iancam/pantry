@@ -119,21 +119,24 @@ pre
   right: 10px;
 }
 
-/*Item Styling*/
+/*Item/Requests Styling*/
 
-.items-wrapper
+.items-wrapper,
+.requests-wrapper 
 {
   padding-top: 2%;
 }
 
-.item 
+.item, 
+.request 
 {
   border-bottom: 2px #ddcf9b solid;
   padding-left: 5%;
   padding-right: 5%;
 }
 
-.item-name 
+.item-name,
+.request-name  
 {
   display: inline;
 }
@@ -151,8 +154,15 @@ pre
   float: right;
 }
 
-.item-category 
+.item-category, 
+.request-category 
 {
   margin-top: 3px;  
   color: #989898;
+}
+
+.like-icon {
+  font-size: 20px;
+  float: right;
+  color: #ddcf9b;
 }
