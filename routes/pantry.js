@@ -8,13 +8,11 @@ exports.home = function(req, res){
 };
 
 exports.create = function (req, res) {
+  console.log("Creating pantry");
   var name = req.param('name');
-  var invited_emails = req.param('invited_emails');
   var user = req.user;
-  share_with(req, res, invited_emails);
   var new_pantry = new models.Pantry({
     name: name,
-    users: [user._id],
   });
 
   user.pantries.push(new_pantry);

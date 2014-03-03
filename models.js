@@ -1,5 +1,4 @@
-var mongoose = require('mongoose'), 
-findOrCreate = require("mongoose-findorcreate");
+var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
@@ -22,15 +21,12 @@ var requestSchema = new Schema({
 });
 
 var userSchema = new Schema({
+  fid: {type: String, required: true},
+  email: {type: String, required: true},
   firstname: {type: String, required: true},
   lastname: {type: String, required: true},
-  likes:  [{type: Schema.Types.ObjectId, ref: "Request"}],
-  fid:    {type: String, required: true},
   pantries: [{type: Schema.Types.ObjectId, ref: "Pantry"}]
 });
-
-userSchema.plugin(findOrCreate);
-
 
 exports.Pantry = mongoose.model('Pantry', pantrySchema);
 exports.Item = mongoose.model('Item', itemSchema);

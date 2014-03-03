@@ -72,29 +72,44 @@ var server = email.server.connect({
 passport.use(new FacebookStrategy({
 		clientID: "220032974854303",
 		clientSecret: "3f3ca3266c18ee0911a845526023b593",
-		// callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
-		callbackURL: "http://safe-anchorage-2842.herokuapp.com/auth/facebook/callback"
+		callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
+		// callbackURL: "http://safe-anchorage-2842.herokuapp.com/auth/facebook/callback"
 	},
-	function(accessToken, refreshToken, profile, done) {
-		var newUser = {fid: profile.id,
-			email: profile.emails[0].value,
-			lastname: profile.name.familyName,
-			firstname: profile.name.givenName};
 
-		models.User.findOrCreate(newUser, function(err, user){
-			if (err) {return done(err); }
-			done(null, user);
-		});
+	function(accessToken, refreshToken, profile, callback) {
+
+    models.User
+    .find({fid: profile.id}, function (err, found_users) {
+      if (err) helpers.error(err);
+
+      console.log("length: " + found_users.length);
+      if (found_users.length == 0) {
+        console.log("Creating new user.");
+        var newUser = new models.User({
+          fid: profile.id,
+          email: profile.emails[0].value,
+          firstname: profile.name.givenName,
+          lastname: profile.name.familyName
+        });
+
+        newUser.save(function (err, new_user) {
+          if (err) helpers.error(err);
+          callback(null, new_user);
+        })
+      } else {
+        callback(null, found_users[0]);
+      }
+    })
 	}
 ));
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
+passport.serializeUser(function(user, callback) {
+  callback(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function(id, callback) {
   models.User.findById(id, function(err, user) {
-    done(err, user);
+    callback(err, user);
   });
 });
 
