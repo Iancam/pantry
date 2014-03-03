@@ -100,10 +100,6 @@ exports.view = function (req, res) {
     .exec(function (err, found_user) {
       if (err) helpers.error(err);
 
-      console.log(found_user);
-      var my_pantries = found_user.pantries;
-      console.log(my_pantries);
-
       res.render('pantry', 
       { modal: true,
         pantry_name: found_pantry.name,
