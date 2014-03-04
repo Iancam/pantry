@@ -16,3 +16,11 @@ $("#edit").click(function () {
 $(document).ready(function () {
   $(".btn-remove").hide();
 })
+
+$(".glyphicon-calendar").click(function () {
+  $("#datepicker").datepicker("show");
+})
+
+$("#datepicker").datepicker({
+  minDate: new Date()
+});

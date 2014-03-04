@@ -11,6 +11,7 @@ var pantrySchema = new Schema({
 var itemSchema = new Schema({
   name: {type: String, required: true},
   category: {type: String, required: true},
+  expiration: String,
   low: Boolean
 });
 

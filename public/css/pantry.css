@@ -159,30 +159,36 @@ pre
 
 .btn-remove 
 {
-  margin-top: 8px;
   float: right;
+  margin-top: 5px; /* To align with category */
 }
 
 .btn-to-pantry
 {
-  margin-top: 8px;
   margin-right: 4px;
+  margin-top: 5px;
   float: right;
   height: 24px; /* The height of btn-remove */
   line-height: 12px !important; /* vertical-align text */
 }
 
+.item-bottom-row,
+.request-bottom-row
+{
+  margin-top: 3px;
+}
+
 .item-expiration 
 {
-  display: inline;
   float: right;
+  margin-bottom: 0px;
 }
 
 .item-category, 
 .request-category 
 {
-  margin-top: 3px;  
   color: #989898;
+  float: left;
 }
 
 .like-icon 
@@ -190,4 +196,15 @@ pre
   font-size: 20px;
   float: right;
   color: #ddcf9b;
+}
+
+/* Item Modal Styling */
+.glyphicon-calendar
+{
+  top: 0px !important; /* Align with input group */
+}
+
+#ui-datepicker-div
+{
+  z-index: 1051 !important; /* Make the datepicker go over the modal */
 }
