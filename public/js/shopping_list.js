@@ -18,17 +18,39 @@ $('.btn-remove').click(function () {
 })
 
 $('.btn-to-pantry').click(function () {
-  var request = $(this).parent().parent('.request')
-  var id = request.attr('id');
-  $.post('/to_pantry', {id: id}, function (data) {
-    request.remove();
+  var request = $(this).parent().parent(".request");
+  var id = request.attr("id");
+  
+  var request_name = request.find(".request-name").html();
+  var request_category = request.find(".request-category").html();
+
+  $("#itemModal").modal();
+  $("#item-modal-name").val(request_name);
+  $("#item-modal-category").val(request_category);
+
+  $("#item-modal-save").click(function () {
+    $.post("/remove_request", {id: id}, function (data) {
+      request.hide(50, function () {
+        request.remove();
+      })
+    })
   })
 })
+
+
+
+
+$(".glyphicon-calendar").click(function () {
+  $("#datepicker").datepicker("show");
+})
+
+$("#datepicker").datepicker({
+  minDate: new Date()
+});
 
 $('#edit').click(function () {
   $('.btn-remove').toggle();
   $('.btn-to-pantry').toggle();
-  // $('.glyphicon-chevron-up').toggle();
 })
 
 $(document).ready(function () {
