@@ -10,7 +10,7 @@ $(".btn-remove").click(function () {
 })
 
 $("#edit").click(function () {
-  $(".btn-remove").slideToggle(50);
+  $(".btn-remove").toggle();
 })
 
 $(document).ready(function () {

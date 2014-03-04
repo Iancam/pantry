@@ -161,8 +161,10 @@ pre
 .btn-to-pantry
 {
   margin-top: 8px;
-  margin-right: 2px;
+  margin-right: 4px;
   float: right;
+  height: 24px; /* The height of btn-remove */
+  line-height: 12px !important; /* vertical-align text */
 }
 
 .item-expiration 

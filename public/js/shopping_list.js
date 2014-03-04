@@ -11,7 +11,9 @@ $('.btn-remove').click(function () {
   var request = $(this).parent('.request')
   var id = request.attr('id');
   $.post('/remove_request', {id: id}, function (data) {
-    request.remove();
+    request.hide(50, function () {
+      request.remove();
+    })
   })
 })
 
