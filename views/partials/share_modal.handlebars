@@ -6,15 +6,15 @@
         <h4 class="modal-title" id="myModalLabel">Share Pantry</h4>
       </div>
       <div class="modal-body">
-        <form role="form" method="post" action="/share" id="share-form">
+        <form role="form">
           <div class="form-group">
-            <input type="email" name="email" class="form-control share-email" placeholder="Add Emails" rows="2">
+            <label>Link to share: </label>
+            <input type="text" class="form-control" value="safe-anchorage-2842.herokuapp.com/pantry/{{id}}/" readonly autofocus>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="shareModalSave" form="share-form">Share</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Done</button>
       </div>
     </div>
   </div>

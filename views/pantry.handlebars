@@ -2,94 +2,51 @@
 
 <html>
 <head>
-  <title>Pantry</title>  
+  <title>Pantry</title>
   <meta charset='utf-8'>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-  
   {{> standard_css}}
-  <link href='/css/pantry.css' rel='stylesheet'>
+  {{> standard_js}}
 
-  <!-- Scripts for fonts -->
-  <script type="text/javascript" src="//use.typekit.net/vka4voo.js"></script>
-  <script type="text/javascript">try{Typekit.load();}catch(e){}</script>    
+
 </head>
 <body>
-<<<<<<< HEAD
-  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-      <div class="navbar">
-        <ul class="nav navbar-nav nav-justified">
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Menu</a>
-            <ul class="dropdown-menu">
-              <li>
-                <a href="/logout">{{user.firstname}} {{user.lastname}} Logout</a>
-              </li>
-              <li>
-                <a href="my_pantries">Home</a>
-              </li>
-              <li>
-                <a data-toggle="modal" data-target="#shareModal" href="#">Share</a>
-              </li>
-              <li class="divider"></li>
-              <li>
-                <a data-toggle="modal" data-target="#pantryModal" href="#">Create New Pantry</a>
-              </li>
-            </ul>
-          </li>
-          <li style="float:none;"><a href="#">Name</a></li>
-          <li class="navbar-right"><a href="#">Name</a></li>
-          <li>
-            <button type="button" class="btn btn-default navbar-btn">
-            <span class="glphyicon glyphicon-plus"></span>
-          </button>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
 
-  <div class='container'>
-    {{> share_modal}}
+  <div>
+    {{!-- Data targets  --}}
+    {{> sidebar}}
     {{> item_modal}}
-    
-    <!--<div class='row' id='header'>
-      <a id="open-icon-header" href="#menu"></a>
-      {{!-- > <!--sidebar --}}
-      {{> user_dropdown}}
-      <h2>{{pantry_name}}</h2>
-      <a href="#" data-toggle="modal" data-target="#itemModal"><span class='glyphicon glyphicon-plus'></span></a>
-    </div>-->
-    
-    <div class="row">
-      <div class="btn-group btn-group-justified">
-        <a href=' /pantry/{{id}}/{{pantry_order}}' class="btn btn-default" role="button">
-          <span class="glphyicon glphyicon-cutlery"></span> Pantry
-        </a>
-        <a href='/shopping_list/{{id}}/{{shopping_list_order}}' class="btn btn-default" role="button">
-          <span class="glphyicon glphyicon-shopping-cart"> Grocery List</span>
-        </a>
-      </div>
-    </div>
+    {{> share_modal}}
+    {{> pantry_modal}}
 
-=======
-  <div class='container'>
-    {{> share_modal}}
-    {{> item_modal}}
-    {{> navbar}}  
+    <div id="data" hidden="true">{{in_my_pantries}}</div>
+
+    <div id="header">
+      <a href="#menu"></a>
+      {{pantry_name}}
+      <a class="right" href="#" data-toggle="modal" data-target="#itemModal"></a>
+    </div>
+  
     {{> control}}
->>>>>>> b1ca62c9182ae6eca457b19b59c820ddd32111d5
-    {{#each items}}
-      {{> item}}
-    {{/each}}
+  
+    <div class="container container-content">
+      {{#each items}}
+        {{> item}}
+      {{/each}}
+    </div>
 
-    {{> footer_pantry}}
+    <div id="footer">
+      <a href="/pantry/{{id}}/{{next_pantry_order}}">
+        Sort by: <i>{{pantry_order}}</i>
+      </a>
+      <a href="#" class="right">
+        <span id="edit">Edit</span>
+      </a>
+    </div>
+  </div>
 
-  {{!-- > navbar --}}
-
-  </div> {{!-- End of container --}}
-  {{> standard_js}}
-  <script src="/js/pantry.js"></script>
+  <script type="text/javascript" src="/js/pantry.js"></script>
 </body>
+
 </html>

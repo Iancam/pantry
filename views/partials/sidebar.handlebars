@@ -1,14 +1,17 @@
 {{!-- user_dropdown.handlebars --}}
-<div id="menu">
+<nav id="menu">
   <ul>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/logout">{{user.firstname}} {{user.lastname}} (logout)</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="/my_pantries">My Pantries</a></li>
-    {{#if id}}
-      <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#shareModal" href="#">Share</a></li>
-    {{else}}
-      <li role="presentation" class="disabled"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#shareModal" href="#">Share</a></li>
-    {{/if}}
+    <li role="presentation">
+      <a>My Pantries</a>
+      <ul>
+        {{#each my_pantries}}
+          <li role="presentation"><a href="/pantry/{{_id}}/Name">{{name}}</a></li>
+        {{/each}}
+      </ul>
+    </li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#shareModal" href="#">Share</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#pantryModal" href="#">Create Pantry</a></li>
     <li role="presentation" class="divider"></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" data-toggle="modal" data-target="#pantryModal" href="#">Create new Pantry</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="/logout">{{user.firstname}} {{user.lastname}} Logout</a></li>
   </ul>
-</div>
+</nav>

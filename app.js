@@ -3,53 +3,55 @@
  * Module dependencies.
  */
 
-var express = require('express'),
-// routes = require("./routes"),
-handlebars = require('express3-handlebars'),
-http = require('http'),
-path = require('path'),
-handlebars = require('express3-handlebars'),
-email = require('emailjs/email'),
+var express = require("express"),
+handlebars = require("express3-handlebars"),
+http = require("http"),
+path = require("path"),
+handlebars = require("express3-handlebars"),
+email = require("emailjs/email"),
 mongoose = require("mongoose"),
 models = require("./models"),
-user = require('./routes/user'),
-// share = require('./routes/share'),
-pantry = require('./routes/pantry'),
-shopping_list = require('./routes/shopping_list'),
-passport = require('passport'),
-FacebookStrategy = require('passport-facebook').Strategy;
+welcome = require("./routes/welcome.js"),
+user = require("./routes/user"),
+pantry = require("./routes/pantry"),
+shopping_list = require("./routes/shopping_list"),
+passport = require("passport"),
+FacebookStrategy = require("passport-facebook").Strategy;
 
 /* Connect to MongoDB */
-local_database_name = 'pantry',
-local_database_uri  = 'mongodb://localhost/' + local_database_name,
+local_database_name = "pantry",
+local_database_uri  = "mongodb://localhost/" + local_database_name,
 database_uri = process.env.MONGOLAB_URI || local_database_uri,
-mongoose.connect(database_uri);
+mongoose.connect(database_uri, function (database_uri, err) {
+  if (err) {
+    res.send(err);
+  }
+});
 
 var app = express();
 
-
 // all environments
-app.set('port', process.env.PORT || 3000);
-app.set('views', path.join(__dirname, 'views'));
-app.engine('handlebars', handlebars());
-app.set('view engine', 'handlebars');
+app.set("port", process.env.PORT || 3000);
+app.set("views", path.join(__dirname, "views"));
+app.engine("handlebars", handlebars());
+app.set("view engine", "handlebars");
 app.use(express.favicon());
-app.use(express.logger('dev'));
+app.use(express.logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(express.methodOverride());
-app.use(express.cookieParser('Intro HCI secret key'));
+app.use(express.cookieParser("Intro HCI secret key"));
 app.use(express.bodyParser());
 /* Setup sessions */
 app.use(express.cookieParser());
-app.use(express.session({secret: 'pantry'}));
+app.use(express.session({secret: "pantry"}));
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(app.router);
-app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.static(path.join(__dirname, "/public")));
 // development only
-if ('development' == app.get('env')) {
+if ("development" == app.get("env")) {
   app.use(express.errorHandler());
 }
 
@@ -73,86 +75,100 @@ passport.use(new FacebookStrategy({
 		callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
 		// callbackURL: "http://safe-anchorage-2842.herokuapp.com/auth/facebook/callback"
 	},
-	function(accessToken, refreshToken, profile, done) {
-		var newUser = {fid: profile.id,
-			email: profile.emails[0].value,
-			lastname: profile.name.familyName,
-			firstname: profile.name.givenName};
 
-		models.User.findOrCreate(newUser, function(err, user){
-			if (err) {return done(err); }
-			done(null, user);
-		});
+	function(accessToken, refreshToken, profile, callback) {
+
+    models.User
+    .find({fid: profile.id}, function (err, found_users) {
+      if (err) helpers.error(err);
+
+      console.log("length: " + found_users.length);
+      if (found_users.length == 0) {
+        console.log("Creating new user.");
+        var newUser = new models.User({
+          fid: profile.id,
+          email: profile.emails[0].value,
+          firstname: profile.name.givenName,
+          lastname: profile.name.familyName
+        });
+
+        newUser.save(function (err, new_user) {
+          if (err) helpers.error(err);
+          callback(null, new_user);
+        })
+      } else {
+        callback(null, found_users[0]);
+      }
+    })
 	}
 ));
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
+passport.serializeUser(function(user, callback) {
+  callback(null, user.id);
 });
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser(function(id, callback) {
   models.User.findById(id, function(err, user) {
-    done(err, user);
+    callback(err, user);
   });
 });
 
-//database
-function init_mongoose () {
-	// Here we find an appropriate database to connect to, defaulting to
-	// localhost if we don't find one.  
-	var uristring = 
-	  process.env.MONGOLAB_URI || 
-	  process.env.MONGOHQ_URL  || 
-	  'mongodb://localhost/test';
-	
-	// The http server will listen to an appropriate port, or default to
-	// port 5000.
-	var theport = process.env.PORT || 5000;
-	
-	// Makes connection asynchronously.  Mongoose will queue up database
-	// operations and release them when the connection is complete.
-	mongoose.connect(uristring, function (err, res) {
-	  if (err) { 
-	    console.log ('ERROR connecting to: ' + uristring + '. ' + err);
-	  } else {
-	    console.log ('Succeeded connected to: ' + uristring);
-	  }
-	});
-};
-
-
 /* Routes */
-app.get('/', pantry.home);
-app.post('/create_pantry', pantry.create);
-app.get('/pantry/:id/:order', pantry.view);
-app.get('/pantry/:id/', function (req, res) {
-	// Make name the order if there isn't one.
-	var id = req.param('id');
-	res.redirect('/pantry/' + id + '/name');
+app.get("/", pantry.home);
+app.post("/create_pantry", pantry.create);
+app.get("/pantry/:id/:order", pantry.view);
+app.get("/pantry/:id/", function (req, res) {
+	// Make name the order if there isn"t one.
+	var id = req.param("id");
+	res.redirect("/pantry/" + id + "/Name");
 })
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email' ] }));
-app.get('/auth/facebook/callback', 
-	passport.authenticate('facebook', {successRedirect: '/my_pantries',
-									   failureRedirect: '/login'}));
-app.get('/shopping_list/:id/:order', shopping_list.view);
-app.get('/shopping_list/:id/', function (req, res) {
-	// Make name the order if there isn't one.
-	var id = req.param('id');
-	res.redirect('/shopping_list/' + id + '/name');
+
+//Pantry Alternate 
+app.get("/pantry_alt/:id/:order", pantry.view_alt);
+app.get("/pantry_alt/:id/", function (req, res) {
+	// Make name the order if there isn"t one.
+	var id = req.param("id");
+	res.redirect("/pantry_alt/" + id + "/Name");
+})
+
+app.get("/auth/facebook", passport.authenticate("facebook", { scope: [ "email" ] }));
+app.get("/auth/facebook/callback", 
+	passport.authenticate("facebook", {successRedirect: "/welcome",
+									   failureRedirect: "/login"}));
+app.get("/welcome", welcome.view);
+
+
+app.get("/shopping_list/:id/:order", shopping_list.view);
+app.get("/shopping_list/:id/", function (req, res) {
+	// Make name the order if there isn"t one.
+	var id = req.param("id");
+	res.redirect("/shopping_list/" + id + "/Name");
 });
-app.post('/create_request', shopping_list.create_request);
-app.post('/create_item', pantry.create_item);
-app.post('/like', shopping_list.like);
-app.post('/share', pantry.share);
-app.post('/share/:pid', pantry.share);
-app.get('/logout', function(req, res) {req.logout(); res.redirect('/');});
+
+
+//Shopping List Alternate
+app.get("/shopping_list_alt/:id/:order", shopping_list.view_alt);
+app.get("/shopping_list_alt/:id/", function (req, res) {
+	// Make name the order if there isn"t one.
+	var id = req.param("id");
+	res.redirect("/shopping_list_alt/" + id + "/Name");
+});
+
+
+app.post("/create_request", shopping_list.create_request);
+app.post("/create_item", pantry.create_item);
+app.post("/like", shopping_list.like);
+app.get("/logout", function(req, res) {req.logout(); res.redirect("/");});
 app.get("/my_pantries", user.myPantries)
+
+app.get("/my_pantries_alt", user.myPantries_alt);
+
 app.post("/remove_item", pantry.remove);
 app.post("/remove_request", shopping_list.remove);
 app.post("/to_pantry", shopping_list.to_pantry);
 
 exports.server = server;
 
-http.createServer(app).listen(app.get('port'), function(){
-  console.log('Express server listening on port ' + app.get('port'));
+http.createServer(app).listen(app.get("port"), function(){
+  console.log("Express server listening on port " + app.get("port"));
 });
