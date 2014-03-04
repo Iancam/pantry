@@ -2,6 +2,7 @@
 var models = require('../models.js');
 var helpers = require('../helpers.js');
 var app  = require("../app");
+var mongoose = require("mongoose");
 
 exports.home = function(req, res){
   res.render('home');
@@ -74,6 +75,21 @@ exports.view = function (req, res) {
   req.session.pantry_id = id;
   req.session.pantry_order = order;
 
+  var pantry_object_id = mongoose.Types.ObjectId(id);
+
+  var in_pantry = false;
+  for (var i = 0; i < req.user.pantries.length; i++) {
+    if (pantry_object_id.equals(req.user.pantries[i])) {
+      in_pantry = true;
+      break;
+    }
+  }
+
+  if (!in_pantry) {
+    req.user.pantries.push(pantry_object_id);
+    req.user.save(helpers.error);
+  }
+
   models.Pantry
   .findById(id)
   .populate('items')
@@ -98,19 +114,20 @@ exports.view = function (req, res) {
     .exec(function (err, found_user) {
       if (err) helpers.error(err);
 
-      var in_pantry = false;
-      for (var i = 0; i < found_user.pantries.length; i++) {
-        if (found_pantry.equals(found_user.pantries[i])) {
-          in_pantry = true;
-          break;
-        }
-      }
+      // var in_pantry = false;
+      // for (var i = 0; i < found_user.pantries.length; i++) {
+      //   if (found_pantry.equals(found_user.pantries[i])) {
+      //     in_pantry = true;
+      //     break;
+      //   }
+      // }
 
-      console.log(in_pantry);
+      // console.log(in_pantry);
 
-      if (!in_pantry) {
-        req.user.pantries.push(found_pantry._id);
-      }
+      // if (!in_pantry) {
+      //   found_user.pantries.push(found_pantry._id);
+      //   found_user.save(helpers.error)
+      // }
 
       res.render('pantry', 
       { modal: true,
