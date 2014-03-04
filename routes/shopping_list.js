@@ -2,6 +2,12 @@ var models = require('../models.js');
 var helpers = require('../helpers.js');
 
 exports.view = function (req, res) {
+
+  if (typeof req.user === "undefined") {
+    res.redirect("/");
+    return;
+  }
+
   var id = req.param('id');
   var order = req.param('order');
   var next_shopping_list_order = get_next_shopping_list_order (order)
@@ -31,7 +37,7 @@ exports.view = function (req, res) {
     .populate("pantries")
     .exec(function (err, found_user) {
       res.render('shopping_list',
-      { page: "shopping_list",
+      { on_pantry: false,
         modal: true,
         pantry_name: found_pantry.name,
         user: req.user,

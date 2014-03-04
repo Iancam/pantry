@@ -67,6 +67,13 @@ exports.share = function(req, res){
 };
 
 exports.view = function (req, res) {
+
+  if (typeof req.user === "undefined") {
+    console.log("hi");
+    res.redirect("/");
+    return;
+  }
+
   var id = req.param('id');
   var order = req.param('order');
 
@@ -114,23 +121,9 @@ exports.view = function (req, res) {
     .exec(function (err, found_user) {
       if (err) helpers.error(err);
 
-      // var in_pantry = false;
-      // for (var i = 0; i < found_user.pantries.length; i++) {
-      //   if (found_pantry.equals(found_user.pantries[i])) {
-      //     in_pantry = true;
-      //     break;
-      //   }
-      // }
-
-      // console.log(in_pantry);
-
-      // if (!in_pantry) {
-      //   found_user.pantries.push(found_pantry._id);
-      //   found_user.save(helpers.error)
-      // }
-
       res.render('pantry', 
-      { modal: true,
+      { on_pantry: true, /* For control highlighting */
+        modal: true,
         pantry_name: found_pantry.name,
         id:req.session.pantry_id,
         user: req.found_user,

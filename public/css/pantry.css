@@ -95,6 +95,11 @@ pre
 {
   border-radius: 0px !important;
 }
+.active-control
+{
+  border: none !important;
+  background-color: white !important;
+}
 #btn-pantry
 {
   border-left: none;
