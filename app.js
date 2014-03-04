@@ -128,7 +128,7 @@ app.get('/pantry/:id/:order', pantry.view);
 app.get('/pantry/:id/', function (req, res) {
 	// Make name the order if there isn't one.
 	var id = req.param('id');
-	res.redirect('/pantry/' + id + '/Name');
+	res.redirect('/pantry/' + id + '/name');
 })
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email' ] }));
 app.get('/auth/facebook/callback', 
@@ -138,7 +138,7 @@ app.get('/shopping_list/:id/:order', shopping_list.view);
 app.get('/shopping_list/:id/', function (req, res) {
 	// Make name the order if there isn't one.
 	var id = req.param('id');
-	res.redirect('/shopping_list/' + id + '/Name');
+	res.redirect('/shopping_list/' + id + '/name');
 });
 app.post('/create_request', shopping_list.create_request);
 app.post('/create_item', pantry.create_item);
