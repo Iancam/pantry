@@ -97,7 +97,7 @@ pre
 }
 .active-control
 {
-  border: none !important;
+  border-bottom: none !important;
   background-color: white !important;
 }
 #btn-pantry
