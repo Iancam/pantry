@@ -26,6 +26,7 @@ $('.btn-to-pantry').click(function () {
 $('#edit').click(function () {
   $('.btn-remove').toggle();
   $('.btn-to-pantry').toggle();
+  $('.glyphicon-chevron-up').toggle();
 })
 
 $(document).ready(function () {

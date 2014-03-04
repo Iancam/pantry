@@ -110,6 +110,7 @@ pre
   bottom: 40px; /* The height of the footer */
   width: 100%;
   overflow: auto; /* Make scrollable */
+  padding-top: 2%;
 }
 
 #footer
@@ -136,12 +137,6 @@ pre
 
 /*Item/Requests Styling*/
 
-.items-wrapper,
-.requests-wrapper 
-{
-  padding-top: 2%;
-}
-
 .item, 
 .request 
 {
@@ -160,7 +155,13 @@ pre
 .btn-remove 
 {
   margin-top: 8px;
-  display: inline;
+  float: right;
+}
+
+.btn-to-pantry
+{
+  margin-top: 8px;
+  margin-right: 2px;
   float: right;
 }
 
