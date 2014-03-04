@@ -1,7 +1,8 @@
 $(".btn-remove").click(function () {
   console.log($(this));
-  var item = $(this).parent(".item")
+  var item = $(this).parent().parent(".item")
   var id = item.attr("id");
+  console.log(id);
   $.post("/remove_item", {id: id}, function (data) {
     item.hide(50, function () {
       item.remove();

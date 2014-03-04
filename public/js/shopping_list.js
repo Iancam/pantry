@@ -8,7 +8,7 @@ $('.glyphicon-chevron-up').click(function () {
 })
 
 $('.btn-remove').click(function () {
-  var request = $(this).parent('.request')
+  var request = $(this).parent().parent('.request')
   var id = request.attr('id');
   $.post('/remove_request', {id: id}, function (data) {
     request.hide(50, function () {
@@ -18,7 +18,7 @@ $('.btn-remove').click(function () {
 })
 
 $('.btn-to-pantry').click(function () {
-  var request = $(this).parent('.request')
+  var request = $(this).parent().parent('.request')
   var id = request.attr('id');
   $.post('/to_pantry', {id: id}, function (data) {
     request.remove();

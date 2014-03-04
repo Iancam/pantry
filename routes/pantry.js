@@ -70,15 +70,26 @@ exports.view = function (req, res) {
 
     var items = found_pantry.items;
 
+    console.log(order);
+
     items.sort(function (item1, item2) {
       if (order === "Name") {
-        return item1.name.localeCompare(item2.name);
-      } else {
+        return item1.name.toLowerCase().localeCompare(item2.name.toLowerCase());
+      } else if (order === "Category") {
         return item1.category.localeCompare(item2.category);
-      } 
+      } else {
+
+        if (typeof item1.expiration === "undefined") {
+          return 1;
+        } else if (typeof item2.expiration === "undefined") {
+          return -1;
+        }
+
+        var date1 = new Date(item1.expiration);
+        var date2 = new Date(item2.expiration);
+        return date1.valueOf() - date2.valueOf();
+      }
     })
-
-
 
     models.User 
     .findById(req.user._id)
@@ -121,10 +132,23 @@ exports.view_alt = function (req, res) {
 
     items.sort(function (item1, item2) {
       if (order === "Name") {
-        return item1.name.localeCompare(item2.name);
-      } else {
+        return item1.name.toLowerCase().localeCompare(item2.name.toLowerCase());
+      } else if (order === "Category") {
         return item1.category.localeCompare(item2.category);
-      } 
+      } else {
+
+        if (typeof item1.expiration === "undefined") {
+          return 1;
+        } else if (typeof item2.expiration === "undefined") {
+          return -1;
+        }
+
+        var date1 = new Date(item1.expiration);
+        var date2 = new Date(item2.expiration);
+        console.log(date1);
+        console.log(date2);
+        return date1.valueOf() - date2.valueOf();
+      }
     })
 
     res.render("pantry", 
@@ -145,6 +169,8 @@ exports.view_alt = function (req, res) {
 function get_next_pantry_order (order) {
   if (order === "Name") {
     return "Category";
+  } else if (order === "Category") {
+    return "Expiration";
   } else {
     return "Name";
   }
