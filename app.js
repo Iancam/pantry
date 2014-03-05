@@ -147,11 +147,11 @@ app.get("/shopping_list/:id/", function (req, res) {
 
 
 //Shopping List Alternate
-app.get("/shopping_list_alt/:id/:order", shopping_list.view_alt);
-app.get("/shopping_list_alt/:id/", function (req, res) {
+app.get("/shopping_list/alt/:id/:order", shopping_list.view_alt);
+app.get("/shopping_list/alt/:id/", function (req, res) {
 	// Make name the order if there isn"t one.
 	var id = req.param("id");
-	res.redirect("/shopping_list_alt/" + id + "/Name");
+	res.redirect("/shopping_list/alt/" + id + "/Name");
 });
 
 

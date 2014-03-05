@@ -1,4 +1,3 @@
-
 var models = require("../models.js");
 var helpers = require("../helpers.js");
 var app  = require("../app");
@@ -162,7 +161,6 @@ exports.view_alt = function (req, res) {
       next_pantry_order: next_pantry_order,
       pantry_order: req.session.pantry_order,
       alt: true
-      pantry_order: req.session.pantry_order
     });
   })
 }
