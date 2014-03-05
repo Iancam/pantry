@@ -5,7 +5,7 @@ var mongoose = require("mongoose");
 exports.view = function (req, res) {
 
   if (typeof req.user === "undefined") {
-    res.redirect("/");
+    res.send("no user");
     return;
   }
 
@@ -55,7 +55,6 @@ exports.view = function (req, res) {
 }
 
 exports.view_alt = function (req, res) {
-  console.log("Alt");
 
   if (typeof req.user === "undefined") {
     res.send("No user");
