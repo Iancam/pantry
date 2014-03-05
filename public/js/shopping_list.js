@@ -3,7 +3,9 @@ $('.glyphicon-chevron-up').click(function () {
   var request_id = span.parent('.request').attr('id');
 
   $.post('/like', {id: request_id}, function (data) {
-    span.text(data.likes);
+    if (data.success) {
+      span.text(data.likes);
+    }
   })
 })
 

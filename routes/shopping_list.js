@@ -1,5 +1,6 @@
-var models = require('../models.js');
-var helpers = require('../helpers.js');
+var models = require("../models.js");
+var helpers = require("../helpers.js");
+var mongoose = require("mongoose");
 
 exports.view = function (req, res) {
 
@@ -8,8 +9,8 @@ exports.view = function (req, res) {
     return;
   }
 
-  var id = req.param('id');
-  var order = req.param('order');
+  var id = req.param("id");
+  var order = req.param("order");
   var next_shopping_list_order = get_next_shopping_list_order (order)
 
 
@@ -18,14 +19,14 @@ exports.view = function (req, res) {
 
   models.Pantry
   .findById(id) 
-  .populate('requests')
+  .populate("requests")
   .exec(function (err, found_pantry) {
     if (err) helpers.error(err);
 
     found_pantry.requests.sort(function (req1, req2) {
-      if (order === 'Name') {
+      if (order === "Name") {
         return req1.name.localeCompare(req2.name);
-      } else if (order === 'Category') {
+      } else if (order === "Category") {
         return req1.category.localeCompare(req2.category);
       } else {
         return req2.likes - req1.likes;
@@ -36,7 +37,7 @@ exports.view = function (req, res) {
     .findById(req.user._id)
     .populate("pantries")
     .exec(function (err, found_user) {
-      res.render('shopping_list',
+      res.render("shopping_list",
       { on_pantry: false,
         modal: true,
         pantry_name: found_pantry.name,
@@ -53,8 +54,8 @@ exports.view = function (req, res) {
 }
 
 exports.view_alt = function (req, res) {
-  var id = req.param('id');
-  var order = req.param('order');
+  var id = req.param("id");
+  var order = req.param("order");
   var next_shopping_list_order = get_next_shopping_list_order (order)
 
 
@@ -63,21 +64,21 @@ exports.view_alt = function (req, res) {
 
   models.Pantry
   .findById(id) 
-  .populate('requests')
+  .populate("requests")
   .exec(function (err, found_pantry) {
     if (err) helpers.error(err);
 
     found_pantry.requests.sort(function (req1, req2) {
-      if (order === 'Name') {
+      if (order === "Name") {
         return req1.name.localeCompare(req2.name);
-      } else if (order === 'Category') {
+      } else if (order === "Category") {
         return req1.category.localeCompare(req2.category);
       } else {
         return req2.likes - req1.likes;
       }
     })
 
-    res.render('shopping_list',
+    res.render("shopping_list",
     { page: "shopping_list",
       modal: true,
       pantry_name: found_pantry.name,
@@ -93,18 +94,18 @@ exports.view_alt = function (req, res) {
 }
 
 function get_next_shopping_list_order (order) {
-  if (order === 'Name') {
-    return 'Category';
-  } else if (order === 'Category') {
-    return 'Likes';
+  if (order === "Name") {
+    return "Category";
+  } else if (order === "Category") {
+    return "Likes";
   } else {
-    return 'Name';
+    return "Name";
   }
 }
 
 exports.create_request = function (req, res) {
-  var name = req.param('name');
-  var category = req.param('category');
+  var name = req.param("name");
+  var category = req.param("category");
 
   var new_request = new models.Request({
     name: name,
@@ -123,15 +124,34 @@ exports.create_request = function (req, res) {
 
     found_pantry.requests.push(new_request);
     found_pantry.save(helpers.error);
-    res.redirect('shopping_list/' 
-                  + req.session.pantry_id + '/'
+    res.redirect("shopping_list/" 
+                  + req.session.pantry_id + "/"
                   + req.session.shopping_list_order);
   })
 
 }
 
 exports.like = function (req, res) {
-  var id = req.param('id');
+  var id = req.param("id");
+  var request_object_id = mongoose.Types.ObjectId(id);
+  console.log(request_object_id);
+
+  var voted = false;
+  var voted_requests = req.user.voted; 
+  for (var i = 0; i < voted_requests.length; i++) {
+    if (request_object_id.equals(voted_requests[i])) {
+      voted = true;
+      break;
+    }
+  }
+
+  if (voted) {
+    res.send({success: false});
+    return;
+  } else {
+    req.user.voted.push(id);
+    req.user.save(helpers.error);
+  }
   
   models.Request
   .findById(id, function (err, found_request) {
@@ -139,12 +159,12 @@ exports.like = function (req, res) {
 
     found_request.likes++;
     found_request.save(helpers.error);
-    res.send({'likes': found_request.likes});
+    res.send({success: true, "likes": found_request.likes});
   })
 }
 
 exports.remove = function (req, res) {
-  var id = req.param('id');
+  var id = req.param("id");
 
   models.Request
   .findById(id)
@@ -154,9 +174,7 @@ exports.remove = function (req, res) {
 }
 
 exports.to_pantry = function (req, res) {
-  var id = req.param('id');
-
-  console.log ('id = ' + id);
+  var id = req.param("id");
 
   models.Request
   .findById(id, function (err, found_request){
