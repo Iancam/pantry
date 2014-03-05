@@ -29,9 +29,15 @@
 
     {{> control}}
     <div class="container container-content">
-      {{#each requests}}
-        {{> request}}
-      {{/each}}
+      {{#if alt}}
+        {{#each requests}}
+          {{> request_alt}}
+        {{/each}}
+      {{else}}
+        {{#each requests}}
+          {{> request}}
+        {{/each}}
+      {{/if}}
     </div>
 
     <div id="footer">

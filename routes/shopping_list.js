@@ -38,7 +38,8 @@ exports.view = function (req, res) {
     .populate("pantries")
     .exec(function (err, found_user) {
       res.render("shopping_list",
-      { on_pantry: false,
+      { alt: false,
+        on_pantry: false,
         modal: true,
         pantry_name: found_pantry.name,
         user: req.user,
@@ -54,6 +55,13 @@ exports.view = function (req, res) {
 }
 
 exports.view_alt = function (req, res) {
+  console.log("Alt");
+
+  if (typeof req.user === "undefined") {
+    res.redirect("/");
+    return;
+  }
+
   var id = req.param("id");
   var order = req.param("order");
   var next_shopping_list_order = get_next_shopping_list_order (order)
@@ -78,18 +86,24 @@ exports.view_alt = function (req, res) {
       }
     })
 
-    res.render("shopping_list",
-    { page: "shopping_list",
-      modal: true,
-      pantry_name: found_pantry.name,
-      user: req.user,
-      requests: found_pantry.requests,
-      id: req.session.pantry_id,
-      shopping_list_order: req.session.shopping_list_order,
-      next_shopping_list_order: next_shopping_list_order,
-      pantry_order: req.session.pantry_order,
-      alt: true
-   });
+    models.User
+    .findById(req.user._id)
+    .populate("pantries")
+    .exec(function (err, found_user) {
+      res.render("shopping_list",
+      { alt: true,
+        on_pantry: false,
+        modal: true,
+        pantry_name: found_pantry.name,
+        user: req.user,
+        my_pantries: found_user.pantries,
+        requests: found_pantry.requests,
+        id: req.session.pantry_id,
+        shopping_list_order: req.session.shopping_list_order,
+        next_shopping_list_order: next_shopping_list_order,
+        pantry_order: req.session.pantry_order
+     });
+    })
   })
 }
 
