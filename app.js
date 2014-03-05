@@ -55,9 +55,9 @@ if ("development" == app.get("env")) {
   app.use(express.errorHandler());
 }
 
-app.use(function (req, res) {
-	res.redirect("/");
-})
+// app.use(function (req, res) {
+// 	res.redirect("/");
+// })
 
 //passport
 
