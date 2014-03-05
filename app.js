@@ -56,7 +56,7 @@ if ("development" == app.get("env")) {
 }
 
 app.use(function (req, res) {
-	res.redirect("/");
+	res.send("Bad url");
 })
 
 // email
