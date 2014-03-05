@@ -114,23 +114,44 @@ passport.deserializeUser(function(id, callback) {
 });
 
 /* Routes */
-app.get('/', pantry.home);
-app.post('/create_pantry', pantry.create);
-app.get('/pantry/:id/:order', pantry.view);
-app.get('/pantry/:id/', function (req, res) {
-	// Make name the order if there isn't one.
-	var id = req.param('id');
-	res.redirect('/pantry/' + id + '/Name');
+app.get("/", pantry.home);
+app.get("/auth/facebook", passport.authenticate("facebook", { scope: [ "email" ] }));
+app.get("/auth/facebook/callback", 
+	passport.authenticate("facebook", {successRedirect: "/welcome",
+									   failureRedirect: "/login"}));
+app.get("/welcome", welcome.view);
+app.post("/create_pantry", pantry.create);
+
+app.get("/pantry/:id/:order", pantry.view);
+app.get("/pantry/:id/", function (req, res) {
+  // Make name the order if there isn"t one.
+  var id = req.param("id");
+  res.redirect("/pantry/" + id + "/Name");
 })
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email' ] }));
-app.get('/auth/facebook/callback', 
-	passport.authenticate('facebook', {successRedirect: '/my_pantries',
-									   failureRedirect: '/login'}));
-app.get('/shopping_list/:id/:order', shopping_list.view);
-app.get('/shopping_list/:id/', function (req, res) {
-	// Make name the order if there isn't one.
-	var id = req.param('id');
-	res.redirect('/shopping_list/' + id + '/Name');
+
+//Pantry Alternate 
+app.get("/pantry_alt/:id/:order", pantry.view_alt);
+app.get("/pantry_alt/:id/", function (req, res) {
+  // Make name the order if there isn"t one.
+  var id = req.param("id");
+  res.redirect("/pantry_alt/" + id + "/Name");
+})
+
+
+app.get("/shopping_list/:id/:order", shopping_list.view);
+app.get("/shopping_list/:id/", function (req, res) {
+	// Make name the order if there isn"t one.
+	var id = req.param("id");
+	res.redirect("/shopping_list/" + id + "/Name");
+});
+
+
+//Shopping List Alternate
+app.get("/shopping_list_alt/:id/:order", shopping_list.view_alt);
+app.get("/shopping_list_alt/:id/", function (req, res) {
+	// Make name the order if there isn"t one.
+	var id = req.param("id");
+	res.redirect("/shopping_list_alt/" + id + "/Name");
 });
 
 
@@ -139,9 +160,6 @@ app.post("/create_item", pantry.create_item);
 app.post("/like", shopping_list.like);
 app.get("/logout", function(req, res) {req.logout(); res.redirect("/");});
 app.get("/my_pantries", user.myPantries)
-
-app.get("/my_pantries_alt", user.myPantries_alt);
-
 app.post("/remove_item", pantry.remove);
 app.post("/remove_request", shopping_list.remove);
 app.post("/to_pantry", shopping_list.to_pantry);

@@ -1,9 +1,10 @@
-$('.glyphicon-chevron-up').click(function () {
+$('.like-icon').click(function () {
   var span = $(this);
   var request_id = span.parent('.request').attr('id');
 
   $.post('/like', {id: request_id}, function (data) {
     if (data.success) {
+      ga("send", "event", "like", "click");
       span.text(data.likes);
     }
   })
