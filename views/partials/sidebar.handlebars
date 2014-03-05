@@ -5,7 +5,7 @@
       <a>My Pantries</a>
       <ul>
         {{#each my_pantries}}
-          <li role="presentation"><a href="/pantry/{{_id}}/Name">{{name}}</a></li>
+          <li role="presentation"><a href="/pantry?id={{_id}}&order=Name">{{name}}</a></li>
         {{/each}}
       </ul>
     </li>

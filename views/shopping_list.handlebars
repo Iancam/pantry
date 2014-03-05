@@ -40,7 +40,7 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     <div id="header">
       <a href="#menu"></a>
       {{pantry_name}}
-      <a class="right" href="#" data-toggle="modal" data-target="#requestModal"></a>
+      <a class="right" data-toggle="modal" data-target="#requestModal"></a>
     </div>
 
     {{> control}}
@@ -57,10 +57,10 @@ valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
     </div>
 
     <div id="footer">
-      <a href="/shopping_list/{{id}}/{{next_shopping_list_order}}">
+      <a href="/shopping_list?id={{id}}&order={{next_shopping_list_order}}">
         Sort by: <i>{{shopping_list_order}}</i>
       </a>
-      <a href="#" class="right">
+      <a class="right">
         <span id="edit">Edit</span>
       </a>
     </div>
