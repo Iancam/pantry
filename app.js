@@ -64,8 +64,8 @@ app.use(function (req, res) {
 passport.use(new FacebookStrategy({
 		clientID: "220032974854303",
 		clientSecret: "3f3ca3266c18ee0911a845526023b593",
-		// callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
-		callbackURL: "http://safe-anchorage-2842.herokuapp.com/auth/facebook/callback"
+		callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
+		// callbackURL: "http://safe-anchorage-2842.herokuapp.com/auth/facebook/callback"
 	},
 
 	function(accessToken, refreshToken, profile, callback) {

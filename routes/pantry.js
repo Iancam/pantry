@@ -113,6 +113,43 @@ exports.view = function (req, res) {
   })
 }
 
+function get_next_pantry_order (order) {
+  if (order === "Name") {
+    return "Category";
+  } else if (order === "Category") {
+    return "Expiration";
+  } else {
+    return "Name";
+  }
+}
+
+exports.create_item = function (req, res) {
+  var name = req.param("name");
+  var category = req.param("category");
+  var expiration = req.param("expiration");
+
+  console.log(expiration);
+
+  var new_item = new models.Item({
+    name: name,
+    category: category,
+    expiration: expiration
+  })
+
+  new_item.save(helpers.error);
+
+  models.Pantry
+  .findById(req.session.pantry_id, function (err, found_pantry) {
+    if (err) helpers.error(err);
+
+    found_pantry.items.push(new_item);
+    found_pantry.save(helpers.error);
+    res.redirect("pantry?id="
+                 + req.session.pantry_id + "&order="
+                 + req.session.pantry_order);
+  })
+}
+
 exports.remove = function (req, res) {
   var id = req.param("id");
 
