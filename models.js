@@ -11,8 +11,7 @@ var pantrySchema = new Schema({
 var itemSchema = new Schema({
   name: {type: String, required: true},
   category: {type: String, required: true},
-  expiration: String,
-  low: Boolean
+  expiration: String
 });
 
 var requestSchema = new Schema({
@@ -26,7 +25,8 @@ var userSchema = new Schema({
   email: {type: String, required: true},
   firstname: {type: String, required: true},
   lastname: {type: String, required: true},
-  pantries: [{type: Schema.Types.ObjectId, ref: "Pantry"}]
+  pantries: [{type: Schema.Types.ObjectId, ref: "Pantry"}],
+  voted: [{type: Schema.Types.ObjectId, ref: "Request"}]
 });
 
 exports.Pantry = mongoose.model('Pantry', pantrySchema);
