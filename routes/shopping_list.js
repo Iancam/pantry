@@ -58,7 +58,7 @@ exports.view_alt = function (req, res) {
   console.log("Alt");
 
   if (typeof req.user === "undefined") {
-    res.redirect("/");
+    res.send("No user");
     return;
   }
 
