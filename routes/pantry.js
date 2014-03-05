@@ -160,12 +160,9 @@ exports.view_alt = function (req, res) {
       id:req.session.pantry_id,
       shopping_list_order: req.session.shopping_list_order,
       next_pantry_order: next_pantry_order,
-<<<<<<< HEAD
       pantry_order: req.session.pantry_order,
       alt: true
-=======
       pantry_order: req.session.pantry_order
->>>>>>> parent of 3484f8d... for the merge
     });
   })
 }
