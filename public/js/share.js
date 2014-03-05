@@ -9,12 +9,9 @@ var new_input = function(){
 		var new_input = '<input type="text" name="email" class="form-control share-email" placeholder="Add Emails" rows="2">';
 		input.parent().append(new_input);
 	}
-	// if(input.val() != '') {
-	// 	input.attr("name", 'email');
-	// }
 }
+
 var remove_input = function() {
-	// $("input[type='text'][name='email']").each(remove_input);
 	var input = $(this);
 	if (input.val() === "" && input.prev().length != 0 && !input.is(":focus")) {
 		input.remove();

@@ -114,6 +114,7 @@ passport.deserializeUser(function(id, callback) {
 });
 
 /* Routes */
+<<<<<<< HEAD
 app.get("/", pantry.home);
 app.post("/create_pantry", pantry.create);
 app.get("/pantry/:id/:order", pantry.view);
@@ -152,6 +153,25 @@ app.get("/shopping_list_alt/:id/", function (req, res) {
 	// Make name the order if there isn"t one.
 	var id = req.param("id");
 	res.redirect("/shopping_list_alt/" + id + "/Name");
+=======
+app.get('/', pantry.home);
+app.post('/create_pantry', pantry.create);
+app.get('/pantry/:id/:order', pantry.view);
+app.get('/pantry/:id/', function (req, res) {
+	// Make name the order if there isn't one.
+	var id = req.param('id');
+	res.redirect('/pantry/' + id + '/Name');
+})
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: [ 'email' ] }));
+app.get('/auth/facebook/callback', 
+	passport.authenticate('facebook', {successRedirect: '/my_pantries',
+									   failureRedirect: '/login'}));
+app.get('/shopping_list/:id/:order', shopping_list.view);
+app.get('/shopping_list/:id/', function (req, res) {
+	// Make name the order if there isn't one.
+	var id = req.param('id');
+	res.redirect('/shopping_list/' + id + '/Name');
+>>>>>>> parent of 3484f8d... for the merge
 });
 
 
