@@ -2,20 +2,20 @@
 
 <html>
 <head>
-  <!-- Google Analytics Content Experiment code -->
-  <script>function utmx_section(){}function utmx(){}(function(){var
-  k='82944833-2',d=document,l=d.location,c=d.cookie;
-  if(l.search.indexOf('utm_expid='+k)>0)return;
-  function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
-  indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
-  length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
-  '<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
-  '://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
-  '&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
-  valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
-  '" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
-  </script><script>utmx('url','A/B');</script>
-  <!-- End of Google Analytics Content Experiment code -->
+<!-- Google Analytics Content Experiment code -->
+<script>function utmx_section(){}function utmx(){}(function(){var
+k='82944833-9',d=document,l=d.location,c=d.cookie;
+if(l.search.indexOf('utm_expid='+k)>0)return;
+function f(n){if(c){var i=c.indexOf(n+'=');if(i>-1){var j=c.
+indexOf(';',i);return escape(c.substring(i+n.length+1,j<0?c.
+length:j))}}}var x=f('__utmx'),xx=f('__utmxx'),h=l.hash;d.write(
+'<sc'+'ript src="'+'http'+(l.protocol=='https:'?'s://ssl':
+'://www')+'.google-analytics.com/ga_exp.js?'+'utmxkey='+k+
+'&utmx='+(x?x:'')+'&utmxx='+(xx?xx:'')+'&utmxtime='+new Date().
+valueOf()+(h?'&utmxhash='+escape(h.substr(1)):'')+
+'" type="text/javascript" charset="utf-8"><\/sc'+'ript>')})();
+</script><script>utmx('url','A/B');</script>
+<!-- End of Google Analytics Content Experiment code -->
 
 
   <title>Pantry</title>
@@ -24,8 +24,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">  
   {{> standard_css}}
   {{> standard_js}}
-  <link href='/css/shopping_list.css' rel='stylesheet' >
-</head>
+{{!--   <link href='/css/shopping_list.css' rel='stylesheet' >
+ --}}</head>
 <body>
 
   <div>
@@ -40,7 +40,7 @@
     <div id="header">
       <a href="#menu"></a>
       {{pantry_name}}
-      <a class="right" href="#" data-toggle="modal" data-target="#requestModal"></a>
+      <a class="right" data-toggle="modal" data-target="#requestModal"><div></div></a>
     </div>
 
     {{> control}}
@@ -57,10 +57,10 @@
     </div>
 
     <div id="footer">
-      <a href="/shopping_list/{{id}}/{{next_shopping_list_order}}">
+      <a href="/shopping_list?id={{id}}&order={{next_shopping_list_order}}">
         Sort by: <i>{{shopping_list_order}}</i>
       </a>
-      <a href="#" class="right">
+      <a class="right">
         <span id="edit">Edit</span>
       </a>
     </div>

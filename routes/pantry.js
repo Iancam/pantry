@@ -8,7 +8,6 @@ exports.home = function(req, res){
 };
 
 exports.create = function (req, res) {
-  console.log("Creating pantry");
   var name = req.param("name");
   var user = req.user;
   var new_pantry = new models.Pantry({
@@ -24,7 +23,7 @@ exports.create = function (req, res) {
       res.redirect("/");
     } else {
       req.session.pantry_order = "Name";
-      res.redirect("pantry/" + new_pantry._id + "/Name");
+      res.redirect("pantry?id=" + new_pantry._id + "&order=Name");
     }
   });
   
@@ -97,7 +96,8 @@ exports.view = function (req, res) {
       if (err) helpers.error(err);
 
       res.render("pantry", 
-      { on_pantry: true, /* For control highlighting */
+      { alt: false,
+        on_pantry: true, /* For control highlighting */
         modal: true,
         pantry_name: found_pantry.name,
         id:req.session.pantry_id,
@@ -110,58 +110,6 @@ exports.view = function (req, res) {
       });
     })
 
-  })
-}
-
-exports.view_alt = function (req, res) {
-  var id = req.param("id");
-  var order = req.param("order");
-  var next_pantry_order = get_next_pantry_order (order)
-
-  req.session.pantry_id = id;
-  req.session.pantry_order = order;
-
-  models.Pantry
-  .findById(id)
-  .populate("items")
-  .exec(function (err, found_pantry) {
-    if (err) helpers.error(err);
-
-    var items = found_pantry.items;
-
-    items.sort(function (item1, item2) {
-      if (order === "Name") {
-        return item1.name.toLowerCase().localeCompare(item2.name.toLowerCase());
-      } else if (order === "Category") {
-        return item1.category.localeCompare(item2.category);
-      } else {
-
-        if (typeof item1.expiration === "undefined") {
-          return 1;
-        } else if (typeof item2.expiration === "undefined") {
-          return -1;
-        }
-
-        var date1 = new Date(item1.expiration);
-        var date2 = new Date(item2.expiration);
-        console.log(date1);
-        console.log(date2);
-        return date1.valueOf() - date2.valueOf();
-      }
-    })
-
-    res.render("pantry", 
-    { page: "pantry",
-      modal: true,
-      pantry_name: found_pantry.name,
-      user: req.user,
-      items: items, 
-      id:req.session.pantry_id,
-      shopping_list_order: req.session.shopping_list_order,
-      next_pantry_order: next_pantry_order,
-      pantry_order: req.session.pantry_order,
-      alt: true
-    });
   })
 }
 
@@ -196,8 +144,8 @@ exports.create_item = function (req, res) {
 
     found_pantry.items.push(new_item);
     found_pantry.save(helpers.error);
-    res.redirect("pantry/"
-                 + req.session.pantry_id + "/"
+    res.redirect("pantry?id="
+                 + req.session.pantry_id + "&order="
                  + req.session.pantry_order);
   })
 }

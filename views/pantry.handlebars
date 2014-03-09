@@ -8,9 +8,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   {{> standard_css}}
   {{> standard_js}}
-  <link href='/css/pantry.css' rel='stylesheet'>
-  <link rel="stylesheet" href="/css/footer.css">
-
 
 </head>
 <body>
@@ -27,7 +24,7 @@
     <div id="header">
       <a href="#menu"></a>
       {{pantry_name}}
-      <a class="right" href="#" data-toggle="modal" data-target="#itemModal"></a>
+      <a class="right" data-toggle="modal" data-target="#itemModal"></a>
     </div>
   
     {{> control}}
@@ -39,10 +36,10 @@
     </div>
 
     <div id="footer">
-      <a href="/pantry/{{id}}/{{next_pantry_order}}">
+      <a href="/pantry?id={{id}}&order={{next_pantry_order}}">
         Sort by: <i>{{pantry_order}}</i>
       </a>
-      <a href="#" class="right">
+      <a class="right">
         <span id="edit">Edit</span>
       </a>
     </div>

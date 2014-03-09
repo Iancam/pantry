@@ -1,10 +1,10 @@
 {{!-- control.handlebars --}}
 <div id="control">
   <div class="btn-group btn-group-justified ">
-    <a href='/pantry/{{id}}/{{pantry_order}}' id="btn-pantry" class="btn btn-default btn-control {{#if on_pantry}}active-control{{/if}}" role="button">
+    <a href='/pantry?id={{id}}&order={{pantry_order}}' id="btn-pantry" class="btn btn-default btn-control {{#if on_pantry}}active-control{{/if}}" role="button">
       Pantry
     </a>
-    <a href='/shopping_list/{{id}}/{{shopping_list_order}}' id="btn-shopping-list" class="btn btn-default btn-control {{#unless on_pantry}}active-control{{/unless}}" role="button">
+    <a href='/shopping_list?id={{id}}&order={{shopping_list_order}}' id="btn-shopping-list" class="btn btn-default btn-control {{#unless on_pantry}}active-control{{/unless}}" role="button">
       Grocery List
     </a>
   </div>

@@ -13,7 +13,6 @@ exports.view = function (req, res) {
   var order = req.param("order");
   var next_shopping_list_order = get_next_shopping_list_order (order)
 
-
   req.session.pantry_id = id;
   req.session.shopping_list_order = order;
 
@@ -55,7 +54,6 @@ exports.view = function (req, res) {
 }
 
 exports.view_alt = function (req, res) {
-  console.log("Alt");
 
   if (typeof req.user === "undefined") {
     res.redirect("/");
@@ -65,7 +63,6 @@ exports.view_alt = function (req, res) {
   var id = req.param("id");
   var order = req.param("order");
   var next_shopping_list_order = get_next_shopping_list_order (order)
-
 
   req.session.pantry_id = id;
   req.session.shopping_list_order = order;
@@ -138,8 +135,8 @@ exports.create_request = function (req, res) {
 
     found_pantry.requests.push(new_request);
     found_pantry.save(helpers.error);
-    res.redirect("shopping_list/" 
-                  + req.session.pantry_id + "/"
+    res.redirect("shopping_list?id=" 
+                  + req.session.pantry_id + "&name="
                   + req.session.shopping_list_order);
   })
 
