@@ -15,6 +15,7 @@ welcome = require("./routes/welcome.js"),
 user = require("./routes/user"),
 pantry = require("./routes/pantry"),
 shopping_list = require("./routes/shopping_list"),
+recipe = require ("./routes/recipe"),
 passport = require("passport"),
 FacebookStrategy = require("passport-facebook").Strategy;
 
@@ -64,8 +65,8 @@ if ("development" == app.get("env")) {
 passport.use(new FacebookStrategy({
 		clientID: "220032974854303",
 		clientSecret: "3f3ca3266c18ee0911a845526023b593",
-		// callbackURL: "http://127.0.0.1:3000/auth/facebook/callback"
-		callbackURL: "http://safe-anchorage-2842.herokuapp.com/auth/facebook/callback"
+		callbackURL: "http://localhost:3000/auth/facebook/callback"
+		// callbackURL: "http://safe-anchorage-2842.herokuapp.com/auth/facebook/callback"
 	},
 
 	function(accessToken, refreshToken, profile, callback) {
@@ -117,9 +118,8 @@ app.get("/welcome", welcome.view);
 app.post("/create_pantry", pantry.create);
 
 app.get("/pantry", pantry.view);
-
 app.get("/shopping_list", shopping_list.view);
-app.get("/shopping_list/alt", shopping_list.view_alt);
+app.get("/recipe_welcome", recipe.welcome);
 
 app.post("/create_request", shopping_list.create_request);
 app.post("/create_item", pantry.create_item);
@@ -129,6 +129,9 @@ app.get("/logout", function(req, res) {req.logout(); res.redirect("/");});
 app.post("/remove_item", pantry.remove);
 app.post("/remove_request", shopping_list.remove);
 app.post("/to_pantry", shopping_list.to_pantry);
+
+app.get("/chefs_choice", recipe.view_chefs_choice);
+app.get("/random_recipe", recipe.random);
 
 http.createServer(app).listen(app.get("port"), function(){
   console.log("Express server listening on port " + app.get("port"));

@@ -15,35 +15,29 @@
   <div>
     {{!-- Data targets  --}}
     {{> sidebar}}
-    {{> item_modal}}
     {{> share_modal}}
     {{> pantry_modal}}
 
     <div id="header">
       <a href="#menu"></a>
       {{pantry_name}}
-      <a class="right" data-toggle="modal" data-target="#itemModal"></a>
     </div>
   
     {{> control}}
-  
-    <div class="container container-content">
-      {{#each items}}
-        {{> item}}
-      {{/each}}
+
+    <div id="container-recipe-welcome" class="container container-content">
+      <a id="btn-recipe-start" class="btn btn-lg btn-recipe-welcome" role="button">Get started</a>
+      <h3 id="separator-recipe-welcome">Or</h3>
+      <a href="/chefs_choice" id="btn-recipe-chef" class="btn btn-lg btn-recipe-welcome" role="button">Chef's Choice</a>
     </div>
 
+
+  
     <div id="footer">
-      <a href="/pantry?id={{id}}&order={{next_pantry_order}}">
-        Sort by: <i>{{pantry_order}}</i>
-      </a>
-      <a class="right">
-        <span id="edit">Edit</span>
-      </a>
+
     </div>
   </div>
 
-  <script type="text/javascript" src="/js/pantry.js"></script>
 </body>
 
 </html>
