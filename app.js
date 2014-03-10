@@ -130,8 +130,7 @@ app.post("/remove_item", pantry.remove);
 app.post("/remove_request", shopping_list.remove);
 app.post("/to_pantry", shopping_list.to_pantry);
 
-app.get("/chefs_choice", recipe.view_chefs_choice);
-app.get("/random_recipe", recipe.random);
+app.get("/chefs_choice", recipe.chefs_choice);
 
 http.createServer(app).listen(app.get("port"), function(){
   console.log("Express server listening on port " + app.get("port"));

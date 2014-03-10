@@ -28,35 +28,14 @@ exports.welcome = function (req, res) {
 
 }
 
-exports.view_chefs_choice = function (req, res) {
+/* Returns a random Yummly query string formed from ingredients in the 
+   pantry */
+exports.chefs_choice = function (req, res) {
 
   if (typeof req.user === "undefined") {
     res.redirect("/");
     return;
   }
-
-  var id = req.session.pantry_id;
-
-  models.User
-  .findById (req.user._id)
-  .populate ("pantries")
-  .exec (function (err, found_user) {
-    if (err) helpers.error (err);
-
-    res.render ("chefs_choice", 
-    {
-      on_recipe: true,
-      id: id,
-      my_pantries: found_user.pantries,
-      shopping_list_order: req.session.shopping_list_order,
-      pantry_order: req.session.pantry_order
-    });
-  })
-}
-
-/* Returns a random Yummly query string formed from ingredients in the 
-   pantry */
-exports.random = function (req, res) {
 
   var id = req.session.pantry_id;
 
@@ -82,7 +61,32 @@ exports.random = function (req, res) {
                               + items[i].name.toLowerCase());
       }
 
-      res.send (query);
+      // TODO
+
+      var yummly_search_res = helpers.yummly_search_res; 
+      var random_idx = Math.floor(Math.random() * yummly_search_res.matches.length);
+      var recipe = yummly_search_res.matches[random_idx];
+
+      // TODO Get search res
+
+      var yummly_get_res = helpers.yummly_get_res;
+
+      models.User
+      .findById (req.user._id)
+      .populate ("pantries")
+      .exec (function (err, found_user) {
+        if (err) helpers.error (err);
+        res.render ("recipe_view", 
+        {
+          on_recipe: true,
+          id: id,
+          pantry_name: found_pantry.name,
+          my_pantries: found_user.pantries,
+          shopping_list_order: req.session.shopping_list_order,
+          pantry_order: req.session.pantry_order,
+          yummly_res: yummly_get_res
+        });
+      })
     })
 
   })

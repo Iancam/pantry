@@ -249,7 +249,7 @@ a:hover {
   z-index: 1051 !important; /* Make the datepicker go over the modal */
 }
 
-/* Recipe page styling */
+/* Recipe welcome page styling */
 #container-recipe-welcome
 {
   background-image: url(../img/recipe-welcome.jpg);
@@ -275,3 +275,5 @@ a:hover {
   margin-top: 15px;
   margin-bottom: 15px;
 }
+
+/* Recipe styling */
