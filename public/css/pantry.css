@@ -323,3 +323,9 @@ a:hover {
   display: block;
   margin-bottom: 15px;
 }
+
+#btn-back
+{
+  padding-left: 6px;
+  font-size: 24px;
+}

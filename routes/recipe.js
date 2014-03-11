@@ -1,5 +1,6 @@
 var models = require("../models");
 var helpers = require("../helpers");
+var request = require("request");
 
 exports.welcome = function (req, res) {
 
@@ -50,45 +51,46 @@ exports.chefs_choice = function (req, res) {
       return (0.5 - Math.random());
     })
 
-    /* Select at most 2 random items to include in the recipe. */
-    var nItems = (items.length > 2) ? 2 : items.length;
+    /* Select at most 3 random items to include in the recipe. */
+    var nItems = (items.length > 3) ? 3 : items.length;
 
     helpers.yummly_id_key (function (id, key) {
-      var query = "http://api.yummly.com/v1/api/recipes?_app_id=" +
+      var search_query = "http://api.yummly.com/v1/api/recipes?_app_id=" +
                   id + "&_app_key=" + key;
       for (var i = 0; i < nItems; i++) {
-        query = query.concat ("&allowedIngredient[]="
+        search_query = search_query.concat ("&allowedIngredient[]="
                               + items[i].name.toLowerCase());
       }
 
-      // TODO
+      request(search_query, function(error, response, body) {
+        var yummly_search_res = JSON.parse(body);
+        
+        var random_idx = Math.floor(Math.random() * yummly_search_res.matches.length);
+        var recipe_id = yummly_search_res.matches[random_idx].id;
+        var get_query = "http://api.yummly.com/v1/api/recipe/"
+                        + recipe_id + "?_app_id=" + id + "&_app_key=" + key;
 
-      var yummly_search_res = helpers.yummly_search_res; 
-      var random_idx = Math.floor(Math.random() * yummly_search_res.matches.length);
-      var recipe = yummly_search_res.matches[random_idx];
+        request(get_query, function (err, response, body) {
+          var yummly_get_res = JSON.parse(body);
 
-      // TODO Get search res
-
-      var yummly_get_res = helpers.yummly_get_res;
-
-      models.User
-      .findById (req.user._id)
-      .populate ("pantries")
-      .exec (function (err, found_user) {
-        if (err) helpers.error (err);
-        res.render ("recipe_view", 
-        {
-          on_recipe: true,
-          id: req.session.pantry_id,
-          pantry_name: found_pantry.name,
-          my_pantries: found_user.pantries,
-          shopping_list_order: req.session.shopping_list_order,
-          pantry_order: req.session.pantry_order,
-          yummly_res: yummly_get_res
-        });
-      })
+          models.User
+          .findById (req.user._id)
+          .populate ("pantries")
+          .exec (function (err, found_user) {
+            if (err) helpers.error (err);
+            res.render ("recipe_view", 
+            {
+              on_recipe: true,
+              id: req.session.pantry_id,
+              pantry_name: found_pantry.name,
+              my_pantries: found_user.pantries,
+              shopping_list_order: req.session.shopping_list_order,
+              pantry_order: req.session.pantry_order,
+              yummly_res: yummly_get_res
+            });
+          })
+        })
+      }); 
     })
-
   })
-
 }
