@@ -117,7 +117,7 @@ pre
 {
   position: absolute;
   top: 73px; /* The height of the header + control */
-  bottom: 40px; /* The height of the footer */
+  bottom: 50px; /* The height of the footer */
   width: 100%;
   overflow: auto; /* Make scrollable */
   padding-top: 2%;
@@ -277,3 +277,49 @@ a:hover {
 }
 
 /* Recipe styling */
+
+#name-recipe
+{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+#time-recipe
+{
+  text-align: center;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+#img-recipe
+{
+  width: 100%;
+}
+
+#ingredients-subtitle-recipe
+{
+  margin-bottom: 5px;
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+/* Align ingredient subtitle with list */
+
+#ingredient-list-recipe
+{
+  padding-left: 0px;
+  margin-left: 0px;
+  margin-bottom: 5px;
+}
+
+.ingredient-recipe
+{
+  margin-left: 1em; 
+}
+
+#src-recipe
+{
+  display: block;
+  margin-bottom: 15px;
+}

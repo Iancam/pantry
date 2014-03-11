@@ -79,7 +79,7 @@ exports.chefs_choice = function (req, res) {
         res.render ("recipe_view", 
         {
           on_recipe: true,
-          id: id,
+          id: req.session.pantry_id,
           pantry_name: found_pantry.name,
           my_pantries: found_user.pantries,
           shopping_list_order: req.session.shopping_list_order,
