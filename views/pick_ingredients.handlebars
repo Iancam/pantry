@@ -25,18 +25,13 @@
   
     {{> control}}
 
-    <div id="container-recipe-welcome" class="container container-content">
-      <a href="/pick_ingredients?id={{id}}" id="btn-recipe-start" class="btn btn-lg btn-recipe-welcome" role="button">Pick your ingredients</a>
-      <h3 id="separator-recipe-welcome">Or</h3>
-      <a href="/chefs_choice?id={{id}}&n_items=4" id="btn-recipe-chef" class="btn btn-lg btn-recipe-welcome" role="button">Chef's Choice</a>
+    <div id="container-pick-ingredients" class="container container-content">
+      <h4 id="pick-ingredients-msg">Soon you will be able to get a recipe chosen based off what items in your pantry you'd like to use. Check back soon!</h4>
     </div>
 
-
-  
     <div id="footer">
-
+      <a id="btn-back" href="/recipe_welcome?id={{id}}"><span class="glyphicon glyphicon-arrow-left"></span></a>
     </div>
-  </div>
 
 </body>
 

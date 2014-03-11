@@ -112,3 +112,34 @@ exports.chefs_choice = function (req, res) {
     })
   })
 }
+
+exports.pick_ingredients = function (req, res) {
+
+  if (typeof req.user === "undefined") {
+    res.redirect("/");
+    return;
+  }
+
+  var pantry_id = req.param("id");
+
+  models.Pantry
+  .findById (pantry_id)
+  .exec (function (err, found_pantry) {
+
+    models.User
+      .findById (req.user._id)
+      .populate ("pantries")
+      .exec (function (err, found_user) {
+        if (err) helpers.error (err);
+        res.render ("pick_ingredients", 
+        {
+          on_recipe: true,
+          id: pantry_id,
+          pantry_name: found_pantry.name,
+          my_pantries: found_user.pantries,
+          shopping_list_order: req.session.shopping_list_order,
+          pantry_order: req.session.pantry_order,
+        });
+      })
+  })
+}

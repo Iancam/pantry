@@ -264,7 +264,7 @@ a:hover {
   margin-right: auto;
   background: rgba(255,255,255,0.7); /* Make transparent */
   color: black;
-  width: 156px;
+  width: 220px;
   border: 1px solid black !important;
 }
 
@@ -333,4 +333,22 @@ a:hover {
 #btn-refresh-recipe
 {
   font-size: 24px;
+}
+
+/* Style the pick ingredients page */
+#container-pick-ingredients
+{
+  background-image: url(../img/pick-ingredients.jpg);
+  background-size: 100% 100%;
+  padding-top: 20%;
+  color: white;
+}
+
+#pick-ingredients-msg
+{
+  background: rgba(255,255,255,0.7); /* Make transparent */
+  color: black;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
 }
