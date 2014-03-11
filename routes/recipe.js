@@ -74,8 +74,10 @@ exports.chefs_choice = function (req, res) {
         var yummly_search_res = JSON.parse(body);
 
         if (yummly_search_res.matches.length == 0) {
+          console.log(pantry_id);
+          console.log(n_items);
           res.redirect("/chefs_choice?id=" + pantry_id 
-                       + "&n_items=" + n_items - 1);
+                       + "&n_items=" + (n_items - 1));
           console.log ("Retry.");
           return;
         }

@@ -27,7 +27,17 @@
 
     <div class="container container-content">
       <h3 id="name-recipe">{{yummly_res.name}}</h3>
-      <h5 id="time-recipe">({{yummly_res.totalTime}}, {{yummly_res.yield}})</h5>
+      {{#if yummly_res.totalTime}}
+        {{#if yummly_res.yield}}
+          <h5 id="time-recipe">({{yummly_res.totalTime}}, {{yummly_res.yield}})</h5>
+        {{else}}
+          <h5 id="time-recipe">({{yummly_res.totalTime}})</h5>
+        {{/if}}
+      {{else}}
+        {{#if yummly_res.yield}}
+          <h5 id="time-recipe">({{yummly_res.yield}})</h5>
+        {{/if}}
+      {{/if}}
       <img src="{{yummly_res.images.0.hostedLargeUrl}}" id="img-recipe">
       <h5 id="ingredients-subtitle-recipe">Ingredients:</h5>
       <ul id="ingredient-list-recipe">
@@ -40,7 +50,7 @@
     </div>
 
     <div id="footer">
-      <a id="btn-back" href="/recipe_welcome?id={{id}}"><span class="glyphicon glyphicon-arrow-left"></span></a>
+      <a id="btn-back" href="/recipe_welcome?id={{id}}&n_items=4"><span class="glyphicon glyphicon-arrow-left"></span></a>
       <a class="right" id="btn-refresh-recipe" href="/chefs_choice?id={{id}}&n_items=4">
         <span class="glyphicon glyphicon-refresh"><span>
       </a>
