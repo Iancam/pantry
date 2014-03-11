@@ -142,7 +142,7 @@ pre
 #footer a.right
 {
   left: auto;
-  right: 10px;
+  right: 15px;
 }
 
 /*Item/Requests Styling*/
@@ -327,5 +327,10 @@ a:hover {
 #btn-back
 {
   padding-left: 6px;
+  font-size: 24px;
+}
+
+#btn-refresh-recipe
+{
   font-size: 24px;
 }

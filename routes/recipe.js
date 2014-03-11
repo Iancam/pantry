@@ -29,8 +29,7 @@ exports.welcome = function (req, res) {
 
 }
 
-/* Returns a random Yummly query string formed from ingredients in the 
-   pantry */
+/* Returns a random Yummly recipe based off the ingredients in the pantry. */
 exports.chefs_choice = function (req, res) {
 
   if (typeof req.user === "undefined") {
@@ -38,10 +37,14 @@ exports.chefs_choice = function (req, res) {
     return;
   }
 
-  var id = req.session.pantry_id;
+  var pantry_id = req.param("id");
+  var n_items = req.param("n_items");
+
+  console.log(n_items);
+
 
   models.Pantry
-  .findById (id)
+  .findById (pantry_id)
   .populate ("items")
   .exec (function (err, found_pantry) {
     var items = found_pantry.items;
@@ -51,19 +54,31 @@ exports.chefs_choice = function (req, res) {
       return (0.5 - Math.random());
     })
 
-    /* Select at most 3 random items to include in the recipe. */
-    var nItems = (items.length > 3) ? 3 : items.length;
+    /* Select at most 4 random items to include in the recipe. */
+    if (items.length < n_items) {
+      n_items = items.length;
+      console.log (n_items);
+    }
 
     helpers.yummly_id_key (function (id, key) {
       var search_query = "http://api.yummly.com/v1/api/recipes?_app_id=" +
                   id + "&_app_key=" + key;
-      for (var i = 0; i < nItems; i++) {
+      for (var i = 0; i < n_items; i++) {
         search_query = search_query.concat ("&allowedIngredient[]="
                               + items[i].name.toLowerCase());
       }
 
+      console.log(search_query);
+
       request(search_query, function(error, response, body) {
         var yummly_search_res = JSON.parse(body);
+
+        if (yummly_search_res.matches.length == 0) {
+          res.redirect("/chefs_choice?id=" + pantry_id 
+                       + "&n_items=" + n_items - 1);
+          console.log ("Retry.");
+          return;
+        }
         
         var random_idx = Math.floor(Math.random() * yummly_search_res.matches.length);
         var recipe_id = yummly_search_res.matches[random_idx].id;
@@ -77,11 +92,12 @@ exports.chefs_choice = function (req, res) {
           .findById (req.user._id)
           .populate ("pantries")
           .exec (function (err, found_user) {
+
             if (err) helpers.error (err);
             res.render ("recipe_view", 
             {
               on_recipe: true,
-              id: req.session.pantry_id,
+              id: pantry_id,
               pantry_name: found_pantry.name,
               my_pantries: found_user.pantries,
               shopping_list_order: req.session.shopping_list_order,
