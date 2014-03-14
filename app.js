@@ -65,8 +65,8 @@ if ("development" == app.get("env")) {
 passport.use(new FacebookStrategy({
 		clientID: "220032974854303",
 		clientSecret: "3f3ca3266c18ee0911a845526023b593",
-		callbackURL: "http://localhost:3000/auth/facebook/callback"
-		// callbackURL: "http://checkyourpantry.herokuapp.com/auth/facebook/callback"
+		// callbackURL: "http://localhost:3000/auth/facebook/callback"
+		callbackURL: "http://checkyourpantry.herokuapp.com/auth/facebook/callback"
 	},
 
 	function(accessToken, refreshToken, profile, callback) {
