@@ -106,13 +106,18 @@ pre
 }
 #btn-shopping-list
 {
+  border-left: none;
+  border-right: none;
+}
+#btn-recipes
+{
   border-right: none;
 }
 .container-content
 {
   position: absolute;
   top: 73px; /* The height of the header + control */
-  bottom: 40px; /* The height of the footer */
+  bottom: 50px; /* The height of the footer */
   width: 100%;
   overflow: auto; /* Make scrollable */
   padding-top: 2%;
@@ -137,7 +142,7 @@ pre
 #footer a.right
 {
   left: auto;
-  right: 10px;
+  right: 15px;
 }
 
 /*Item/Requests Styling*/
@@ -197,8 +202,6 @@ pre
   float: right;
   color: #ddcf9b;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
 
 #footer {
   text-align: center;
@@ -245,7 +248,107 @@ a:hover {
 {
   z-index: 1051 !important; /* Make the datepicker go over the modal */
 }
-=======
->>>>>>> parent of 3484f8d... for the merge
-=======
->>>>>>> parent of 3484f8d... for the merge
+
+/* Recipe welcome page styling */
+#container-recipe-welcome
+{
+  background-image: url(../img/recipe-welcome.jpg);
+  background-size: 100% 100%;
+  padding-top: 20%;
+}
+
+.btn-recipe-welcome
+{
+  display: block !important;
+  margin-left: auto;
+  margin-right: auto;
+  background: rgba(255,255,255,0.7); /* Make transparent */
+  color: black;
+  width: 220px;
+  border: 1px solid black !important;
+}
+
+#separator-recipe-welcome
+{
+  text-align: center;
+  color: black;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* Recipe styling */
+
+#name-recipe
+{
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+#time-recipe
+{
+  text-align: center;
+  margin-top: 2px;
+  font-style: italic;
+}
+
+#img-recipe
+{
+  width: 100%;
+}
+
+#ingredients-subtitle-recipe
+{
+  margin-bottom: 5px;
+  margin-top: 25px;
+  font-weight: bold;
+}
+
+/* Align ingredient subtitle with list */
+
+#ingredient-list-recipe
+{
+  padding-left: 0px;
+  margin-left: 0px;
+  margin-bottom: 5px;
+}
+
+.ingredient-recipe
+{
+  margin-left: 1em; 
+}
+
+#src-recipe
+{
+  display: block;
+  margin-bottom: 15px;
+}
+
+#btn-back
+{
+  padding-left: 6px;
+  font-size: 24px;
+}
+
+#btn-refresh-recipe
+{
+  font-size: 24px;
+}
+
+/* Style the pick ingredients page */
+#container-pick-ingredients
+{
+  background-image: url(../img/pick-ingredients.jpg);
+  background-size: 100% 100%;
+  padding-top: 20%;
+  color: white;
+}
+
+#pick-ingredients-msg
+{
+  background: rgba(255,255,255,0.7); /* Make transparent */
+  color: black;
+  border: 1px solid black;
+  border-radius: 15px;
+  padding: 15px;
+}

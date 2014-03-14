@@ -96,12 +96,10 @@ exports.view = function (req, res) {
       if (err) helpers.error(err);
 
       res.render("pantry", 
-      { alt: false,
+      { 
         on_pantry: true, /* For control highlighting */
-        modal: true,
         pantry_name: found_pantry.name,
         id:req.session.pantry_id,
-        user: req.found_user,
         my_pantries: found_user.pantries,
         items: items, 
         shopping_list_order: req.session.shopping_list_order,

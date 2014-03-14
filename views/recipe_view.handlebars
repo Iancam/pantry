@@ -1,0 +1,62 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>Pantry</title>
+  <meta charset='utf-8'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  {{> standard_css}}
+  {{> standard_js}}
+
+</head>
+<body>
+
+  <div>
+    {{!-- Data targets  --}}
+    {{> sidebar}}
+    {{> share_modal}}
+    {{> pantry_modal}}
+
+    <div id="header">
+      <a href="#menu"></a>
+      {{pantry_name}}
+    </div>
+  
+    {{> control}}
+
+    <div class="container container-content">
+      <h3 id="name-recipe">{{yummly_res.name}}</h3>
+      {{#if yummly_res.totalTime}}
+        {{#if yummly_res.yield}}
+          <h5 id="time-recipe">({{yummly_res.totalTime}}, {{yummly_res.yield}})</h5>
+        {{else}}
+          <h5 id="time-recipe">({{yummly_res.totalTime}})</h5>
+        {{/if}}
+      {{else}}
+        {{#if yummly_res.yield}}
+          <h5 id="time-recipe">({{yummly_res.yield}})</h5>
+        {{/if}}
+      {{/if}}
+      <img src="{{yummly_res.images.0.hostedLargeUrl}}" id="img-recipe">
+      <h5 id="ingredients-subtitle-recipe">Ingredients:</h5>
+      <ul id="ingredient-list-recipe">
+        {{#each yummly_res.ingredientLines}}
+          <li class="ingredient-recipe">{{this}}</li>
+        {{/each}}
+      </ul>
+      <a id="src-recipe" src="{{yummly_res.source.sourceRecipeUrl}}">Read this recipe >></a>
+      <div id="yummly-attribution">{{{yummly_res.attribution.html}}}</div>
+    </div>
+
+    <div id="footer">
+      <a id="btn-back" href="/recipe_welcome?id={{id}}"><span class="glyphicon glyphicon-arrow-left"></span></a>
+      <a class="right" id="btn-refresh-recipe" href="/chefs_choice?id={{id}}&n_items=4">
+        <span class="glyphicon glyphicon-refresh"><span>
+      </a>
+    </div>
+  </div>
+
+</body>
+
+</html>

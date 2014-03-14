@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html>
+<head>
+  <title>Pantry</title>
+  <meta charset='utf-8'>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  {{> standard_css}}
+  {{> standard_js}}
+
+</head>
+<body>
+
+  <div>
+    {{!-- Data targets  --}}
+    {{> sidebar}}
+    {{> share_modal}}
+    {{> pantry_modal}}
+
+    <div id="header">
+      <a href="#menu"></a>
+      {{pantry_name}}
+    </div>
+  
+    {{> control}}
+
+    <div id="container-recipe-welcome" class="container container-content">
+      <a href="/pick_ingredients?id={{id}}" id="btn-recipe-start" class="btn btn-lg btn-recipe-welcome" role="button">Pick your ingredients</a>
+      <h3 id="separator-recipe-welcome">Or</h3>
+      <a href="/chefs_choice?id={{id}}&n_items=4" id="btn-recipe-chef" class="btn btn-lg btn-recipe-welcome" role="button">Chef's Choice</a>
+    </div>
+
+
+  
+    <div id="footer">
+
+    </div>
+  </div>
+
+</body>
+
+</html>

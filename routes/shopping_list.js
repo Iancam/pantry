@@ -37,11 +37,8 @@ exports.view = function (req, res) {
     .populate("pantries")
     .exec(function (err, found_user) {
       res.render("shopping_list",
-      { alt: false,
-        on_pantry: false,
-        modal: true,
+      { on_shopping_list: true,
         pantry_name: found_pantry.name,
-        user: req.user,
         my_pantries: found_user.pantries,
         requests: found_pantry.requests,
         id: req.session.pantry_id,
